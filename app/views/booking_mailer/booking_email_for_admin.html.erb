@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+  <p>
+    Машину <%= @car.name %> було заброньовано на період від <%= @reservation.start_date.strftime('%d.%m.%Y %H:%M') %> по <%= @reservation.end_date.strftime('%d.%m.%Y %H:%M') %>.
+  </p>
+  <h2>Інформація бронювання</h2>
+  <p>Ім'я: <%= @reservation.name %></p>
+  <p>Телефон: <%= @reservation.phone %></p>
+  <% if @reservation.description %>
+    <p>Додаткова інформація: <%= @reservation.description %></p>
+  <% end %>
+  <hr />
+<footer><a href="http://www.dragobrat.net">www.dragobrat.net</a></footer>
+</body>
+</html>

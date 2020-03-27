@@ -1,0 +1,18 @@
+.custom-button {
+	font-family: $secondary-font-family;
+    border-radius: 0;
+    height: 60px;
+    background: -webkit-gradient(linear, left bottom, left top, from(#054b61), to(#3e296d));
+    background: -webkit-linear-gradient(bottom, #054b61 0%, #3e296d 100%);
+    background: -moz-linear-gradient(bottom, #054b61 0%, #3e296d 100%);
+    background: -o-linear-gradient(bottom, #054b61 0%, #3e296d 100%);
+    background: linear-gradient(top, #054b61 0%, #3e296d 100%);    color: #fff;
+    font-size: 24px;
+    font-weight: 800;
+    text-transform: uppercase;
+    transition: all 0.3s;
+
+    &:hover{
+    	 background-color: darken($primary-background-color,5%);	
+    }
+}

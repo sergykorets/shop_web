@@ -1,0 +1,110 @@
+.race {
+  cursor: pointer;
+  display: flex;
+  border-radius: 5px;
+  padding: 20px;
+  margin-top: 20px;
+  -webkit-box-shadow: 14px 14px 28px 6px rgba(0,0,0,0.75);
+  -moz-box-shadow: 14px 14px 28px 6px rgba(0,0,0,0.75);
+  box-shadow: 14px 14px 28px 6px rgba(0,0,0,0.75);
+  .race-img {
+    width: 40%;
+    margin-right: 20px;
+    img {
+      border-radius: 5px;
+      width: 100%;
+    }
+  }
+  .race-text {
+    .race-date {
+      color: red;
+    }
+    .race-heading {
+      color: #fed136;
+      font-weight: bold;
+    }
+  }
+}
+.dark th h1 {
+  font-weight: bold;
+  font-size: 1em;
+  text-align: left;
+  color: #185875;
+}
+
+.dark td {
+  font-weight: normal;
+  font-size: 1em;
+  -webkit-box-shadow: 0 2px 2px -2px #0E1119;
+  -moz-box-shadow: 0 2px 2px -2px #0E1119;
+  box-shadow: 0 2px 2px -2px #0E1119;
+  color: white;
+}
+
+.dark {
+  text-align: left;
+  overflow: hidden;
+  width: 100%;
+  margin: 0 auto;
+  display: table;
+  padding: 0 0 8em 0;
+  -webkit-box-shadow: 14px 14px 28px 6px rgba(0,0,0,0.75);
+  -moz-box-shadow: 14px 14px 28px 6px rgba(0,0,0,0.75);
+  box-shadow: 14px 14px 28px 6px rgba(0,0,0,0.75);
+  border: none;
+}
+
+.dark i {
+  width: 1rem;
+  cursor: pointer;
+}
+
+.dark td, table th {
+  padding-bottom: 2%;
+  padding-top: 2%;
+  padding-left:2%;
+  border: none;
+}
+
+/* Background-color of the odd rows */
+.dark tr:nth-child(odd) {
+  background-color: #323C50;
+}
+
+/* Background-color of the even rows */
+.dark tr:nth-child(even) {
+  background-color: #2C3446;
+}
+
+.dark th {
+  background-color: #1F2739;
+}
+
+.dark td:first-child {
+  color: #FB667A;
+  width: 2rem;
+}
+
+.dark tr:hover {
+  background-color: #464A52;
+  -webkit-box-shadow: 0 6px 6px -6px #0E1119;
+  -moz-box-shadow: 0 6px 6px -6px #0E1119;
+  box-shadow: 0 6px 6px -6px #0E1119;
+}
+
+.dark .actions:hover {
+  background-color: #FFF842;
+  color: #403E10;
+  font-weight: bold;
+
+  box-shadow: #7F7C21 -1px 1px, #7F7C21 -2px 2px, #7F7C21 -3px 3px, #7F7C21 -4px 4px, #7F7C21 -5px 5px, #7F7C21 -6px 6px;
+  transform: translate3d(6px, -6px, 0);
+
+  transition-delay: 0s;
+  transition-duration: 0.4s;
+  transition-property: all;
+  transition-timing-function: line;
+}
+section {
+  min-height: 100%;
+}

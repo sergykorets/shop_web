@@ -1,0 +1,24 @@
+<div class="page-wrapper bg-gra-01 p-t-180 p-b-100 font-poppins">
+  <div class="wrapper wrapper--w780">
+    <div class="card card-3">
+      <div class="card-body">
+        <h2 class="title text-center">Вхід гонщика</h2>
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <%= devise_error_messages! %>
+          <div class="input-group">
+            <%= f.email_field :email, autocomplete: "email", class: 'input--style-3', placeholder: 'Email'  %>
+          </div>
+          <div class="input-group">
+            <%= f.password_field :password, autocomplete: "off", class: 'input--style-3', placeholder: 'Пароль' %>
+          </div>
+          <%= link_to 'Забули пароль?', new_user_password_path %>
+          <div class="p-t-10">
+            <%= f.submit "Увійти", class: "btn btn--pill btn--green" %>
+          </div>
+          <hr/>
+          <%= link_to 'Реєстрація', new_registration_path(resource_name) %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

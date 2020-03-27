@@ -1,0 +1,18 @@
+<div class="page-wrapper bg-gra-01 p-t-180 p-b-100 font-poppins">
+  <div class="wrapper wrapper--w780">
+    <div class="card card-3">
+      <div class="card-body">
+        <h2 class="title text-center">Відновлення паролю</h2>
+        <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+          <%= devise_error_messages! %>
+          <div class="input-group">
+            <%= f.email_field :email, autocomplete: "email", class: 'input--style-3', placeholder: 'Email'  %>
+          </div>
+          <div class="p-t-10">
+            <%= f.submit "Надіслати посилання", class: "btn btn--pill btn--green" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,800%7cRoboto+Mono:400,700%7cMerriweather:300%7cAbril+Fatface'
+          rel='stylesheet' >
+    <%= favicon_link_tag '/images/favicon.png' %>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application' %>
+
+  </head>
+  <body>
+    <% flash.each do |key,  value| %>
+      <%= content_tag(:div, value, class: "flash #{key}") %>
+    <% end %>
+    <main>
+      <%= render 'layouts/nav'%>
+      <%= yield %>
+      <footer id="footer" class="footer">
+        <div class="container">
+          <div class="row">
+<!--            <div class="col-md-6 footer-left">-->
+<!--              <div class="row">-->
+<!--                <div class="col-xs-6">-->
+<!--                  <div class="footer-link footer-link-1">-->
+<!--                    <h4>Create Free Account</h4>-->
+<!--                    <ul>-->
+<!--                      <li><a href="#">View courses</a></li>-->
+<!--                      <li><a href="#">Discuss</a></li>-->
+<!--                      <li><a href="#">Suggest course</a></li>-->
+<!--                      <li><a href="#">View courses</a></li>-->
+<!--                      <li><a href="#">Discuss</a></li>-->
+<!--                      <li><a href="#">Suggest course</a></li>-->
+<!--                    </ul>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <div class="col-xs-6">-->
+<!--                  <div class="footer-link footer-link-2">-->
+<!--                    <h4>Create Free Account</h4>-->
+<!--                    <ul>-->
+<!--                      <li><a href="#">View courses</a></li>-->
+<!--                      <li><a href="#">Discuss</a></li>-->
+<!--                      <li><a href="#">Suggest course</a></li>-->
+<!--                      <li><a href="#">View courses</a></li>-->
+<!--                      <li><a href="#">Discuss</a></li>-->
+<!--                      <li><a href="#">Suggest course</a></li>-->
+<!--                    </ul>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+            <div class="col-md-5 col-md-offset-1 footer-text">
+<!--              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip</p>-->
+              <span>&copy; 2020 Sergii Fedorchuk <a href="#">IT Racing</a></span>
+            </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </main>
+  </body>
+</html>
