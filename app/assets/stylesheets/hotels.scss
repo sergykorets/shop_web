@@ -145,29 +145,6 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 0;
 }
 
-/* Buttons */
-.btn {
-  letter-spacing: 2px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -o-border-radius: 5px;
-  border-radius: 5px;
-  padding-left: 20px;
-  padding-right: 20px;
-  &:hover, &:focus, &:active {
-    box-shadow: none;
-    outline: none!important;
-    border-color: transparent;
-  }
-  &.fh5co-btn-icon {
-    text-transform: none!important;
-    letter-spacing: normal!important;
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-}
-
 .btn-outline {
   border: 2px solid $brand-gray!important;
   background: transparent;
@@ -175,24 +152,6 @@ h1, h2, h3, h4, h5, h6 {
   &:hover, &:active, &:focus {
     border: 2px solid $brand-primary!important;
     background: $brand-primary!important;
-    color: $brand-white;
-  }
-}
-.btn-primary,
-.btn-success,
-.btn-info,
-.btn-warning,
-.btn-danger {
-  border-color: transparent;
-}
-.btn-default,
-.btn-primary,
-.btn-success,
-.btn-info,
-.btn-warning,
-.btn-danger {
-  &:hover, &:active, &:focus {
-    background: $brand-darker;
     color: $brand-white;
   }
 }
@@ -478,9 +437,6 @@ h1, h2, h3, h4, h5, h6 {
     padding: 30px;
     text-align: center;
     margin-left: 20px;
-    .btn {
-      margin-bottom: 20px;
-    }
   }
 }
 .reviews-wrap {

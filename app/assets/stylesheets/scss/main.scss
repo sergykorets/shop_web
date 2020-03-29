@@ -29,41 +29,12 @@
 @import 'layout/responsive/desktop.scss';
 
 
-.next-race-banner {
-  background: #3d296c;
-  padding: 20px;
+.category-create {
+  border: 1px solid black;
   border-radius: 5px;
-  margin-top: 5px;
-  .right {
-    margin-top: 1rem;
-    button {
-      background: -webkit-gradient(linear, left bottom, left top, from(#e8bb1e), to(#524002));
-      background: -webkit-linear-gradient(bottom, #e8bb1e 0%, #524002 100%);
-      background: -moz-linear-gradient(bottom, #e8bb1e 0%, #524002 100%);
-      background: -o-linear-gradient(bottom, #e8bb1e 0%, #524002 100%);
-      background: linear-gradient(top, #e8bb1e 0%, #524002 100%);
-      border: none;
-    }
-  }
-  h3 {
-    font-weight: 600;
-  }
-}
-.my-masonry-grid {
-  display: -webkit-box; /* Not needed if autoprefixing */
-  display: -ms-flexbox; /* Not needed if autoprefixing */
-  display: flex;
-  width: auto;
-}
-.my-masonry-grid_column {
-  background-clip: padding-box;
-}
-.masonry-grid {
-  position: relative;
-}
-@media (max-width: 750px) {
-  .container .my-masonry-grid .image {
-    width: 90%;
-  }
+  padding: 15px;
 }
 
+.btn {
+  margin-right: 1rem;
+}
