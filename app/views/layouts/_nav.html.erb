@@ -11,10 +11,21 @@
     <!-- Navbar links -->
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="https://www.facebook.com/groups/IT.Racing" target="_blank">Facebook</a>
-        </li>
         <% if signed_in? %>
+          <li class="nav-item">
+            <a class="nav-link" href="/sell">Продаж</a>
+          </li>
+          <% if current_user.admin? %>
+            <li class="nav-item">
+              <a class="nav-link" href="/products/new">Приход</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/products/expense">Списання</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/products">Продукти</a>
+            </li>
+          <% end %>
           <li class="nav-item">
             <%= link_to "Профіль", edit_user_registration_path, class: 'nav-link' %>
           </li>

@@ -1,6 +1,7 @@
 @import 'bootstrap';
 @import "font-awesome";
 @import 'notifications';
+@import 'pagination';
 @import 'main';
 @import 'race';
 @import 'mobile';
@@ -8,3 +9,4 @@
 @import "react-image-gallery/styles/scss/image-gallery.scss";
 @import "login";
 @import "user_info";
+@import 'react-dates/lib/css/_datepicker.css';

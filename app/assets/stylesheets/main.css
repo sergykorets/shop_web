@@ -682,24 +682,6 @@ label.local-error {
     border-radius: 2px;
 }
 
-/* line 1, ../scss/modules/_tables.scss */
-table {
-    font-family: 'Roboto Mono';
-    font-size: 12px;
-    color: #444;
-    width: 100%;
-}
-/* line 8, ../scss/modules/_tables.scss */
-table tr td {
-    padding: 15px 0;
-    border-bottom: 1px solid #d5d5d5;
-}
-/* line 12, ../scss/modules/_tables.scss */
-table tr td:first-of-type {
-    width: 30%;
-    font-weight: 700;
-}
-
 /* =================  CAROUSEL ANIMATION DELAY ===================== */
 /* line 3, ../scss/modules/_animations.scss */
 .delay-1 {

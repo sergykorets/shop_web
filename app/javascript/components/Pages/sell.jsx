@@ -10,171 +10,291 @@ export default class SellPage extends React.Component {
     this.state = {
       barcodes: {},
       products: {},
+      showSuccess: false,
       categories: this.props.categories,
-      barcodeModal: {
+      productSearchModal: {
         barcode: '',
         name: '',
         quantity: 1,
         category_id: this.props.categories[0].id,
-        buy_price: '',
-        sell_price: ''
-      },
-      productModal: {
-        barcode: '',
-        name: '',
-        quantity: 1,
-        category_id: this.props.categories[0].id,
-        buy_price: '',
         sell_price: ''
       },
       openedModal: '',
-      createCategory: false,
-      category: {
-        name: '',
-        multiplier: 1
-      }
+      income_amount: '',
+      change: '',
+      transactionAmount: ''
     };
   }
 
   handleReceivedBarcode = (response) => {
-    if (Object.values(this.state.products).some(item => response.message === item.barcode)) {
-      NotificationManager.error('Редагування доступне у верхній таблиці', 'Баркод вже відскановано');
-    } else {
+    if (response.product) {
       this.setState({
         ...this.state,
         barcodes: {
           ...this.state.barcodes,
-          [response.message]: response.product || {barcode: response.message}
+          [response.product.id]: Object.assign(response.product, {quantity_sell: 1})
         }
       });
+    } else {
+      NotificationManager.error('Продукт не знайдено', 'Баркод невідомий');
     }
+  };
+
+  handleModal = (modal) => {
+    this.setState({
+      ...this.state,
+      openedModal: modal
+    })
+  };
+
+  handleInputChange = (type, field, value) => {
+    this.setState({
+      ...this.state,
+      barcodes: {
+        ...this.state.barcodes,
+        [field]: {
+          ...this.state.barcodes[field],
+          [type]: value
+        }
+      }
+    })
+  };
+
+  handleFieldChange = (field, value) => {
+    this.setState({ ...this.state, [field]: value })
+  };
+
+  cancelBarcode = (barcode) => {
+    let barcodes = this.state.barcodes;
+    delete barcodes[barcode];
+    this.setState({
+      ...this.state,
+      barcodes: barcodes
+    })
+  };
+
+  ceilFloat = (value) => {
+    return (Math.ceil(value * 100) / 100);
+  };
+
+  summary = () => {
+    let sumArray = [];
+    Object.values(this.state.barcodes).map((product, index) => {
+      return sumArray.push(parseFloat(product.sell_price) * parseFloat(product.quantity_sell))
+    });
+    return this.ceilFloat(sumArray.reduce((a, b) => a + b, 0))
+  };
+
+  handleProductSearch = (field, v) => {
+    if (v.length > 0 || this.state.productSearchModal.name.length > 0 || this.state.productSearchModal.barcode.length > 0) {
+      let parameters = {};
+      if (field === 'barcode') {
+        parameters[field] = v;
+        parameters['name'] = this.state.productSearchModal.name
+      } else {
+        parameters[field] = v;
+        parameters['barcode'] = this.state.productSearchModal.barcode
+      }
+      $.ajax({
+        url: '/products/search.json',
+        type: 'POST',
+        data: parameters,
+        success: (resp) => {
+          if (resp.success) {
+            this.setState({
+              ...this.state,
+              products: resp.products,
+              productSearchModal: {
+                ...this.state.productSearchModal,
+                [field]: v
+              }
+            });
+          } else {
+            this.setState({
+              ...this.state,
+              products: {},
+              productSearchModal: {
+                ...this.state.productSearchModal,
+                [field]: v
+              }
+            });
+            NotificationManager.error(resp.error, "Неможливо зробити дію");
+          }
+        }
+      });
+    } else {
+      this.setState({
+        ...this.state,
+        productSearchModal: {
+          ...this.state.productSearchModal,
+          [field]: v
+        },
+      });
+    }
+  };
+
+  addProduct = (id) => {
+    this.setState({
+      ...this.state,
+      barcodes: {
+        ...this.state.barcodes,
+        [id]: Object.assign(this.state.products[id], {quantity_sell: 1})
+      }
+    })
+  };
+
+  restrictAdding = (id) => {
+    return Object.keys(this.state.barcodes).some(item => id.toString() === item)
+  };
+
+  submitSell = () => {
+    let products = [];
+    Object.values(this.state.barcodes).map((product, index) => {
+      return (products.push({ id: product.id, quantity: product.quantity_sell }))
+    });
+    $.ajax({
+      url: '/actions.json',
+      type: 'POST',
+      data: {
+        transaction: {
+          products: products
+        }
+      },
+      success: (resp) => {
+        if (resp.success) {
+          this.setState({
+            ...this.state,
+            showSuccess: true,
+            barcodes: {},
+            transactionAmount: resp.amount
+          });
+          NotificationManager.success('Транзакція успішна');
+        } else {
+          NotificationManager.error(resp.error, "Неможливо зробити дію");
+        }
+      }
+    });
   };
 
   render() {
     console.log(this.state)
     return (
-      <ActionCableProvider url='ws://192.168.0.104:3000/cable'>
+      <ActionCableProvider url={`ws://${location.host}/cable`}>
         <NotificationContainer/>
         <ActionCable
           channel='BarcodesChannel'
           onReceived={(data) => this.handleReceivedBarcode(data)}
         />
-        <div className='container' style={{marginTop: 100+'px', color: 'black'}}>
-          <h1>Відскановані баркоди</h1>
-          <table className='dark' style={{marginTop: 20 + 'px'}}>
-            <thead>
-            <tr>
-              <th><h1>Баркод</h1></th>
-              <th><h1>Назва</h1></th>
-              <th><h1>Категорія</h1></th>
-              <th><h1>Купівля</h1></th>
-              <th><h1>Продаж</h1></th>
-              <th><h1>Кількість</h1></th>
-              <th><h1>Дії</h1></th>
-            </tr>
-            </thead>
-            <tbody>
-            { Object.keys(this.state.barcodes).map((barcode, i) => {
-              return (
-                <tr key={i}>
-                  <td>{barcode}</td>
-                  <td>{this.state.barcodes[barcode].name}</td>
-                  <td>{this.state.barcodes[barcode].category && this.state.barcodes[barcode].category.name}</td>
-                  <td>{this.state.barcodes[barcode].buy_price}</td>
-                  <td>{this.state.barcodes[barcode].sell_price}</td>
-                  <td>{this.state.barcodes[barcode].quantity}</td>
-                  <td>
-                    <ButtonToggle color="danger" size="sm" onClick={() => this.cancelBarcode(barcode)}>Видалити</ButtonToggle>
-                    <ButtonToggle color="success" size="sm" onClick={() => this.editBarcode(barcode)}>Додати</ButtonToggle>
-                  </td>
-                </tr>
-              )
-            })}
-            </tbody>
-          </table>
-
-          { (this.state.openedModal === 'barcodeModal' || this.state.openedModal === 'productModal') &&
-          <Modal isOpen={this.state.openedModal === 'barcodeModal' || this.state.openedModal === 'productModal'} toggle={() => this.handleModal('')} size="lg">
-            <div className='container'>
-              <ModalHeader>Редагувати {this.state.openedModal === 'barcodeModal' ? 'баркод' : 'продукт'}</ModalHeader>
-              <div className='row'>
-                <div className='col-12'>
-                  <FormGroup>
-                    <Label for={`category_${this.state.openedModal}`}>Категорія</Label>
-                    <Input type="select" name="category" id={`category_${this.state.openedModal}`} defaultValue={this.state[this.state.openedModal].category_id} onChange={(e) => this.handleInputChange(this.state.openedModal,'category_id', e.target.value)}>
-                      { Object.values(this.state.categories).map((category) => {
-                        return <option key={category.id} value={category.id}>{category.name}</option>
-                      })}
-                    </Input>
-                    <i onClick={() => this.setState({createCategory: true})} className="fa fa-plus"> Додати категорію</i>
-                  </FormGroup>
-                  { this.state.createCategory &&
-                  <div className='category-create'>
-                    <h5>Створити нову категорію</h5>
-                    <div className='row'>
-                      <div className='col-6'>
-                        <FormGroup>
-                          <Label for='categoryName'>Назва</Label>
-                          <Input type='text' id='categoryName' value={this.state.category.name} onChange={(e) => this.handleInputChange('category','name', e.target.value)}/>
-                        </FormGroup>
-                      </div>
-                      <div className='col-6'>
-                        <FormGroup>
-                          <Label for='categoryMultiplier'>Множник</Label>
-                          <Input type='number' id='categoryMultiplier' min={0} value={this.state.category.multiplier} onChange={(e) => this.handleInputChange('category','multiplier', e.target.value)}/>
-                        </FormGroup>
+        { this.state.showSuccess ?
+          <div className='container text-center' style={{marginTop: 6+'rem'}}>
+            <h1>Транзакція успішна</h1>
+            <h2>Сума продажу: {this.state.transactionAmount} грн</h2>
+            <ButtonToggle style={{marginBottom: 6+'rem'}} size='lg' color="primary" onClick={() => location.reload()}>Зробити нову продажу</ButtonToggle>
+          </div>
+          :
+          <div className='container' style={{marginTop: 100+'px', color: 'black'}}>
+            <h1>Відскановані баркоди</h1>
+            <br/>
+            <ButtonToggle color="primary" onClick={() => this.handleModal('productSearchModal')}>Шукати продукт</ButtonToggle>
+            <table className='dark' style={{marginTop: 20 + 'px'}}>
+              <thead>
+              <tr>
+                <th><h1>Баркод</h1></th>
+                <th><h1>Назва</h1></th>
+                <th><h1>Група</h1></th>
+                <th><h1>Ціна</h1></th>
+                <th><h1>Залишок</h1></th>
+                <th><h1>Кількість</h1></th>
+                <th><h1>Дії</h1></th>
+              </tr>
+              </thead>
+              <tbody>
+              { Object.keys(this.state.barcodes).map((barcode, i) => {
+                return (
+                  <tr key={i}>
+                    <td>{this.state.barcodes[barcode].barcode}</td>
+                    <td>{this.state.barcodes[barcode].name}</td>
+                    <td>{this.state.barcodes[barcode].category && this.state.barcodes[barcode].category.name}</td>
+                    <td>{this.state.barcodes[barcode].sell_price}</td>
+                    <td>{this.state.barcodes[barcode].quantity}</td>
+                    <td>
+                      <Input type='number' id={`quantity_${i}`}
+                             value={this.state.barcodes[barcode].quantity_sell}
+                             onChange={(e) => this.handleInputChange('quantity_sell', barcode, e.target.value)}
+                             className='quantity-sell'
+                             min={0}
+                             max={this.state.barcodes[barcode].quantity}
+                      />
+                    </td>
+                    <td>
+                      <ButtonToggle color="danger" size="sm" onClick={() => this.cancelBarcode(barcode)}>Видалити</ButtonToggle>
+                    </td>
+                  </tr>
+                )
+              })}
+              </tbody>
+            </table>
+            <hr/>
+            { Object.keys(this.state.barcodes).length > 0 &&
+              <Fragment>
+                <h1>Всього: {this.summary()} грн</h1>
+                <FormGroup>
+                  <Label for='income_amount'>Готівка</Label>
+                  <Input type='text' id='income_amount' value={this.state.income_amount}
+                         onChange={(e) => this.handleFieldChange('income_amount', e.target.value)}/>
+                </FormGroup>
+                { this.state.income_amount > this.summary() &&
+                  <h1>Решта: {this.ceilFloat(this.state.income_amount - this.summary())} грн</h1>}
+              </Fragment>}
+            <hr/>
+            <ButtonToggle size='lg' color="success" disabled={Object.keys(this.state.barcodes).length < 1} onClick={() => this.submitSell()}>Продати</ButtonToggle>
+            <hr/>
+            { (this.state.openedModal === 'productSearchModal') &&
+              <Modal isOpen={this.state.openedModal === 'productSearchModal'} toggle={() => this.handleModal('')} size="lg">
+                <div className='container'>
+                  <ModalHeader>Пошук продукту</ModalHeader>
+                  <div className='row'>
+                    <div className='col-6'>
+                      <FormGroup>
+                        <Label for='barcode'>Баркод</Label>
+                        <Input type='search' id='barcode' value={this.state[this.state.openedModal].barcode}
+                               onChange={(e) => this.handleProductSearch('barcode', e.target.value)}/>
+                        <ButtonToggle size='sm' color="primary" style={{marginTop: 20+'px'}}
+                                      onClick={() => this.handleProductSearch('barcode', '482')}>
+                          Україна
+                        </ButtonToggle>
+                      </FormGroup>
+                    </div>
+                    <div className='col-6'>
+                      <FormGroup>
+                        <Label for='name'>Назва продукту</Label>
+                        <Input type='search' id='name' value={this.state[this.state.openedModal].name}
+                               onChange={(e) => this.handleProductSearch('name', e.target.value)}/>
+                      </FormGroup>
+                    </div>
+                    <div className='col-12'>
+                      <div className='found-products'>
+                        {Object.values(this.state.products).map((product, index) => {
+                          return (
+                            <div className='found-product' key={index}>
+                              <div className='found-product-info'>
+                                <span>{product.barcode}</span>
+                                <span>{product.category.name}</span>
+                                <span>{product.name}</span>
+                              </div>
+                              <ButtonToggle size='sm' color="success" disabled={this.restrictAdding(product.id)} onClick={() => this.addProduct(product.id)}>Додати</ButtonToggle>
+                            </div>
+                          )
+                        })}
                       </div>
                     </div>
-                    <FormGroup>
-                      <ButtonToggle color="secondary" onClick={() => this.setState({createCategory: false})}>Відміна</ButtonToggle>
-                      <ButtonToggle color="success" onClick={this.submitCategory}>Створити</ButtonToggle>
-                    </FormGroup>
-                  </div>}
+                  </div>
                   <FormGroup>
-                    <Label for={`barcode_${this.state.openedModal}`}>Баркод</Label>
-                    <Input type='text' id={`barcode_${this.state.openedModal}`} value={this.state[this.state.openedModal].barcode} disabled={true}/>
+                    <ButtonToggle color="secondary" onClick={() => this.handleModal('')}>Закрити</ButtonToggle>
                   </FormGroup>
                 </div>
-                <div className='col-12'>
-                  <FormGroup>
-                    <Label for={`name_${this.state.openedModal}`}>Назва</Label>
-                    <Input type='text' id={`name_${this.state.openedModal}`} value={this.state[this.state.openedModal].name} onChange={(e) => this.handleInputChange(this.state.openedModal,'name', e.target.value)}/>
-                  </FormGroup>
-                </div>
-                <div className='col-4'>
-                  <FormGroup>
-                    <Label for={`buy_price_${this.state.openedModal}`}>Покупка</Label>
-                    <Input type='number' id={`buy_price_${this.state.openedModal}`} value={this.state[this.state.openedModal].buy_price} onChange={(e) => this.handleInputChange(this.state.openedModal,'buy_price', e.target.value)}/>
-                  </FormGroup>
-                </div>
-                <div className='col-4'>
-                  <FormGroup>
-                    <Label for={`sell_price_${this.state.openedModal}`}>Продаж</Label>
-                    <Input type='number' id={`sell_price_${this.state.openedModal}`}
-                           value={this.state[this.state.openedModal].sell_price}
-                           onChange={(e) => this.handleInputChange(this.state.openedModal,'sell_price', e.target.value)}
-                      // disabled={this.state.openedModal === 'barcodeModal'}
-                    />
-                  </FormGroup>
-                </div>
-                <div className='col-4'>
-                  <FormGroup>
-                    <Label for={`quantity_${this.state.openedModal}`}>Кількість</Label>
-                    <Input type='number' id={`quantity_${this.state.openedModal}`}
-                           value={this.state[this.state.openedModal].quantity}
-                           onChange={(e) => this.handleInputChange(this.state.openedModal,'quantity', e.target.value)}
-                           min={0}
-                    />
-                  </FormGroup>
-                </div>
-              </div>
-              <FormGroup>
-                <ButtonToggle color="secondary" onClick={() => this.handleModal('')}>Відміна</ButtonToggle>
-                <ButtonToggle color="success" disabled={this.state.createCategory} onClick={this.state.openedModal === 'barcodeModal' ? this.submitBarcode : this.submitProduct}>Зберегти</ButtonToggle>
-              </FormGroup>
-            </div>
-          </Modal>}
-        </div>
+              </Modal>}
+          </div>}
       </ActionCableProvider>
     );
   }

@@ -9,10 +9,11 @@ class ApiController < ActionController::Base
         barcode: product.barcode,
         buy_price: product.buy_price,
         sell_price: product.sell_price,
+        due_date: product.due_date&.strftime("%d.%m.%Y"),
         category: product.category && {
-            id: product.category.id,
-            name: product.category.name,
-            multiplier: product.category.multiplier
+          id: product.category.id,
+          name: product.category.name,
+          multiplier: product.category.multiplier
         }
     }}
     render json: {success: true}

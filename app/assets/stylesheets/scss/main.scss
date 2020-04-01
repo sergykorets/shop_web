@@ -20,7 +20,7 @@
 @import 'modules/sections.scss';
 @import 'modules/components.scss';
 @import 'modules/forms.scss';
-@import 'modules/tables.scss';
+@import 'modules/table.scss';
 @import 'modules/animations.scss';
 
 @import 'layout/responsive/big-mobile.scss';
@@ -37,4 +37,37 @@
 
 .btn {
   margin-right: 1rem;
+}
+
+.quantity-sell {
+  width: 5rem;
+}
+.found-product {
+  border: 1px solid black;
+  padding: 5px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 1rem;
+  .found-product-info {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 80%;
+  }
+}
+.SingleDatePicker {
+  width: 100%;
+  .SingleDatePickerInput {
+    width: 100%;
+    .DateInput {
+      width: 100%;
+      .DateInput_input {
+        font-size: 1rem;
+        line-height: 1.5;
+        padding: 5px 11px;
+      }
+    }
+  }
 }

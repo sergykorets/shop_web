@@ -1,34 +1,470 @@
 import React, {Fragment} from 'react';
 import {ActionCable, ActionCableProvider} from 'react-actioncable-provider';
+import { Modal, ModalHeader, FormGroup, Label, Input, ButtonToggle } from 'reactstrap';
+import Pagination from "react-js-pagination";
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+import AirBnbPicker from '../common/AirBnbPicker';
 
 export default class Products extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      barcodes: []
+      products: this.props.products,
+      categories: this.props.categories,
+      openedModal: '',
+      activePage: 1,
+      count: this.props.count,
+      per: this.props.per,
+      createCategory: false,
+      category: {
+        name: '',
+        multiplier: 1
+      },
+      sort: {
+        field: '',
+        descending: true
+      },
+      productModal: {
+        id: '',
+        index: '',
+        barcode: '',
+        name: '',
+        quantity: '',
+        category_id: '',
+        buy_price: '',
+        sell_price: '',
+        due_date: null
+      },
+      productSearch: {
+        barcode: '',
+        name: '',
+        category_id: ''
+      }
     };
   }
 
+  handleModal = (modal) => {
+    this.setState({
+      ...this.state,
+      openedModal: modal
+    })
+  };
+
   handleReceivedConversation = (response) => {
-    this.setState(prevState => ({
-      barcodes: [...prevState.barcodes, response.message]
-    }));
+    if (response.product) {
+      this.setState({
+        ...this.state,
+        openedModal: 'productModal',
+        productModal: Object.assign(response.product, {category_id: response.product.category.id})
+      });
+    } else {
+      NotificationManager.error('Продукт не знайдено');
+    }
+  };
+
+  handleInputChange = (type, field, value) => {
+    this.setState({
+      ...this.state,
+      [type]: {
+        ...this.state[type],
+        [field]: value
+      }
+    })
+  };
+
+  handleDateChange = ({date}) => {
+    this.setState({
+      ...this.state,
+      [this.state.openedModal]: {
+        ...this.state[this.state.openedModal],
+        due_date: date ? date.format('DD.MM.YYYY') : null
+      }
+    })
+  };
+
+  onSort = (field) => {
+    $.ajax({
+      url: '/products/search.json',
+      type: 'POST',
+      data: {
+        barcode: this.state.productSearch.barcode,
+        name: this.state.productSearch.name,
+        category_id: this.state.productSearch.category_id,
+        index: true,
+        sort: field,
+        descending: this.state.sort.descending,
+        page: this.state.activePage
+      },
+      success: (resp) => {
+        if (resp.success) {
+          this.setState({
+            ...this.state,
+            products: resp.products,
+            sort: {
+              field: field,
+              descending: !this.state.sort.descending
+            }
+          });
+        } else {
+          NotificationManager.error(resp.error, "Неможливо зробити дію");
+        }
+      }
+    });
+  };
+
+  handlePageChange = (page) => {
+    $.ajax({
+      url: '/products/search.json',
+      type: 'POST',
+      data: {
+        barcode: this.state.productSearch.barcode,
+        name: this.state.productSearch.name,
+        category_id: this.state.productSearch.category_id,
+        index: true,
+        sort: this.state.sort.field,
+        descending: this.state.sort.descending,
+        page: page
+      },
+      success: (resp) => {
+        this.setState({
+          ...this.state,
+          products: resp.products,
+          activePage: page,
+          count: resp.count
+        });
+      }
+    });
+  };
+
+  editProduct = (product, index) => {
+    this.setState({
+      ...this.state,
+      openedModal: 'productModal',
+      productModal: Object.assign(product, {index: index})
+    })
+  };
+
+  handleProductSearch = (field, v) => {
+    if (v.length > 0 || this.state.productSearch.name.length > 0 || this.state.productSearch.barcode.length > 0 || this.state.productSearch.category_id.length > 0) {
+      let parameters = {index: true, sort: this.state.sort.field, descending: this.state.sort.descending};
+      if (field === 'barcode') {
+        parameters[field] = v;
+        parameters['name'] = this.state.productSearch.name;
+        parameters['category_id'] = this.state.productSearch.category_id;
+      } else if (field === 'category_id') {
+        parameters[field] = v;
+        parameters['name'] = this.state.productSearch.name;
+        parameters['barcode'] = this.state.productSearch.barcode;
+      } else {
+        parameters[field] = v;
+        parameters['barcode'] = this.state.productSearch.barcode;
+        parameters['category_id'] = this.state.productSearch.category_id;
+      }
+      $.ajax({
+        url: '/products/search.json',
+        type: 'POST',
+        data: parameters,
+        success: (resp) => {
+          if (resp.success) {
+            this.setState({
+              ...this.state,
+              products: resp.products,
+              count: resp.count,
+              productSearch: {
+                ...this.state.productSearch,
+                [field]: v
+              }
+            });
+          } else {
+            this.setState({
+              ...this.state,
+              products: [],
+              count: 0,
+              productSearch: {
+                ...this.state.productSearch,
+                [field]: v
+              }
+            });
+            NotificationManager.error(resp.error, "Неможливо зробити дію");
+          }
+        }
+      });
+    } else {
+      this.setState({
+        ...this.state,
+        productSearch: {
+          ...this.state.productSearch,
+          count: 0,
+          [field]: v
+        },
+      });
+    }
+  };
+
+  submitCategory = () => {
+    $.ajax({
+      url: '/categories.json',
+      type: 'POST',
+      data: {
+        category: {
+          name: this.state.category.name,
+          multiplier: this.state.category.multiplier
+        }
+      },
+      success: (resp) => {
+        if (resp.success) {
+          this.setState({
+            ...this.state,
+            createCategory: false,
+            categories: [...this.state.categories, resp.category],
+            category: {
+              name: '',
+              multiplier: 1
+            }
+          });
+          NotificationManager.success("Тепер її можна вибрати в списку категорій", 'Категорію створено');
+        } else {
+          NotificationManager.error(resp.error, "Неможливо зробити дію");
+        }
+      }
+    });
+  };
+
+  submitProduct = (modal) => {
+    $.ajax({
+      url: `/products/${this.state.productModal.id}.json`,
+      type: 'PATCH',
+      data: {
+        product: {
+          id: this.state[this.state.openedModal].id,
+          barcode: this.state[this.state.openedModal].barcode,
+          name: this.state[this.state.openedModal].name,
+          quantity: this.state[this.state.openedModal].quantity,
+          category_id: this.state[this.state.openedModal].category_id,
+          buy_price: this.state[this.state.openedModal].buy_price,
+          sell_price: this.state[this.state.openedModal].sell_price,
+          due_date: this.state[this.state.openedModal].due_date
+        }
+      }
+    }).then((resp) => {
+      if (resp.success) {
+        let products = this.state.products;
+        products[this.state.productModal.index] = resp.product;
+        this.setState({
+          ...this.state,
+          openedModal: '',
+          products: products,
+          [modal]: {
+            id: '',
+            index: '',
+            barcode: '',
+            name: '',
+            quantity: 1,
+            category_id: this.state.categories[0].id,
+            buy_price: '',
+            sell_price: '',
+            due_date: null
+          }
+        });
+        NotificationManager.success('Продукт змінено');
+      } else {
+        NotificationManager.error(resp.error, 'Неможливо зробити дію');
+      }
+    });
   };
 
   render() {
-    console.log(React.version);
+    console.log(this.state)
     return (
-      <ActionCableProvider url='ws://192.168.0.104:3000/cable'>
+      <ActionCableProvider url={`ws://${location.host}/cable`}>
         <ActionCable
           channel='BarcodesChannel'
           onReceived={(data) => this.handleReceivedConversation(data)}
         />
+        <NotificationContainer/>
         <div className='container' style={{marginTop: 100+'px', color: 'black'}}>
-          { this.state.barcodes.map((barcode, i) => {
-            return (<h1 key={i}>{barcode}</h1>
-            )
-          })}
+          <div className='row'>
+            <div className='col-4'>
+              <FormGroup>
+                <Label for='barcode'>Баркод</Label>
+                <Input type='search' id='barcode' value={this.state.productSearch.barcode}
+                       onChange={(e) => this.handleProductSearch('barcode', e.target.value)}/>
+              </FormGroup>
+            </div>
+            <div className='col-4'>
+              <FormGroup>
+                <Label for='name'>Назва продукту</Label>
+                <Input type='search' id='name' value={this.state.productSearch.name}
+                       onChange={(e) => this.handleProductSearch('name', e.target.value)}/>
+              </FormGroup>
+            </div>
+            <div className='col-4'>
+              <FormGroup>
+                <Label for='category'>Група</Label>
+                <Input type="select" name="category" id='category'
+                       defaultValue={this.state.productSearch.category_id}
+                       onChange={(e) => this.handleProductSearch('category_id', e.target.value)}>
+                  <option key={0} value=' '>Вибрати групу</option>
+                  { this.state.categories.map((category) => {
+                    return <option key={category.id} value={category.id}>{category.name}</option>
+                  })}
+                </Input>
+              </FormGroup>
+            </div>
+          </div>
+          <table className='dark' style={{marginTop: 20 + 'px'}}>
+            <thead>
+            <tr>
+              <th><h1>Баркод</h1></th>
+              <th><h1>Назва</h1></th>
+              <th><h1>Група</h1></th>
+              <th style={{cursor: 'pointer'}} onClick={() => this.onSort('buy_price')}><h1>Закупівля</h1></th>
+              <th style={{cursor: 'pointer'}} onClick={() => this.onSort('sell_price')}><h1>Ціна</h1></th>
+              <th style={{cursor: 'pointer'}} onClick={() => this.onSort('quantity')}><h1>Залишок</h1></th>
+              <th style={{cursor: 'pointer'}} onClick={() => this.onSort('due_date')}><h1>Придатність</h1></th>
+              <th><h1>Дії</h1></th>
+            </tr>
+            </thead>
+            <tbody>
+            { this.state.products.map((product, i) => {
+              return (
+                <tr key={i}>
+                  <td>{product.barcode}</td>
+                  <td>{product.name}</td>
+                  <td>{product.category && product.category.name}</td>
+                  <td>{product.buy_price}</td>
+                  <td>{product.sell_price}</td>
+                  <td>{product.quantity}</td>
+                  <td>{product.due_date}</td>
+                  <td>
+                    <ButtonToggle color="warning" size="sm" onClick={() => this.editProduct(product, i)}>Редагувати</ButtonToggle>
+                  </td>
+                </tr>
+              )
+            })}
+            </tbody>
+          </table>
+          { this.state.count > this.state.per ?
+            <Fragment>
+              <br/>
+              <div className='paginator'>
+                <Pagination
+                  activePage={this.state.activePage}
+                  itemsCountPerPage={this.state.per}
+                  totalItemsCount={this.state.count}
+                  pageRangeDisplayed={9}
+                  onChange={this.handlePageChange}
+                />
+                <span className='ml-auto'>Всього: {this.state.count}</span>
+              </div>
+            </Fragment>
+            :
+            <Fragment>
+              <br/>
+              <span className='ml-auto'>Всього: {this.state.count}</span>
+            </Fragment>
+          }
+          <br/>
+          { (this.state.openedModal.length > 0) &&
+          <Modal isOpen={this.state.openedModal.length > 0} toggle={() => this.handleModal('')} size="lg">
+            <div className='container'>
+              <ModalHeader>Редагувати продукт</ModalHeader>
+              <div className='row'>
+                <div className='col-12'>
+                  <FormGroup>
+                    <Label for={`category_${this.state.openedModal}`}>Група</Label>
+                    <Input type="select" name="category" id={`category_${this.state.openedModal}`}
+                           defaultValue={this.state[this.state.openedModal].category_id}
+                           onChange={(e) => this.handleInputChange(this.state.openedModal,'category_id', e.target.value)}>
+                      <option key={0} value=' '>Вибрати групу</option>
+                      { Object.values(this.state.categories).map((category) => {
+                        return <option key={category.id} value={category.id}>{category.name}</option>
+                      })}
+                    </Input>
+                    <i onClick={() => this.setState({createCategory: true})} className="fa fa-plus"> Додати групу</i>
+                  </FormGroup>
+                  { this.state.createCategory &&
+                  <div className='category-create'>
+                    <h5>Створити нову групу</h5>
+                    <div className='row'>
+                      <div className='col-6'>
+                        <FormGroup>
+                          <Label for='categoryName'>Назва групи</Label>
+                          <Input type='text' id='categoryName' value={this.state.category.name}
+                                 onChange={(e) => this.handleInputChange('category','name', e.target.value)}/>
+                        </FormGroup>
+                      </div>
+                      <div className='col-6'>
+                        <FormGroup>
+                          <Label for='categoryMultiplier'>Множник</Label>
+                          <Input type='number' id='categoryMultiplier' min={0} value={this.state.category.multiplier}
+                                 onChange={(e) => this.handleInputChange('category','multiplier', e.target.value)}/>
+                        </FormGroup>
+                      </div>
+                    </div>
+                    <FormGroup>
+                      <ButtonToggle color="secondary" onClick={() => this.setState({createCategory: false})}>Відміна</ButtonToggle>
+                      <ButtonToggle color="success" onClick={this.submitCategory}>Створити групу</ButtonToggle>
+                    </FormGroup>
+                  </div>}
+                  <FormGroup>
+                    <Label for={`barcode_${this.state.openedModal}`}>Баркод</Label>
+                    <Input type='text' id={`barcode_${this.state.openedModal}`}
+                           value={this.state[this.state.openedModal].barcode}
+                           disabled={this.state.openedModal === 'barcodeModal'}
+                           onChange={(e) => this.handleInputChange(this.state.openedModal,'barcode', e.target.value)}/>
+                  </FormGroup>
+                </div>
+                <div className='col-6'>
+                  <FormGroup>
+                    <Label for={`name_${this.state.openedModal}`}>Назва продукту</Label>
+                    <Input type='text' id={`name_${this.state.openedModal}`} value={this.state[this.state.openedModal].name}
+                           onChange={(e) => this.handleInputChange(this.state.openedModal,'name', e.target.value)}/>
+                  </FormGroup>
+                </div>
+                <div className='col-6'>
+                  <FormGroup>
+                    <Label for={`due_date_${this.state.openedModal}`}>Дата придатності</Label>
+                    <AirBnbPicker
+                      single={true}
+                      onPickerApply={this.handleDateChange}
+                      date={this.state[this.state.openedModal].due_date}
+                    />
+                  </FormGroup>
+                </div>
+                <div className='col-4'>
+                  <FormGroup>
+                    <Label for={`buy_price_${this.state.openedModal}`}>Закупка</Label>
+                    <Input type='number' id={`buy_price_${this.state.openedModal}`} value={this.state[this.state.openedModal].buy_price}
+                           onChange={(e) => this.handleInputChange(this.state.openedModal,'buy_price', e.target.value)}/>
+                  </FormGroup>
+                </div>
+                <div className='col-4'>
+                  <FormGroup>
+                    <Label for={`sell_price_${this.state.openedModal}`}>Ціна</Label>
+                    <Input type='number' id={`sell_price_${this.state.openedModal}`}
+                           value={this.state[this.state.openedModal].sell_price}
+                           onChange={(e) => this.handleInputChange(this.state.openedModal,'sell_price', e.target.value)}/>
+                  </FormGroup>
+                </div>
+                <div className='col-4'>
+                  <FormGroup>
+                    <Label for={`quantity_${this.state.openedModal}`}>Залишок</Label>
+                    <Input type='number' id={`quantity_${this.state.openedModal}`}
+                           value={this.state[this.state.openedModal].quantity}
+                           onChange={(e) => this.handleInputChange(this.state.openedModal,'quantity', e.target.value)}
+                           min={0}/>
+                  </FormGroup>
+                </div>
+              </div>
+              <FormGroup>
+                <ButtonToggle color="secondary" onClick={() => this.handleModal('')}>Відміна</ButtonToggle>
+                <ButtonToggle color="success" disabled={this.state.createCategory}
+                              onClick={() => this.submitProduct(this.state.openedModal)}>Зберегти</ButtonToggle>
+              </FormGroup>
+            </div>
+          </Modal>}
         </div>
       </ActionCableProvider>
     );

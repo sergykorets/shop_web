@@ -5,8 +5,15 @@ Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
 
   devise_for :users, :controllers => { registrations: 'registrations' }
-  resources :products
+  resources :products do
+    collection do
+      post :search
+      get :expense
+    end
+  end
+  resources :product_actions, only: [:update, :create, :destroy]
   resources :categories, only: :create
+  resources :actions, only: :create
   get '/sell', to: 'pages#sell'
 
   post '/barcode', to: 'api#barcode'

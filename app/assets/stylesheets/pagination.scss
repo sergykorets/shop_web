@@ -10,16 +10,22 @@
 .pagination a {
   border: 1px solid #ddd;
   padding: 10px 20px;
-  color: white;
+  color: black;
 }
 .pagination .active a {
   background: white;
 }
 .pagination {
   margin-top: 30px;
+  margin-right: auto;
   .active {
     a {
-      color: black;
+      color: red;
     }
   }
+}
+.paginator {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
 }

@@ -1,11 +1,10 @@
 class PagesController < ApplicationController
 
   def sell
-    category = Category.new(category_params)
-    if category.save
-      render json: {success: true, category: category}
-    else
-      render json: {success: false, error: category.errors.full_messages.to_sentence}
+    @categories = Category.all.map do |category|
+      {  id: category.id,
+         name: category.name,
+         multiplier: category.multiplier}
     end
   end
 
