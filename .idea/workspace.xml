@@ -3,645 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="c5307506-254b-412b-9295-c53e89ac35ca" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/stylesheets/application.scss" beforeDir="false" afterPath="$PROJECT_DIR$/app/assets/stylesheets/application.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/stylesheets/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/assets/stylesheets/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/stylesheets/pagination.scss" beforeDir="false" afterPath="$PROJECT_DIR$/app/assets/stylesheets/pagination.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/stylesheets/race.scss" beforeDir="false" afterPath="$PROJECT_DIR$/app/assets/stylesheets/race.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/stylesheets/scss/main.scss" beforeDir="false" afterPath="$PROJECT_DIR$/app/assets/stylesheets/scss/main.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/stylesheets/scss/modules/_forms.scss" beforeDir="false" afterPath="$PROJECT_DIR$/app/assets/stylesheets/scss/modules/_forms.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/stylesheets/scss/modules/_tables.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/api_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/api_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/pages_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/pages_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/products_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/products_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/javascript/components/Pages/sell.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/javascript/components/Pages/sell.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/javascript/components/Products/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/javascript/components/Products/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/javascript/components/Products/new.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/javascript/components/Products/new.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/javascript/components/common/barcode.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/javascript/components/common/AirBnbPicker.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/javascript/packs/application.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/javascript/packs/application.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/category.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/category.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/product.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/product.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/user.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/user.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/devise/registrations/edit.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/devise/registrations/edit.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/devise/registrations/new.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/devise/registrations/new.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/devise/sessions/new.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/devise/sessions/new.html.erb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/layouts/_nav.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/layouts/_nav.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/pages/sell.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/pages/sell.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/products/index.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/products/index.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/products/new.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/products/new.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/routes.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/schema.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/schema.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/development.log" beforeDir="false" afterPath="$PROJECT_DIR$/log/development.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.yarn-integrity" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.yarn-integrity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/.nycrc" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/.nycrc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/.travis.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/and.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/and.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/and.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/and.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/between.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/between.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/between.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/between.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/booleanSome.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/booleanSome.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/booleanSome.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/booleanSome.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/childrenHavePropXorChildren.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/childrenHavePropXorChildren.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/childrenHavePropXorChildren.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/childrenHavePropXorChildren.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/childrenOf.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/childrenOf.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/childrenOf.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/childrenOf.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/childrenOfType.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/childrenOfType.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/childrenOfType.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/childrenOfType.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/childrenSequenceOf.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/childrenSequenceOf.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/childrenSequenceOf.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/childrenSequenceOf.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/componentWithName.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/componentWithName.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/componentWithName.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/componentWithName.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/disallowedIf.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/disallowedIf.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/disallowedIf.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/disallowedIf.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/elementType.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/elementType.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/elementType.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/elementType.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/explicitNull.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/explicitNull.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/explicitNull.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/explicitNull.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/forbidExtraProps.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/forbidExtraProps.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/forbidExtraProps.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/forbidExtraProps.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/helpers/getComponentName.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/helpers/getComponentName.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/helpers/getComponentName.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/helpers/getComponentName.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/helpers/isInteger.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/helpers/isInteger.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/helpers/isInteger.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/helpers/isInteger.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/helpers/isPlainObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/helpers/isPlainObject.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/helpers/isPlainObject.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/helpers/isPlainObject.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/helpers/isPrimitive.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/helpers/isPrimitive.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/helpers/isPrimitive.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/helpers/isPrimitive.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/helpers/renderableChildren.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/helpers/renderableChildren.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/helpers/renderableChildren.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/helpers/renderableChildren.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/helpers/typeOf.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/helpers/typeOf.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/helpers/typeOf.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/helpers/typeOf.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/helpers/wrapValidator.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/helpers/wrapValidator.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/helpers/wrapValidator.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/helpers/wrapValidator.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/index.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/index.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/integer.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/integer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/integer.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/integer.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/keysOf.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/keysOf.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/keysOf.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/keysOf.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/mocks/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/mocks/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/mocks/index.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/mocks/index.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/mutuallyExclusiveProps.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/mutuallyExclusiveProps.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/mutuallyExclusiveProps.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/mutuallyExclusiveProps.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/mutuallyExclusiveTrueProps.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/mutuallyExclusiveTrueProps.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/mutuallyExclusiveTrueProps.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/mutuallyExclusiveTrueProps.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/nChildren.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/nChildren.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/nChildren.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/nChildren.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/nonNegativeInteger.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/nonNegativeInteger.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/nonNegativeInteger.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/nonNegativeInteger.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/nonNegativeNumber.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/nonNegativeNumber.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/nonNegativeNumber.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/nonNegativeNumber.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/numericString.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/numericString.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/numericString.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/numericString.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/object.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/object.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/object.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/object.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/or.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/or.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/or.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/or.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/range.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/range.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/range.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/range.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/requiredBy.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/requiredBy.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/requiredBy.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/requiredBy.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/restrictedProp.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/restrictedProp.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/restrictedProp.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/restrictedProp.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/sequenceOf.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/sequenceOf.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/sequenceOf.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/sequenceOf.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/shape.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/shape.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/shape.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/shape.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/stringStartsWith.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/stringStartsWith.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/stringStartsWith.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/stringStartsWith.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/uniqueArray.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/uniqueArray.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/uniqueArray.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/uniqueArray.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/uniqueArrayOf.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/uniqueArrayOf.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/uniqueArrayOf.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/uniqueArrayOf.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/valuesOf.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/valuesOf.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/valuesOf.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/valuesOf.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/withShape.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/withShape.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/withShape.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/build/withShape.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/index.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/index.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/src/between.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/src/between.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/src/booleanSome.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/src/booleanSome.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/src/childrenOfType.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/src/childrenOfType.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/src/componentWithName.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/src/componentWithName.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/src/elementType.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/src/elementType.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/src/helpers/getComponentName.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/src/helpers/getComponentName.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/src/helpers/isInteger.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/src/helpers/isInteger.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/src/helpers/renderableChildren.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/src/helpers/renderableChildren.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/src/mocks/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/src/mocks/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/src/mutuallyExclusiveProps.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/src/mutuallyExclusiveProps.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/src/mutuallyExclusiveTrueProps.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/src/mutuallyExclusiveTrueProps.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/src/or.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/src/or.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/test/.eslintrc" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/test/.eslintrc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/test/babel-register.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/test/babel-register.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/test/childrenSequenceOf.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/test/childrenSequenceOf.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/test/componentWithName.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/test/componentWithName.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/test/elementType.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/test/elementType.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/test/helpers/_failTestsOnErrors.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/test/helpers/_failTestsOnErrors.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/test/helpers/getComponentName.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/test/helpers/getComponentName.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/test/mocks.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/test/mocks.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/airbnb-prop-types/test/nChildren.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/airbnb-prop-types/test/nChildren.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/array.prototype.find/.eslintrc" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/array.prototype.find/.eslintrc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/array.prototype.find/.npmignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/array.prototype.find/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/array.prototype.find/.travis.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/array.prototype.find/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/array.prototype.find/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/array.prototype.find/implementation.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/array.prototype.find/implementation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/array.prototype.find/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/array.prototype.find/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/array.prototype.find/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/array.prototype.find/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/array.prototype.find/polyfill.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/array.prototype.find/polyfill.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/array.prototype.find/tests/.eslintrc" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/array.prototype.find/tests/.eslintrc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/array.prototype.find/tests/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/array.prototype.find/tests/test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/define-properties/.eslintrc" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/define-properties/.eslintrc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/define-properties/.jscs.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/define-properties/.jscs.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/define-properties/.npmignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/define-properties/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/define-properties/.travis.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/define-properties/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/define-properties/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/define-properties/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/define-properties/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/define-properties/node_modules/object-keys/.editorconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/define-properties/node_modules/object-keys/.eslintrc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/define-properties/node_modules/object-keys/.jscs.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/define-properties/node_modules/object-keys/.travis.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/define-properties/node_modules/object-keys/CHANGELOG.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/define-properties/node_modules/object-keys/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/define-properties/node_modules/object-keys/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/define-properties/node_modules/object-keys/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/define-properties/node_modules/object-keys/isArguments.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/define-properties/node_modules/object-keys/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/define-properties/node_modules/object-keys/test/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/define-properties/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/define-properties/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/define-properties/test/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/define-properties/test/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/direction/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/direction/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/direction/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/direction/readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/es-to-primitive/.eslintrc" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/es-to-primitive/.eslintrc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/es-to-primitive/.jscs.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/es-to-primitive/.npmignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/es-to-primitive/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/es-to-primitive/.travis.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/es-to-primitive/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/es-to-primitive/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/es-to-primitive/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/es-to-primitive/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/es-to-primitive/es5.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/es-to-primitive/es5.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/es-to-primitive/es6.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/es-to-primitive/es6.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/es-to-primitive/helpers/isPrimitive.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/es-to-primitive/helpers/isPrimitive.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/es-to-primitive/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/es-to-primitive/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/es-to-primitive/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/es-to-primitive/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/es-to-primitive/test/es5.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/es-to-primitive/test/es5.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/es-to-primitive/test/es6.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/es-to-primitive/test/es6.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/es-to-primitive/test/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/es-to-primitive/test/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/function.prototype.name/.editorconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/function.prototype.name/.eslintrc" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/function.prototype.name/.eslintrc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/function.prototype.name/.jscs.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/function.prototype.name/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/function.prototype.name/.travis.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/function.prototype.name/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/function.prototype.name/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/function.prototype.name/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/function.prototype.name/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/function.prototype.name/helpers/functionsHaveNames.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/function.prototype.name/helpers/functionsHaveNames.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/function.prototype.name/implementation.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/function.prototype.name/implementation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/function.prototype.name/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/function.prototype.name/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/function.prototype.name/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/function.prototype.name/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/function.prototype.name/shim.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/function.prototype.name/shim.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/function.prototype.name/test/.eslintrc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/function.prototype.name/test/tests.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/function.prototype.name/test/tests.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/hoist-non-react-statics/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/hoist-non-react-statics/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/hoist-non-react-statics/index.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/hoist-non-react-statics/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/hoist-non-react-statics/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/hoist-non-react-statics/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/hoist-non-react-statics/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/ar-dz.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/ar-dz.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/ar-kw.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/ar-kw.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/ar-ly.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/ar-ly.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/ar-ma.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/ar-ma.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/ar-sa.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/ar-sa.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/ar.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/ar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/az.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/az.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/be.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/be.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/bg.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/bg.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/bn.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/bn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/bo.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/bo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/bs.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/bs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/cs.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/cs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/cv.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/cv.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/dv.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/dv.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/en-ie.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/en-ie.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/eo.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/eo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/es-us.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/es-us.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/eu.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/eu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/fa.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/fa.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/fo.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/fo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/gom-latn.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/gom-latn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/gu.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/gu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/hi.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/hi.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/hr.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/hr.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/hy-am.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/hy-am.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/id.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/id.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/ja.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/ja.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/jv.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/jv.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/kk.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/kk.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/kn.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/kn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/ky.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/ky.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/me.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/me.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/mk.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/mk.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/mr.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/mr.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/ms-my.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/ms-my.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/ms.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/ms.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/my.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/my.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/ne.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/ne.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/nl-be.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/nl-be.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/nl.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/nl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/pa-in.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/pa-in.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/pt-br.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/pt-br.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/pt.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/pt.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/ro.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/ro.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/sl.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/sl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/sr-cyrl.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/sr-cyrl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/sr.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/sr.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/sw.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/sw.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/ta.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/ta.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/te.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/te.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/tr.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/tr.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/tzm-latn.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/tzm-latn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/tzm.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/tzm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/uk.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/uk.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/locale/uz-latn.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/locale/uz-latn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/min/locales.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/min/locales.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/min/locales.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/min/locales.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/min/moment-with-locales.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/min/moment-with-locales.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/min/moment-with-locales.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/min/moment-with-locales.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/min/moment.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/min/moment.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/moment.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/moment.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/moment.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/moment.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/lib/create/date-from-array.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/lib/create/date-from-array.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/lib/create/from-array.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/lib/create/from-array.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/lib/duration/as.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/lib/duration/as.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/lib/duration/constructor.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/lib/duration/constructor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/lib/duration/create.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/lib/duration/create.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/lib/duration/prototype.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/lib/duration/prototype.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/lib/moment/compare.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/lib/moment/compare.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/lib/moment/start-end-of.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/lib/moment/start-end-of.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/lib/units/day-of-week.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/lib/units/day-of-week.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/lib/units/week.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/lib/units/week.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/ar-dz.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/ar-dz.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/ar-kw.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/ar-kw.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/ar-ly.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/ar-ly.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/ar-ma.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/ar-ma.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/ar-sa.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/ar-sa.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/ar.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/ar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/az.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/az.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/be.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/be.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/bg.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/bg.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/bn.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/bn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/bo.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/bo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/bs.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/bs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/cs.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/cs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/cv.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/cv.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/dv.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/dv.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/en-au.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/en-au.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/en-ie.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/en-ie.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/eo.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/eo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/es-us.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/es-us.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/eu.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/eu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/fa.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/fa.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/fo.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/fo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/gom-latn.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/gom-latn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/gu.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/gu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/hi.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/hi.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/hr.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/hr.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/hy-am.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/hy-am.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/id.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/id.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/ja.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/ja.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/jv.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/jv.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/kk.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/kk.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/kn.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/kn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/ky.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/ky.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/me.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/me.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/mk.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/mk.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/mr.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/mr.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/ms-my.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/ms-my.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/ms.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/ms.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/my.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/my.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/ne.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/ne.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/nl-be.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/nl-be.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/nl.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/nl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/pa-in.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/pa-in.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/pt-br.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/pt-br.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/pt.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/pt.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/ro.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/ro.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/sl.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/sl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/sr-cyrl.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/sr-cyrl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/sr.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/sr.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/sw.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/sw.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/ta.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/ta.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/te.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/te.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/tr.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/tr.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/tzm-latn.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/tzm-latn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/tzm.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/tzm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/uk.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/uk.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/locale/uz-latn.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/locale/uz-latn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/moment/src/moment.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/moment/src/moment.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/object.entries/.eslintrc" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/object.entries/.eslintrc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/object.entries/.jscs.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/object.entries/.npmignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/object.entries/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/object.entries/.travis.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/object.entries/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/object.entries/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/object.entries/implementation.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/object.entries/implementation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/object.entries/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/object.entries/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/object.entries/test.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/object.entries/test/.eslintrc" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/object.entries/test/.eslintrc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/object.entries/test/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/object.entries/test/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/object.entries/test/shimmed.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/object.entries/test/shimmed.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/object.entries/test/tests.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/object.entries/test/tests.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/object.values/.eslintrc" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/object.values/.eslintrc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/object.values/.jscs.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/object.values/.npmignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/object.values/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/object.values/.travis.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/object.values/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/object.values/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/object.values/implementation.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/object.values/implementation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/object.values/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/object.values/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/object.values/test/.eslintrc" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/object.values/test/.eslintrc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/object.values/test/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/object.values/test/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/object.values/test/shimmed.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/object.values/test/shimmed.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/object.values/test/tests.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/object.values/test/tests.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-addons-shallow-compare/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-addons-shallow-compare/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-addons-shallow-compare/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-addons-shallow-compare/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-addons-shallow-compare/react-addons-shallow-compare.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-addons-shallow-compare/react-addons-shallow-compare.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/.babelrc" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/.babelrc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/.eslintrc" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/.eslintrc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/.lgtm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/.travis.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/MAINTAINERS" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/_gh-pages/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/_gh-pages/iframe.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/_gh-pages/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/_gh-pages/static/iframe.4bcc0029da1ae846b82e.bundle.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/_gh-pages/static/iframe.4bcc0029da1ae846b82e.bundle.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/_gh-pages/static/manager.96f83631a62b6cc87548.bundle.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/_gh-pages/static/manager.96f83631a62b6cc87548.bundle.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/_gh-pages/static/runtime~iframe.36305751f78a2d599ec4.bundle.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/_gh-pages/static/runtime~iframe.36305751f78a2d599ec4.bundle.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/_gh-pages/static/runtime~manager.9ffd8dd7b8642e4235e2.bundle.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/_gh-pages/static/runtime~manager.9ffd8dd7b8642e4235e2.bundle.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/_gh-pages/static/vendors~iframe.d1dff5de9721269dba04.bundle.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/_gh-pages/static/vendors~iframe.d1dff5de9721269dba04.bundle.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/esm/components/CalendarDay.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/esm/components/CalendarDay.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/esm/components/CalendarIcon.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/esm/components/CalendarIcon.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/esm/components/CalendarMonth.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/esm/components/CalendarMonth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/esm/components/CalendarMonthGrid.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/esm/components/CalendarMonthGrid.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/esm/components/CalendarWeek.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/esm/components/CalendarWeek.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/esm/components/ChevronDown.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/esm/components/ChevronDown.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/esm/components/ChevronUp.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/esm/components/ChevronUp.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/esm/components/CloseButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/esm/components/CloseButton.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/esm/components/CustomizableCalendarDay.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/esm/components/CustomizableCalendarDay.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/esm/components/DateInput.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/esm/components/DateInput.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/esm/components/DateRangePicker.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/esm/components/DateRangePicker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/esm/components/DateRangePickerInput.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/esm/components/DateRangePickerInput.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/esm/components/DateRangePickerInputController.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/esm/components/DateRangePickerInputController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/esm/components/DayPicker.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/esm/components/DayPicker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/esm/components/DayPickerKeyboardShortcuts.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/esm/components/DayPickerKeyboardShortcuts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/esm/components/DayPickerNavigation.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/esm/components/DayPickerNavigation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/esm/components/DayPickerRangeController.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/esm/components/DayPickerRangeController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/esm/components/DayPickerSingleDateController.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/esm/components/DayPickerSingleDateController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/esm/components/KeyboardShortcutRow.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/esm/components/KeyboardShortcutRow.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/esm/components/LeftArrow.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/esm/components/LeftArrow.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/esm/components/RightArrow.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/esm/components/RightArrow.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/esm/components/SingleDatePicker.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/esm/components/SingleDatePicker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/esm/components/SingleDatePickerInput.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/esm/components/SingleDatePickerInput.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/esm/components/SingleDatePickerInputController.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/esm/components/SingleDatePickerInputController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/esm/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/esm/constants.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/esm/defaultPhrases.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/esm/defaultPhrases.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/esm/shapes/DateRangePickerShape.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/esm/shapes/DateRangePickerShape.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/esm/shapes/ModifiersShape.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/esm/shapes/ModifiersShape.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/esm/shapes/SingleDatePickerShape.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/esm/shapes/SingleDatePickerShape.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/esm/theme/DefaultTheme.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/esm/theme/DefaultTheme.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/esm/utils/getCalendarDaySettings.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/esm/utils/getCalendarDaySettings.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/esm/utils/getPhrasePropTypes.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/esm/utils/getPhrasePropTypes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/esm/utils/getResponsiveContainerStyles.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/esm/utils/getResponsiveContainerStyles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/esm/utils/isDayVisible.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/esm/utils/isDayVisible.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/esm/utils/toISODateString.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/esm/utils/toISODateString.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/esm/utils/toISOMonthString.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/esm/utils/toISOMonthString.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/karma.conf.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/karma.conf.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/components/CalendarDay.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/components/CalendarDay.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/components/CalendarIcon.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/components/CalendarIcon.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/components/CalendarMonth.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/components/CalendarMonth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/components/CalendarMonthGrid.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/components/CalendarMonthGrid.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/components/CalendarWeek.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/components/CalendarWeek.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/components/ChevronDown.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/components/ChevronDown.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/components/ChevronUp.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/components/ChevronUp.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/components/CloseButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/components/CloseButton.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/components/CustomizableCalendarDay.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/components/CustomizableCalendarDay.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/components/DateInput.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/components/DateInput.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/components/DateRangePicker.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/components/DateRangePicker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/components/DateRangePickerInput.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/components/DateRangePickerInput.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/components/DateRangePickerInputController.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/components/DateRangePickerInputController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/components/DayPicker.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/components/DayPicker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/components/DayPickerKeyboardShortcuts.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/components/DayPickerKeyboardShortcuts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/components/DayPickerNavigation.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/components/DayPickerNavigation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/components/DayPickerRangeController.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/components/DayPickerRangeController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/components/DayPickerSingleDateController.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/components/DayPickerSingleDateController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/components/KeyboardShortcutRow.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/components/KeyboardShortcutRow.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/components/LeftArrow.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/components/LeftArrow.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/components/RightArrow.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/components/RightArrow.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/components/SingleDatePicker.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/components/SingleDatePicker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/components/SingleDatePickerInput.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/components/SingleDatePickerInput.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/components/SingleDatePickerInputController.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/components/SingleDatePickerInputController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/constants.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/css/_datepicker.css" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/css/_datepicker.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/defaultPhrases.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/defaultPhrases.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/initialize.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/initialize.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/shapes/AnchorDirectionShape.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/shapes/AnchorDirectionShape.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/shapes/CalendarInfoPositionShape.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/shapes/CalendarInfoPositionShape.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/shapes/DateRangePickerShape.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/shapes/DateRangePickerShape.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/shapes/DayOfWeekShape.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/shapes/DayOfWeekShape.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/shapes/DisabledShape.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/shapes/DisabledShape.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/shapes/FocusedInputShape.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/shapes/FocusedInputShape.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/shapes/IconPositionShape.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/shapes/IconPositionShape.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/shapes/ModifiersShape.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/shapes/ModifiersShape.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/shapes/OpenDirectionShape.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/shapes/OpenDirectionShape.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/shapes/OrientationShape.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/shapes/OrientationShape.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/shapes/ScrollableOrientationShape.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/shapes/ScrollableOrientationShape.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/shapes/SingleDatePickerShape.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/shapes/SingleDatePickerShape.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/theme/DefaultTheme.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/theme/DefaultTheme.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/getCalendarDaySettings.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/getCalendarDaySettings.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/getCalendarMonthWeeks.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/getCalendarMonthWeeks.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/getNumberOfCalendarMonthWeeks.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/getNumberOfCalendarMonthWeeks.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/getPhrasePropTypes.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/getPhrasePropTypes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/getResponsiveContainerStyles.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/getResponsiveContainerStyles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/getVisibleDays.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/getVisibleDays.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/isAfterDay.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/isAfterDay.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/isBeforeDay.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/isBeforeDay.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/isDayVisible.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/isDayVisible.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/isInclusivelyAfterDay.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/isInclusivelyAfterDay.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/isInclusivelyBeforeDay.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/isInclusivelyBeforeDay.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/isNextDay.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/isNextDay.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/isNextMonth.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/isNextMonth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/isPrevMonth.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/isPrevMonth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/isSameDay.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/isSameDay.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/isSameMonth.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/isSameMonth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/registerCSSInterfaceWithDefaultTheme.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/registerCSSInterfaceWithDefaultTheme.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/registerInterfaceWithDefaultTheme.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/registerInterfaceWithDefaultTheme.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/toISODateString.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/toISODateString.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/toISOMonthString.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/toISOMonthString.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/toLocalizedDateString.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/toLocalizedDateString.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/toMomentObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/lib/utils/toMomentObject.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/scripts/buildCSS.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/scripts/buildCSS.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/scripts/pure-component-fallback.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/scripts/pure-component-fallback.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/scripts/renderAllComponents.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/scripts/renderAllComponents.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/src/components/CalendarDay.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/src/components/CalendarDay.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/src/components/CalendarMonth.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/src/components/CalendarMonth.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/src/components/CalendarMonthGrid.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/src/components/CalendarMonthGrid.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/src/components/CalendarWeek.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/src/components/CalendarWeek.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/src/components/CustomizableCalendarDay.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/src/components/CustomizableCalendarDay.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/src/components/DateInput.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/src/components/DateInput.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/src/components/DateRangePicker.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/src/components/DateRangePicker.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/src/components/DateRangePickerInput.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/src/components/DateRangePickerInput.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/src/components/DateRangePickerInputController.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/src/components/DateRangePickerInputController.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/src/components/DayPicker.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/src/components/DayPicker.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/src/components/DayPickerKeyboardShortcuts.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/src/components/DayPickerKeyboardShortcuts.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/src/components/DayPickerNavigation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/src/components/DayPickerNavigation.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/src/components/DayPickerRangeController.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/src/components/DayPickerRangeController.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/src/components/DayPickerSingleDateController.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/src/components/DayPickerSingleDateController.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/src/components/KeyboardShortcutRow.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/src/components/KeyboardShortcutRow.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/src/components/SingleDatePicker.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/src/components/SingleDatePicker.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/src/components/SingleDatePickerInput.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/src/components/SingleDatePickerInput.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/src/components/SingleDatePickerInputController.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/src/components/SingleDatePickerInputController.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/src/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/src/constants.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/src/defaultPhrases.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/src/defaultPhrases.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/src/shapes/DateRangePickerShape.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/src/shapes/DateRangePickerShape.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/src/shapes/SingleDatePickerShape.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/src/shapes/SingleDatePickerShape.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/src/svg/arrow-left.svg" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/src/svg/arrow-left.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/src/svg/arrow-right.svg" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/src/svg/arrow-right.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/src/svg/calendar.svg" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/src/svg/calendar.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/src/svg/chevron-down.svg" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/src/svg/chevron-down.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/src/svg/chevron-up.svg" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/src/svg/chevron-up.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/src/theme/DefaultTheme.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/src/theme/DefaultTheme.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/src/utils/disableScroll.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/src/utils/disableScroll.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/src/utils/getCalendarDaySettings.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/src/utils/getCalendarDaySettings.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/src/utils/getSelectedDateOffset.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/src/utils/getSelectedDateOffset.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/src/utils/isDayVisible.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/src/utils/isDayVisible.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/src/utils/toISODateString.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/src/utils/toISODateString.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-dates/src/utils/toISOMonthString.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-dates/src/utils/toISOMonthString.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-is/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-is/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-is/cjs/react-is.development.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-is/cjs/react-is.development.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-is/cjs/react-is.production.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-is/cjs/react-is.production.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-is/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-is/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-is/umd/react-is.development.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-is/umd/react-is.development.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-is/umd/react-is.production.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-is/umd/react-is.production.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-outside-click-handler/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-outside-click-handler/.travis.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-outside-click-handler/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-outside-click-handler/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-outside-click-handler/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-outside-click-handler/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-outside-click-handler/build/OutsideClickHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-outside-click-handler/build/OutsideClickHandler.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-outside-click-handler/esm/OutsideClickHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-outside-click-handler/esm/OutsideClickHandler.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-outside-click-handler/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-outside-click-handler/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-outside-click-handler/src/OutsideClickHandler.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-outside-click-handler/src/OutsideClickHandler.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-outside-click-handler/test/OutsideClickHandler_test.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-outside-click-handler/test/OutsideClickHandler_test.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-portal/es/PortalWithState.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-portal/es/PortalWithState.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-portal/lib/PortalWithState.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-portal/lib/PortalWithState.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-portal/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-portal/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-with-direction/.babelrc" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-with-direction/.babelrc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-with-direction/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-with-direction/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-with-direction/dist/AutoDirectionProvider.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-with-direction/dist/AutoDirectionProvider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-with-direction/dist/DirectionProvider.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-with-direction/dist/DirectionProvider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-with-direction/dist/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-with-direction/dist/constants.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-with-direction/dist/proptypes/brcast.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-with-direction/dist/proptypes/brcast.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-with-direction/dist/proptypes/direction.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-with-direction/dist/proptypes/direction.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-with-direction/dist/withDirection.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-with-direction/dist/withDirection.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-with-direction/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-with-direction/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-with-styles-interface-css/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-with-styles-interface-css/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-with-styles-interface-css/dist/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-with-styles-interface-css/dist/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-with-styles-interface-css/dist/utils/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-with-styles-interface-css/dist/utils/constants.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-with-styles-interface-css/dist/utils/getClassName.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-with-styles-interface-css/dist/utils/getClassName.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-with-styles-interface-css/dist/utils/registerCSSInterfaceNamespace.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-with-styles-interface-css/dist/utils/registerCSSInterfaceNamespace.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-with-styles-interface-css/dist/utils/registerMaxSpecificity.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-with-styles-interface-css/dist/utils/registerMaxSpecificity.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-with-styles-interface-css/dist/utils/separateStyles.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-with-styles-interface-css/dist/utils/separateStyles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-with-styles-interface-css/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-with-styles-interface-css/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-with-styles/.babelrc" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-with-styles/.babelrc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-with-styles/.eslintrc" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-with-styles/.eslintrc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-with-styles/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-with-styles/.travis.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-with-styles/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-with-styles/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-with-styles/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-with-styles/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-with-styles/lib/ThemedStyleSheet.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-with-styles/lib/ThemedStyleSheet.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-with-styles/lib/withStyles.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-with-styles/lib/withStyles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-with-styles/package-lock.json.3721378828" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-with-styles/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-with-styles/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-with-styles/src/ThemedStyleSheet.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-with-styles/src/ThemedStyleSheet.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-with-styles/src/withStyles.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-with-styles/src/withStyles.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-with-styles/test/.eslintrc" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-with-styles/test/.eslintrc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-with-styles/test/_setup.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-with-styles/test/_setup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-with-styles/test/mocha.opts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-with-styles/test/mocha.opts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-with-styles/test/withStyles_test.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-with-styles/test/withStyles_test.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/regexp.prototype.flags/node_modules/define-properties/.editorconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/regexp.prototype.flags/node_modules/define-properties/.eslintrc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/regexp.prototype.flags/node_modules/define-properties/.jscs.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/regexp.prototype.flags/node_modules/define-properties/.travis.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/regexp.prototype.flags/node_modules/define-properties/CHANGELOG.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/regexp.prototype.flags/node_modules/define-properties/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/regexp.prototype.flags/node_modules/define-properties/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/regexp.prototype.flags/node_modules/define-properties/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/regexp.prototype.flags/node_modules/define-properties/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/regexp.prototype.flags/node_modules/define-properties/test/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/regexp.prototype.flags/node_modules/es-to-primitive/.eslintrc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/regexp.prototype.flags/node_modules/es-to-primitive/.github/FUNDING.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/regexp.prototype.flags/node_modules/es-to-primitive/.travis.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/regexp.prototype.flags/node_modules/es-to-primitive/CHANGELOG.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/regexp.prototype.flags/node_modules/es-to-primitive/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/regexp.prototype.flags/node_modules/es-to-primitive/Makefile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/regexp.prototype.flags/node_modules/es-to-primitive/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/regexp.prototype.flags/node_modules/es-to-primitive/es2015.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/regexp.prototype.flags/node_modules/es-to-primitive/es5.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/regexp.prototype.flags/node_modules/es-to-primitive/es6.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/regexp.prototype.flags/node_modules/es-to-primitive/helpers/isPrimitive.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/regexp.prototype.flags/node_modules/es-to-primitive/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/regexp.prototype.flags/node_modules/es-to-primitive/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/regexp.prototype.flags/node_modules/es-to-primitive/test/es2015.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/regexp.prototype.flags/node_modules/es-to-primitive/test/es5.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/regexp.prototype.flags/node_modules/es-to-primitive/test/es6.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/regexp.prototype.flags/node_modules/es-to-primitive/test/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/regexp.prototype.flags/node_modules/is-symbol/.editorconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/regexp.prototype.flags/node_modules/is-symbol/.eslintrc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/regexp.prototype.flags/node_modules/is-symbol/.github/FUNDING.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/regexp.prototype.flags/node_modules/is-symbol/.github/workflows/rebase.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/regexp.prototype.flags/node_modules/is-symbol/.nvmrc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/regexp.prototype.flags/node_modules/is-symbol/.travis.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/regexp.prototype.flags/node_modules/is-symbol/CHANGELOG.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/regexp.prototype.flags/node_modules/is-symbol/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/regexp.prototype.flags/node_modules/is-symbol/Makefile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/regexp.prototype.flags/node_modules/is-symbol/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/regexp.prototype.flags/node_modules/is-symbol/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/regexp.prototype.flags/node_modules/is-symbol/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/regexp.prototype.flags/node_modules/is-symbol/test/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/string.prototype.trimleft/node_modules/define-properties/.editorconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/string.prototype.trimleft/node_modules/define-properties/.eslintrc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/string.prototype.trimleft/node_modules/define-properties/.jscs.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/string.prototype.trimleft/node_modules/define-properties/.travis.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/string.prototype.trimleft/node_modules/define-properties/CHANGELOG.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/string.prototype.trimleft/node_modules/define-properties/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/string.prototype.trimleft/node_modules/define-properties/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/string.prototype.trimleft/node_modules/define-properties/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/string.prototype.trimleft/node_modules/define-properties/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/string.prototype.trimleft/node_modules/define-properties/test/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/string.prototype.trimright/node_modules/define-properties/.editorconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/string.prototype.trimright/node_modules/define-properties/.eslintrc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/string.prototype.trimright/node_modules/define-properties/.jscs.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/string.prototype.trimright/node_modules/define-properties/.travis.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/string.prototype.trimright/node_modules/define-properties/CHANGELOG.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/string.prototype.trimright/node_modules/define-properties/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/string.prototype.trimright/node_modules/define-properties/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/string.prototype.trimright/node_modules/define-properties/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/string.prototype.trimright/node_modules/define-properties/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/string.prototype.trimright/node_modules/define-properties/test/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/packs/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/packs/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tmp/cache/assets/sprockets/v3.0/Jc/JcfZeeJVGYSMgOzURSXwsky0qvrZMhw9efVTNAQwVm0.cache" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/cache/assets/sprockets/v3.0/Jc/JcfZeeJVGYSMgOzURSXwsky0qvrZMhw9efVTNAQwVm0.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tmp/cache/assets/sprockets/v3.0/nk/nKbDtcRcQF2BmFhOEmD4gVPJANlF_H_fY4nvfD2Otpg.cache" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/cache/assets/sprockets/v3.0/nk/nKbDtcRcQF2BmFhOEmD4gVPJANlF_H_fY4nvfD2Otpg.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tmp/cache/assets/sprockets/v3.0/rQ/rQTILYM49mB0mee-nHDUNZQgz5LjM1lNv7VU6bMVtO8.cache" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/cache/assets/sprockets/v3.0/rQ/rQTILYM49mB0mee-nHDUNZQgz5LjM1lNv7VU6bMVtO8.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tmp/cache/webpacker/.last-compilation-digest-development" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/cache/webpacker/.last-compilation-digest-development" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
@@ -811,8 +176,40 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/layouts/_nav.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="19" column="65" lean-forward="true" selection-start-line="19" selection-start-column="65" selection-end-line="19" selection-end-column="65" />
+            <state relative-caret-position="240">
+              <caret line="16" column="15" lean-forward="true" selection-start-line="16" selection-start-column="15" selection-end-line="16" selection-end-column="15" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/db/migrate/20170421112035_devise_create_users.rb">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/views/devise/registrations/new.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="345">
+              <caret line="23" selection-start-line="23" selection-start-column="4" selection-end-line="26" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/devise/registrations/edit.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="375">
+              <caret line="25" selection-start-line="25" selection-start-column="4" selection-end-line="28" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/devise/sessions/new.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="42" selection-start-line="4" selection-start-column="42" selection-end-line="4" selection-end-column="42" />
             </state>
           </provider>
         </entry>
@@ -822,15 +219,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state>
               <caret column="15" lean-forward="true" selection-end-column="91" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/products/index.html.erb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="89" lean-forward="true" selection-start-column="89" selection-end-column="89" />
             </state>
           </provider>
         </entry>
@@ -881,15 +269,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/products/expense.html.erb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="28" selection-start-column="21" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/javascript/packs/application.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="195">
@@ -901,11 +280,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/javascript/components/Products/expense.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="126" column="5" lean-forward="true" selection-start-line="126" selection-start-column="5" selection-end-line="126" selection-end-column="5" />
+            <state relative-caret-position="96">
+              <caret line="243" column="37" lean-forward="true" selection-start-line="243" selection-start-column="37" selection-end-line="243" selection-end-column="37" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
               </folding>
@@ -951,8 +330,8 @@
       <find>table tr td:first-of-type</find>
       <find>first-of</find>
       <find>margin-bottom: 20px;</find>
-      <find>productModal</find>
       <find>handleProductSearch</find>
+      <find>productModal</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -969,9 +348,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/config/environments/development.rb" />
-        <option value="$PROJECT_DIR$/app/assets/javascripts/cable.js" />
-        <option value="$PROJECT_DIR$/app/channels/web_notifications_channel.rb" />
         <option value="$PROJECT_DIR$/app/channels/barcodes_channel.rb" />
         <option value="$PROJECT_DIR$/.babelrc" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/scss/base/_base.scss" />
@@ -1016,10 +392,13 @@
         <option value="$PROJECT_DIR$/app/views/products/expense.html.erb" />
         <option value="$PROJECT_DIR$/app/javascript/packs/application.js" />
         <option value="$PROJECT_DIR$/config/routes.rb" />
-        <option value="$PROJECT_DIR$/app/views/layouts/_nav.html.erb" />
         <option value="$PROJECT_DIR$/app/controllers/products_controller.rb" />
         <option value="$PROJECT_DIR$/app/controllers/product_actions_controller.rb" />
         <option value="$PROJECT_DIR$/app/javascript/components/Products/expense.jsx" />
+        <option value="$PROJECT_DIR$/app/views/devise/sessions/new.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/layouts/_nav.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/devise/registrations/new.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/devise/registrations/edit.html.erb" />
       </list>
     </option>
   </component>
@@ -1195,6 +574,14 @@
               <item name="views" type="462c0819:PsiDirectoryNode" />
               <item name="devise" type="462c0819:PsiDirectoryNode" />
               <item name="registrations" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="shop_web" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shop_web" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="devise" type="462c0819:PsiDirectoryNode" />
+              <item name="sessions" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="shop_web" type="b2602c69:ProjectViewProjectNode" />
@@ -1378,12 +765,12 @@
       <workItem from="1584704685313" duration="20492000" />
       <workItem from="1585228328375" duration="11169000" />
       <workItem from="1585314344859" duration="66062000" />
-      <workItem from="1585601408780" duration="36450000" />
+      <workItem from="1585601408780" duration="37780000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="134173000" />
+    <option name="totallyTimeSpent" value="135503000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -1414,20 +801,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/views/pages/sell.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="31" selection-start-column="31" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/migrate/20200329184907_create_product_actions.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="28" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/categories_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -1503,13 +876,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/devise/registrations/new.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="30" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Gemfile">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
@@ -1559,13 +925,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="21" column="41" selection-start-line="21" selection-start-column="41" selection-end-line="21" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/devise/registrations/edit.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="16" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="16" />
         </state>
       </provider>
     </entry>
@@ -1732,13 +1091,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/layouts/_nav.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="19" column="65" lean-forward="true" selection-start-line="19" selection-start-column="65" selection-end-line="19" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/javascript/components/Products/new.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="177">
@@ -1775,11 +1127,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/javascript/components/Products/expense.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="126" column="5" lean-forward="true" selection-start-line="126" selection-start-column="5" selection-end-line="126" selection-end-column="5" />
+        <state relative-caret-position="96">
+          <caret line="243" column="37" lean-forward="true" selection-start-line="243" selection-start-column="37" selection-end-line="243" selection-end-column="37" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/layouts/_nav.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="15" lean-forward="true" selection-start-line="16" selection-start-column="15" selection-end-line="16" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/migrate/20170421112035_devise_create_users.rb">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/devise/sessions/new.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="42" selection-start-line="4" selection-start-column="42" selection-end-line="4" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/devise/registrations/edit.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" selection-start-line="25" selection-start-column="4" selection-end-line="28" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/devise/registrations/new.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" selection-start-line="23" selection-start-column="4" selection-end-line="26" selection-end-column="20" />
         </state>
       </provider>
     </entry>
