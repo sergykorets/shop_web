@@ -10,9 +10,11 @@ class ApplicationController < ActionController::Base
     usbs = Dir.entries("/media/#{username}").select {|entry| File.directory? File.join("/media/#{username}", entry) and !(entry =='.' || entry == '..' || entry == 'BCEC7AA4EC7A591A'  || entry == 'B22841072840CBD3') }
     if usbs.count > 0
       if File.exist?("/media/#{username}/#{usbs.first}/backup.bak")
+        ActiveRecord::Base.remove_connection
         system("dropdb shop_web_development")
         system("createdb shop_web_development")
         system("psql shop_web_development < /media/#{username}/#{usbs.first}/backup.bak")
+        ActiveRecord::Base.establish_connection
         render json: {success: true}
       else
         render json: {success: false, error: 'Файлу бази даних немає на флешці'}

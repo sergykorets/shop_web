@@ -8,6 +8,7 @@ export default class SystemButtons extends React.Component {
   }
 
   sendRequest = (url) => {
+    NotificationManager.error("Будь ласка зачекайте декілька секунд", "Операція в процесі");
     $.ajax({
       url: `/${url}.json`,
       type: 'GET',
