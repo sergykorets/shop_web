@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   resources :categories, only: :create
   resources :actions, only: :create
   get '/sell', to: 'pages#sell'
+  get '/copy_db', to: 'application#copy_db'
+  get '/update_db', to: 'application#update_db'
 
   post '/barcode', to: 'api#barcode'
 end
