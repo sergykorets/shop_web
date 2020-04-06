@@ -77,6 +77,10 @@ export default class SellPage extends React.Component {
     return (Math.floor(value * 100) / 100);
   };
 
+  ceilFloat = (value) => {
+    return (Math.ceil(value * 100) / 100);
+  };
+
   summary = () => {
     let sumArray = [];
     Object.values(this.state.barcodes).map((product, index) => {
@@ -244,14 +248,14 @@ export default class SellPage extends React.Component {
             <hr/>
             { Object.keys(this.state.barcodes).length > 0 &&
               <Fragment>
-                <h1>Всього: {this.summary()} грн</h1>
+                <h1>Сума до сплати: {this.summary()} грн</h1>
                 <FormGroup>
                   <Label for='income_amount'>Готівка</Label>
-                  <Input type='text' id='income_amount' value={this.state.income_amount}
+                  <Input type='number' id='income_amount' value={this.state.income_amount}
                          onChange={(e) => this.handleFieldChange('income_amount', e.target.value)}/>
                 </FormGroup>
                 { this.state.income_amount > this.summary() &&
-                  <h1>Решта: {this.floorFloat(this.state.income_amount - this.summary())} грн</h1>}
+                  <h1>Решта: {this.ceilFloat((this.state.income_amount - this.summary()).toPrecision(4))} грн</h1>}
               </Fragment>}
             <hr/>
             <ButtonToggle size='lg' color="success" disabled={Object.keys(this.state.barcodes).length < 1} onClick={() => this.submitSell()}>Продати</ButtonToggle>
