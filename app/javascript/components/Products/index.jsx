@@ -141,7 +141,7 @@ export default class Products extends React.Component {
     this.setState({
       ...this.state,
       openedModal: 'productModal',
-      productModal: Object.assign(product, {index: index})
+      productModal: Object.assign(product, {index: index, category_id: product.category.id})
     })
   };
 
@@ -240,9 +240,7 @@ export default class Products extends React.Component {
           id: this.state[this.state.openedModal].id,
           barcode: this.state[this.state.openedModal].barcode,
           name: this.state[this.state.openedModal].name,
-          quantity: this.state[this.state.openedModal].quantity,
           category_id: this.state[this.state.openedModal].category_id,
-          buy_price: this.state[this.state.openedModal].buy_price,
           sell_price: this.state[this.state.openedModal].sell_price,
           due_date: this.state[this.state.openedModal].due_date
         }
@@ -305,7 +303,7 @@ export default class Products extends React.Component {
                 <Input type="select" name="category" id='category'
                        defaultValue={this.state.productSearch.category_id}
                        onChange={(e) => this.handleProductSearch('category_id', e.target.value)}>
-                  <option key={0} value=' '>Вибрати групу</option>
+                  <option key={0} value=' '>Всі продукти</option>
                   { this.state.categories.map((category) => {
                     return <option key={category.id} value={category.id}>{category.name}</option>
                   })}
@@ -333,8 +331,8 @@ export default class Products extends React.Component {
                   <td>{product.barcode}</td>
                   <td>{product.name}</td>
                   <td>{product.category && product.category.name}</td>
-                  <td>{product.buy_price}</td>
-                  <td>{product.sell_price}</td>
+                  <td>{product.buy_price} грн</td>
+                  <td>{product.sell_price} грн</td>
                   <td>{product.quantity}</td>
                   <td>{product.due_date}</td>
                   <td>
@@ -416,14 +414,14 @@ export default class Products extends React.Component {
                            onChange={(e) => this.handleInputChange(this.state.openedModal,'barcode', e.target.value)}/>
                   </FormGroup>
                 </div>
-                <div className='col-6'>
+                <div className='col-4'>
                   <FormGroup>
                     <Label for={`name_${this.state.openedModal}`}>Назва продукту</Label>
                     <Input type='text' id={`name_${this.state.openedModal}`} value={this.state[this.state.openedModal].name}
                            onChange={(e) => this.handleInputChange(this.state.openedModal,'name', e.target.value)}/>
                   </FormGroup>
                 </div>
-                <div className='col-6'>
+                <div className='col-4'>
                   <FormGroup>
                     <Label for={`due_date_${this.state.openedModal}`}>Дата придатності</Label>
                     <AirBnbPicker
@@ -435,26 +433,10 @@ export default class Products extends React.Component {
                 </div>
                 <div className='col-4'>
                   <FormGroup>
-                    <Label for={`buy_price_${this.state.openedModal}`}>Закупка</Label>
-                    <Input type='number' id={`buy_price_${this.state.openedModal}`} value={this.state[this.state.openedModal].buy_price}
-                           onChange={(e) => this.handleInputChange(this.state.openedModal,'buy_price', e.target.value)}/>
-                  </FormGroup>
-                </div>
-                <div className='col-4'>
-                  <FormGroup>
                     <Label for={`sell_price_${this.state.openedModal}`}>Ціна</Label>
                     <Input type='number' id={`sell_price_${this.state.openedModal}`}
                            value={this.state[this.state.openedModal].sell_price}
                            onChange={(e) => this.handleInputChange(this.state.openedModal,'sell_price', e.target.value)}/>
-                  </FormGroup>
-                </div>
-                <div className='col-4'>
-                  <FormGroup>
-                    <Label for={`quantity_${this.state.openedModal}`}>Залишок</Label>
-                    <Input type='number' id={`quantity_${this.state.openedModal}`}
-                           value={this.state[this.state.openedModal].quantity}
-                           onChange={(e) => this.handleInputChange(this.state.openedModal,'quantity', e.target.value)}
-                           min={0}/>
                   </FormGroup>
                 </div>
               </div>

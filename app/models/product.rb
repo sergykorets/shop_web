@@ -17,6 +17,14 @@ class Product < ApplicationRecord
 
   before_save :capitalize_name
 
+  def get_quantity
+    last_version = versions.last
+    incoming_actions = product_actions.incoming.after_time(last_version.created_at - 1.second).sum(:quantity)
+    expense_actions = product_actions.expense.after_time(last_version.created_at).sum(:quantity)
+    sell_actions = product_actions.sell.after_time(last_version.created_at).sum(:quantity)
+    self.quantity + incoming_actions - expense_actions - sell_actions
+  end
+
   private
 
   def capitalize_name

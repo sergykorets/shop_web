@@ -9,7 +9,7 @@ class ProductsController < ApplicationController
     @products = products.order('created_at DESC').page(params[:page] || 1).per(@per).map do |product|
       { id: product.id,
         name: product.name,
-        quantity: product.quantity,
+        quantity: product.get_quantity,
         barcode: product.barcode,
         buy_price: product.buy_price,
         sell_price: product.sell_price,
@@ -35,6 +35,7 @@ class ProductsController < ApplicationController
         id: product.id,
         product_action_id: product.product_actions.incoming.last.id,
         name: product.name,
+        product_quantity: product.get_quantity,
         quantity: product.product_actions.incoming.last.quantity,
         barcode: product.barcode,
         buy_price: product.buy_price,
@@ -65,8 +66,6 @@ class ProductsController < ApplicationController
       end
       buy_price = product_params[:buy_price].to_d
       product = if p
-
-        p.quantity += product_params[:quantity].to_d
         p.buy_price = buy_price
         p.sell_price = product_params[:sell_price].to_d
         p.name = product_params[:name].present? ? product_params[:name] : p.name
@@ -74,7 +73,7 @@ class ProductsController < ApplicationController
         p.due_date = product_params[:due_date]
         p
       else
-        Product.new(product_params.merge(buy_price: buy_price))
+        Product.new(product_params.merge(buy_price: buy_price, quantity: 0))
       end
       unless product_params[:sell_price].present?
         category_multiplier = Category.find_by_id(product_params[:category_id])&.multiplier || product.category&.multiplier || 1
@@ -92,6 +91,7 @@ class ProductsController < ApplicationController
           buy_price: product.buy_price,
           sell_price: product.sell_price,
           due_date: product.due_date&.strftime("%d.%m.%Y"),
+          product_quantity: product.get_quantity,
           quantity: product_action.quantity,
           category: {
               id: product.category.id,
@@ -115,7 +115,7 @@ class ProductsController < ApplicationController
           id: product.id,
           name: product.name,
           barcode: product.barcode,
-          quantity: product.quantity,
+          quantity: product.get_quantity,
           buy_price: product.buy_price,
           sell_price: product.sell_price,
           due_date: product.due_date&.strftime("%d.%m.%Y"),
@@ -138,7 +138,7 @@ class ProductsController < ApplicationController
           id: product.id,
           product_action_id: product.product_actions.expense.last.id,
           name: product.name,
-          quantity: product.quantity,
+          quantity: product.get_quantity,
           quantity_expense: product.product_actions.expense.last.quantity,
           barcode: product.barcode,
           sell_price: product.sell_price,
@@ -152,17 +152,6 @@ class ProductsController < ApplicationController
     end
   end
 
-  def destroy
-    product = Product.find_by_id(params[:id])
-    last_version = product.paper_trail.previous_version
-    product.versions.last.destroy if product.versions.last.event != 'create'
-    if product.update(quantity: last_version.quantity)
-      render json: {success: true}
-    else
-      render json: {success: false}
-    end
-  end
-
   def search
     products = Product.by_barcode(params[:barcode]).by_name(params[:name]).by_category(params[:category_id])
     products = if params[:index].present?
@@ -171,7 +160,7 @@ class ProductsController < ApplicationController
       products.page(params[:page] || 1).per(per).order(params[:sort].present? ? "#{params[:sort]} #{ActiveModel::Type::Boolean.new.cast(params[:descending]) ? 'DESC' : 'ASC'}" : 'created_at DESC').map do |product|
         { id: product.id,
           name: product.name,
-          quantity: product.quantity,
+          quantity: product.get_quantity,
           barcode: product.barcode,
           buy_price: product.buy_price,
           sell_price: product.sell_price,
@@ -188,7 +177,7 @@ class ProductsController < ApplicationController
         hash[product.id] =
           { id: product.id,
             name: product.name,
-            quantity: product.quantity,
+            quantity: product.get_quantity,
             barcode: product.barcode,
             buy_price: product.buy_price,
             sell_price: product.sell_price,

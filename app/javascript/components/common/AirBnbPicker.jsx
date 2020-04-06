@@ -35,6 +35,7 @@ export default class AirBnbPicker extends React.Component {
         { this.props.single ?
           <SingleDatePicker
             date={this.state.date}
+            placeholder='Дата'
             focused={this.state.focused}
             onDateChange={date => this.onDateChange({ date })}
             onFocusChange={({ focused }) => this.setState({ focused })}

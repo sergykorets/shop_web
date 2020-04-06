@@ -73,8 +73,8 @@ export default class SellPage extends React.Component {
     })
   };
 
-  ceilFloat = (value) => {
-    return (Math.ceil(value * 100) / 100);
+  floorFloat = (value) => {
+    return (Math.floor(value * 100) / 100);
   };
 
   summary = () => {
@@ -82,7 +82,12 @@ export default class SellPage extends React.Component {
     Object.values(this.state.barcodes).map((product, index) => {
       return sumArray.push(parseFloat(product.sell_price) * parseFloat(product.quantity_sell))
     });
-    return this.ceilFloat(sumArray.reduce((a, b) => a + b, 0))
+    return this.floorFloat(sumArray.reduce((a, b) => a + b, 0))
+  };
+
+  productSum = (product_id) => {
+    const product = this.state.barcodes[product_id];
+    return this.floorFloat(parseFloat(product.sell_price) * parseFloat(product.quantity_sell))
   };
 
   handleProductSearch = (field, v) => {
@@ -202,9 +207,10 @@ export default class SellPage extends React.Component {
                 <th><h1>Баркод</h1></th>
                 <th><h1>Назва</h1></th>
                 <th><h1>Група</h1></th>
-                <th><h1>Ціна</h1></th>
                 <th><h1>Залишок</h1></th>
+                <th><h1>Ціна</h1></th>
                 <th><h1>Кількість</h1></th>
+                <th><h1>Сума</h1></th>
                 <th><h1>Дії</h1></th>
               </tr>
               </thead>
@@ -215,8 +221,8 @@ export default class SellPage extends React.Component {
                     <td>{this.state.barcodes[barcode].barcode}</td>
                     <td>{this.state.barcodes[barcode].name}</td>
                     <td>{this.state.barcodes[barcode].category && this.state.barcodes[barcode].category.name}</td>
-                    <td>{this.state.barcodes[barcode].sell_price}</td>
                     <td>{this.state.barcodes[barcode].quantity}</td>
+                    <td>{this.state.barcodes[barcode].sell_price} грн</td>
                     <td>
                       <Input type='number' id={`quantity_${i}`}
                              value={this.state.barcodes[barcode].quantity_sell}
@@ -226,6 +232,7 @@ export default class SellPage extends React.Component {
                              max={this.state.barcodes[barcode].quantity}
                       />
                     </td>
+                    <td>{this.productSum(barcode)} грн</td>
                     <td>
                       <ButtonToggle color="danger" size="sm" onClick={() => this.cancelBarcode(barcode)}>Видалити</ButtonToggle>
                     </td>
@@ -244,7 +251,7 @@ export default class SellPage extends React.Component {
                          onChange={(e) => this.handleFieldChange('income_amount', e.target.value)}/>
                 </FormGroup>
                 { this.state.income_amount > this.summary() &&
-                  <h1>Решта: {this.ceilFloat(this.state.income_amount - this.summary())} грн</h1>}
+                  <h1>Решта: {this.floorFloat(this.state.income_amount - this.summary())} грн</h1>}
               </Fragment>}
             <hr/>
             <ButtonToggle size='lg' color="success" disabled={Object.keys(this.state.barcodes).length < 1} onClick={() => this.submitSell()}>Продати</ButtonToggle>

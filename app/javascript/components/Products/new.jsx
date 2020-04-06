@@ -11,6 +11,7 @@ export default class newProduct extends React.Component {
     this.state = {
       barcodes: {},
       products: this.props.products,
+      foundProducts: {},
       categories: this.props.categories,
       barcodeModal: {
         barcode: '',
@@ -38,6 +39,10 @@ export default class newProduct extends React.Component {
         buy_price: '',
         sell_price: '',
         due_date: null
+      },
+      productSearchModal: {
+        barcode: '',
+        name: '',
       },
       openedModal: '',
       createCategory: false,
@@ -76,17 +81,17 @@ export default class newProduct extends React.Component {
       ...this.state,
       openedModal: modal
     })
-  }
+  };
 
-  handleInputChange = (type, field, value) => {
+  handleInputChange = (type, field, v) => {
     this.setState({
       ...this.state,
       [type]: {
         ...this.state[type],
-        [field]: value
+        [field]: v
       }
     })
-  }
+  };
 
   handleDateChange = ({date}) => {
     this.setState({
@@ -96,10 +101,10 @@ export default class newProduct extends React.Component {
         due_date: date ? date.format('DD.MM.YYYY') : null
       }
     })
-  }
+  };
 
-  ceilFloat = (value) => {
-    return (Math.ceil(value * 100) / 100);
+  floorFloat = (value) => {
+    return (Math.floor(value * 100) / 100);
   };
 
   summary = () => {
@@ -107,7 +112,12 @@ export default class newProduct extends React.Component {
     Object.values(this.state.products).map((product, index) => {
       return sumArray.push(parseFloat(product.sell_price) * parseFloat(product.quantity))
     });
-    return this.ceilFloat(sumArray.reduce((a, b) => a + b, 0))
+    return this.floorFloat(sumArray.reduce((a, b) => a + b, 0))
+  };
+
+  productSum = (products, product_id) => {
+    const product = this.state[products][product_id];
+    return this.floorFloat(parseFloat(product.sell_price) * parseFloat(product.quantity))
   };
 
   editBarcode = (barcode) => {
@@ -124,7 +134,7 @@ export default class newProduct extends React.Component {
         sell_price: this.state.barcodes[barcode].sell_price
       }
     })
-  }
+  };
 
   editProduct = (id) => {
     this.setState({
@@ -143,7 +153,70 @@ export default class newProduct extends React.Component {
         due_date: this.state.products[id].due_date
       }
     })
-  }
+  };
+
+  handleProductSearch = (field, v) => {
+    if (v.length > 0 || this.state.productSearchModal.name.length > 0 || this.state.productSearchModal.barcode.length > 0) {
+      let parameters = {};
+      if (field === 'barcode') {
+        parameters[field] = v;
+        parameters['name'] = this.state.productSearchModal.name
+      } else {
+        parameters[field] = v;
+        parameters['barcode'] = this.state.productSearchModal.barcode
+      }
+      $.ajax({
+        url: '/products/search.json',
+        type: 'POST',
+        data: parameters,
+        success: (resp) => {
+          if (resp.success) {
+            this.setState({
+              ...this.state,
+              foundProducts: resp.products,
+              productSearchModal: {
+                ...this.state.productSearchModal,
+                [field]: v
+              }
+            });
+          } else {
+            this.setState({
+              ...this.state,
+              foundProducts: {},
+              productSearchModal: {
+                ...this.state.productSearchModal,
+                [field]: v
+              }
+            });
+            NotificationManager.error(resp.error, "Неможливо зробити дію");
+          }
+        }
+      });
+    } else {
+      this.setState({
+        ...this.state,
+        productSearchModal: {
+          ...this.state.productSearchModal,
+          [field]: v
+        },
+      });
+    }
+  };
+
+  addProduct = (id) => {
+    this.setState({
+      ...this.state,
+      barcodes: {
+        ...this.state.barcodes,
+        [this.state.foundProducts[id].barcode]: this.state.foundProducts[id]
+      }
+    })
+  };
+
+  restrictAdding = (barcode) => {
+    return Object.keys(this.state.barcodes).some(item => barcode === item) ||
+      Object.values(this.state.products).some(item => barcode === item.barcode)
+  };
 
   submitCategory = () => {
     $.ajax({
@@ -165,14 +238,33 @@ export default class newProduct extends React.Component {
               name: '',
               multiplier: 1
             }
-          })
+          });
           NotificationManager.success("Тепер її можна вибрати в списку категорій", 'Категорію створено');
         } else {
           NotificationManager.error(resp.error, "Неможливо зробити дію");
         }
       }
     });
-  }
+  };
+
+  cancelIncoming = (product) => {
+    $.ajax({
+      url: `/product_actions/${product.product_action_id}.json`,
+      type: 'DELETE'
+    }).then((resp) => {
+      if (resp.success) {
+        let products = this.state.products;
+        delete products[product.id];
+        this.setState({
+          ...this.state,
+          products: products
+        });
+        NotificationManager.success('Приход продукту скасовано');
+      } else {
+        NotificationManager.error(resp.error, 'Неможливо зробити дію');
+      }
+    });
+  };
 
   submitProduct = (modal) => {
     $.ajax({
@@ -223,12 +315,10 @@ export default class newProduct extends React.Component {
         NotificationManager.error(resp.error, 'Неможливо зробити дію');
       }
     });
-  }
+  };
 
   render() {
     console.log(this.state)
-    console.log(location.hostname)
-    console.log(location.host)
     return (
       <ActionCableProvider url={`ws://${location.host}/cable`}>
         <NotificationContainer/>
@@ -240,6 +330,7 @@ export default class newProduct extends React.Component {
           <h1>Прийняті продукти</h1>
           <br/>
           <ButtonToggle color="primary" onClick={() => this.handleModal('manualModal')}>Додати продукт</ButtonToggle>
+          <ButtonToggle color="success" onClick={() => this.handleModal('productSearchModal')}>Шукати продукт</ButtonToggle>
           <table className='dark' style={{marginTop: 20 + 'px'}}>
             <thead>
             <tr>
@@ -248,7 +339,9 @@ export default class newProduct extends React.Component {
               <th><h1>Група</h1></th>
               <th><h1>Закупівля</h1></th>
               <th><h1>Ціна</h1></th>
-              <th><h1>Приход к-ть</h1></th>
+              <th><h1>Приход</h1></th>
+              <th><h1>Сума</h1></th>
+              <th><h1>Залишок</h1></th>
               <th><h1>Дії</h1></th>
             </tr>
             </thead>
@@ -259,11 +352,14 @@ export default class newProduct extends React.Component {
                   <td>{product.barcode}</td>
                   <td>{product.name}</td>
                   <td>{product.category && product.category.name}</td>
-                  <td>{product.buy_price}</td>
-                  <td>{product.sell_price}</td>
+                  <td>{product.buy_price} грн</td>
+                  <td>{product.sell_price} грн</td>
                   <td>{product.quantity}</td>
+                  <td>{this.productSum('products' ,product.id)} грн</td>
+                  <td>{product.product_quantity}</td>
                   <td>
                     <ButtonToggle color="warning" size="sm" onClick={() => this.editProduct(product.id)}>Редагувати</ButtonToggle>
+                    <ButtonToggle color="danger" size="sm" onClick={() => this.cancelIncoming(product)}>Скасувати</ButtonToggle>
                   </td>
                 </tr>
               )
@@ -280,10 +376,11 @@ export default class newProduct extends React.Component {
             <tr>
               <th><h1>Баркод</h1></th>
               <th><h1>Назва</h1></th>
-              <th><h1>Категорія</h1></th>
-              <th><h1>Купівля</h1></th>
-              <th><h1>Продаж</h1></th>
-              <th><h1>Кількість</h1></th>
+              <th><h1>Група</h1></th>
+              <th><h1>Закупівля</h1></th>
+              <th><h1>Ціна</h1></th>
+              <th><h1>Залишок</h1></th>
+              <th><h1>Сума</h1></th>
               <th><h1>Дії</h1></th>
             </tr>
             </thead>
@@ -291,15 +388,16 @@ export default class newProduct extends React.Component {
               { Object.keys(this.state.barcodes).map((barcode, i) => {
                 return (
                   <tr key={i}>
-                    <td>{barcode}</td>
+                    <td>{this.state.barcodes[barcode].barcode}</td>
                     <td>{this.state.barcodes[barcode].name}</td>
                     <td>{this.state.barcodes[barcode].category && this.state.barcodes[barcode].category.name}</td>
                     <td>{this.state.barcodes[barcode].buy_price}</td>
                     <td>{this.state.barcodes[barcode].sell_price}</td>
                     <td>{this.state.barcodes[barcode].quantity}</td>
+                    <td>{this.productSum('barcodes', barcode)} грн</td>
                     <td>
-                      <ButtonToggle color="danger" size="sm" onClick={() => this.cancelBarcode(barcode)}>Видалити</ButtonToggle>
                       <ButtonToggle color="success" size="sm" onClick={() => this.editBarcode(barcode)}>Додати</ButtonToggle>
+                      <ButtonToggle color="danger" size="sm" onClick={() => this.cancelBarcode(barcode)}>Скасувати</ButtonToggle>
                     </td>
                   </tr>
                 )
@@ -307,7 +405,7 @@ export default class newProduct extends React.Component {
             </tbody>
           </table>
 
-          { (this.state.openedModal.length > 0) &&
+          { (this.state.openedModal.length > 0 && this.state.openedModal != 'productSearchModal') &&
             <Modal isOpen={this.state.openedModal.length > 0} toggle={() => this.handleModal('')} size="lg">
               <div className='container'>
                 <ModalHeader>{this.state.openedModal === 'productModal' ? 'Редагувати приход продукту' : 'Додати приход продукту'}</ModalHeader>
@@ -403,6 +501,52 @@ export default class newProduct extends React.Component {
                   <ButtonToggle color="secondary" onClick={() => this.handleModal('')}>Відміна</ButtonToggle>
                   <ButtonToggle color="success" disabled={this.state.createCategory}
                                 onClick={() => this.submitProduct(this.state.openedModal)}>Зберегти</ButtonToggle>
+                </FormGroup>
+              </div>
+            </Modal>}
+
+          { (this.state.openedModal === 'productSearchModal') &&
+            <Modal isOpen={this.state.openedModal === 'productSearchModal'} toggle={() => this.handleModal('')} size="lg">
+              <div className='container'>
+                <ModalHeader>Пошук продукту</ModalHeader>
+                <div className='row'>
+                  <div className='col-6'>
+                    <FormGroup>
+                      <Label for='barcode'>Баркод</Label>
+                      <Input type='search' id='barcode' value={this.state[this.state.openedModal].barcode}
+                             onChange={(e) => this.handleProductSearch('barcode', e.target.value)}/>
+                      <ButtonToggle size='sm' color="primary" style={{marginTop: 20+'px'}}
+                                    onClick={() => this.handleProductSearch('barcode', '482')}>
+                        Україна
+                      </ButtonToggle>
+                    </FormGroup>
+                  </div>
+                  <div className='col-6'>
+                    <FormGroup>
+                      <Label for='name'>Назва продукту</Label>
+                      <Input type='search' id='name' value={this.state[this.state.openedModal].name}
+                             onChange={(e) => this.handleProductSearch('name', e.target.value)}/>
+                    </FormGroup>
+                  </div>
+                  <div className='col-12'>
+                    <div className='found-products'>
+                      {Object.values(this.state.foundProducts).map((product, index) => {
+                        return (
+                          <div className='found-product' key={index}>
+                            <div className='found-product-info'>
+                              <span>{product.barcode}</span>
+                              <span>{product.category.name}</span>
+                              <span>{product.name}</span>
+                            </div>
+                            <ButtonToggle size='sm' color="success" disabled={this.restrictAdding(product.barcode)} onClick={() => this.addProduct(product.id)}>Додати</ButtonToggle>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </div>
+                </div>
+                <FormGroup>
+                  <ButtonToggle color="secondary" onClick={() => this.handleModal('')}>Закрити</ButtonToggle>
                 </FormGroup>
               </div>
             </Modal>}

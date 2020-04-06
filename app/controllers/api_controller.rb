@@ -5,7 +5,7 @@ class ApiController < ActionController::Base
     ActionCable.server.broadcast 'barcodes_channel', {message: params[:barcode], product: product && {
         id: product.id,
         name: product.name,
-        quantity: product.quantity,
+        quantity: product.get_quantity,
         barcode: product.barcode,
         buy_price: product.buy_price,
         sell_price: product.sell_price,
