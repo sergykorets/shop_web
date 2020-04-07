@@ -59,7 +59,7 @@ export default class Products extends React.Component {
         productModal: Object.assign(response.product, {category_id: response.product.category.id})
       });
     } else {
-      NotificationManager.error('Продукт не знайдено');
+      NotificationManager.error('товар не знайдено');
     }
   };
 
@@ -265,7 +265,7 @@ export default class Products extends React.Component {
             due_date: null
           }
         });
-        NotificationManager.success('Продукт змінено');
+        NotificationManager.success('товар змінено');
       } else {
         NotificationManager.error(resp.error, 'Неможливо зробити дію');
       }
@@ -292,7 +292,7 @@ export default class Products extends React.Component {
             </div>
             <div className='col-4'>
               <FormGroup>
-                <Label for='name'>Назва продукту</Label>
+                <Label for='name'>Назва товару</Label>
                 <Input type='search' id='name' value={this.state.productSearch.name}
                        onChange={(e) => this.handleProductSearch('name', e.target.value)}/>
               </FormGroup>
@@ -303,7 +303,7 @@ export default class Products extends React.Component {
                 <Input type="select" name="category" id='category'
                        defaultValue={this.state.productSearch.category_id}
                        onChange={(e) => this.handleProductSearch('category_id', e.target.value)}>
-                  <option key={0} value=' '>Всі продукти</option>
+                  <option key={0} value=' '>Всі товари</option>
                   { this.state.categories.map((category) => {
                     return <option key={category.id} value={category.id}>{category.name}</option>
                   })}
@@ -367,7 +367,7 @@ export default class Products extends React.Component {
           { (this.state.openedModal.length > 0) &&
           <Modal isOpen={this.state.openedModal.length > 0} toggle={() => this.handleModal('')} size="lg">
             <div className='container'>
-              <ModalHeader>Редагувати продукт</ModalHeader>
+              <ModalHeader>Редагувати товар</ModalHeader>
               <div className='row'>
                 <div className='col-12'>
                   <FormGroup>
@@ -416,7 +416,7 @@ export default class Products extends React.Component {
                 </div>
                 <div className='col-4'>
                   <FormGroup>
-                    <Label for={`name_${this.state.openedModal}`}>Назва продукту</Label>
+                    <Label for={`name_${this.state.openedModal}`}>Назва товару</Label>
                     <Input type='text' id={`name_${this.state.openedModal}`} value={this.state[this.state.openedModal].name}
                            onChange={(e) => this.handleInputChange(this.state.openedModal,'name', e.target.value)}/>
                   </FormGroup>

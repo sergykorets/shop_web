@@ -1,4 +1,25 @@
 class ActionsController < ApplicationController
+  before_action :set_action, only: [:edit, :update]
+
+  def index
+    actions = Action.all
+    @count = actions.count
+    @per = 10
+    @actions = actions.page(params[:page] || 1).each_with_object({}) { |action, hash|
+      hash[action.id] = {
+        id: action.id,
+        amount: action.amount,
+        products: action.product_actions.map do |action_product|
+          { name: action_product.product.name,
+            barcode: action_product.product.barcode,
+            category: action_product.product.category.name,
+            quantity: action_product.quantity,
+            sell_price: action_product.sell_price
+          }
+        end
+      }
+    }
+  end
 
   def create
     action = Action.new(user: current_user)
@@ -25,15 +46,69 @@ class ActionsController < ApplicationController
       action.product_actions = product_actions
     end
     if action.save
-      render json: {success: true, amount: action.amount}
+      render json: {success: true, action: {id: action.id, amount: action.amount}}
     else
       render json: {success: false, error: action.errors.full_messages.to_sentence}
     end
   end
 
+  def edit
+    @categories = Category.all.map do |category|
+      {  id: category.id,
+         name: category.name,
+         multiplier: category.multiplier}
+    end
+    @transaction = {
+      id: @action.id,
+      amount: @action.amount,
+      previous_amount: @action.amount,
+      products: @action.product_actions.each_with_object({}) { |action_product, hash|
+        hash[action_product.product_id] = {
+            product_action_id: action_product.id,
+            id: action_product.product_id,
+            name: action_product.product.name,
+            barcode: action_product.product.barcode,
+            category: { name: action_product.product.category.name },
+            quantity: action_product.product.get_quantity,
+            quantity_sell: action_product.quantity,
+            sell_price: action_product.sell_price
+        }
+      }
+    }
+  end
+
+  def update
+    if @action.update(action_params)
+      render json: {success: true, action: {
+        id: @action.id,
+        amount: @action.amount,
+        previous_amount: @action.amount,
+        products: @action.product_actions.each_with_object({}) { |action_product, hash|
+          hash[action_product.product_id] = {
+              product_action_id: action_product.id,
+              id: action_product.product_id,
+              name: action_product.product.name,
+              barcode: action_product.product.barcode,
+              category: { name: action_product.product.category.name },
+              quantity: action_product.product.get_quantity,
+              quantity_sell: action_product.quantity,
+              quantity_previous: action_product.quantity,
+              sell_price: action_product.sell_price
+          }
+        }
+      }}
+    else
+      render json: {success: false, error: @action.errors.full_messages.to_sentence}
+    end
+  end
+
   private
 
+  def set_action
+    @action = Action.find_by_id(params[:id])
+  end
+
   def action_params
-    params.require(:transaction).permit(products: [:id, :quantity])
+    params.require(:transaction).permit(:amount, products: [:id, :quantity], product_actions_attributes: [:id, :product_id, :quantity, :_destroy])
   end
 end

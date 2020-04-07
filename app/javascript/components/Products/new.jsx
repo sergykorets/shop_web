@@ -259,7 +259,7 @@ export default class newProduct extends React.Component {
           ...this.state,
           products: products
         });
-        NotificationManager.success('Приход продукту скасовано');
+        NotificationManager.success('Приход товару скасовано');
       } else {
         NotificationManager.error(resp.error, 'Неможливо зробити дію');
       }
@@ -307,9 +307,9 @@ export default class newProduct extends React.Component {
           }
         })
         if (modal === 'productModal') {
-          NotificationManager.success('Приход продукту змінено');
+          NotificationManager.success('Приход товару змінено');
         } else {
-          NotificationManager.success('Продукт прийнято на приход');
+          NotificationManager.success('товар прийнято на приход');
         }
       } else {
         NotificationManager.error(resp.error, 'Неможливо зробити дію');
@@ -327,10 +327,10 @@ export default class newProduct extends React.Component {
           onReceived={(data) => this.handleReceivedBarcode(data)}
         />
         <div className='container' style={{marginTop: 100+'px', color: 'black'}}>
-          <h1>Прийняті продукти</h1>
+          <h1>Прийняті товари</h1>
           <br/>
-          <ButtonToggle color="primary" onClick={() => this.handleModal('manualModal')}>Додати продукт</ButtonToggle>
-          <ButtonToggle color="success" onClick={() => this.handleModal('productSearchModal')}>Шукати продукт</ButtonToggle>
+          <ButtonToggle color="primary" onClick={() => this.handleModal('manualModal')}>Додати товар</ButtonToggle>
+          <ButtonToggle color="success" onClick={() => this.handleModal('productSearchModal')}>Шукати товар</ButtonToggle>
           <table className='dark' style={{marginTop: 20 + 'px'}}>
             <thead>
             <tr>
@@ -408,7 +408,7 @@ export default class newProduct extends React.Component {
           { (this.state.openedModal.length > 0 && this.state.openedModal != 'productSearchModal') &&
             <Modal isOpen={this.state.openedModal.length > 0} toggle={() => this.handleModal('')} size="lg">
               <div className='container'>
-                <ModalHeader>{this.state.openedModal === 'productModal' ? 'Редагувати приход продукту' : 'Додати приход продукту'}</ModalHeader>
+                <ModalHeader>{this.state.openedModal === 'productModal' ? 'Редагувати приход товару' : 'Додати приход товару'}</ModalHeader>
                 <div className='row'>
                   <div className='col-12'>
                     <FormGroup>
@@ -457,7 +457,7 @@ export default class newProduct extends React.Component {
                   </div>
                   <div className='col-6'>
                     <FormGroup>
-                      <Label for={`name_${this.state.openedModal}`}>Назва продукту</Label>
+                      <Label for={`name_${this.state.openedModal}`}>Назва товару</Label>
                       <Input type='text' id={`name_${this.state.openedModal}`} value={this.state[this.state.openedModal].name}
                              onChange={(e) => this.handleInputChange(this.state.openedModal,'name', e.target.value)}/>
                     </FormGroup>
@@ -508,7 +508,7 @@ export default class newProduct extends React.Component {
           { (this.state.openedModal === 'productSearchModal') &&
             <Modal isOpen={this.state.openedModal === 'productSearchModal'} toggle={() => this.handleModal('')} size="lg">
               <div className='container'>
-                <ModalHeader>Пошук продукту</ModalHeader>
+                <ModalHeader>Пошук товару</ModalHeader>
                 <div className='row'>
                   <div className='col-6'>
                     <FormGroup>
@@ -523,7 +523,7 @@ export default class newProduct extends React.Component {
                   </div>
                   <div className='col-6'>
                     <FormGroup>
-                      <Label for='name'>Назва продукту</Label>
+                      <Label for='name'>Назва товару</Label>
                       <Input type='search' id='name' value={this.state[this.state.openedModal].name}
                              onChange={(e) => this.handleProductSearch('name', e.target.value)}/>
                     </FormGroup>

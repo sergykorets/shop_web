@@ -22,7 +22,7 @@ export default class SellPage extends React.Component {
       openedModal: '',
       income_amount: '',
       change: '',
-      transactionAmount: ''
+      action: {}
     };
   }
 
@@ -36,7 +36,7 @@ export default class SellPage extends React.Component {
         }
       });
     } else {
-      NotificationManager.error('Продукт не знайдено', 'Баркод невідомий');
+      NotificationManager.error('товар не знайдено', 'Баркод невідомий');
     }
   };
 
@@ -73,25 +73,17 @@ export default class SellPage extends React.Component {
     })
   };
 
-  floorFloat = (value) => {
-    return (Math.floor(value * 100) / 100);
-  };
-
-  ceilFloat = (value) => {
-    return (Math.ceil(value * 100) / 100);
-  };
-
   summary = () => {
     let sumArray = [];
     Object.values(this.state.barcodes).map((product, index) => {
       return sumArray.push(parseFloat(product.sell_price) * parseFloat(product.quantity_sell))
     });
-    return this.floorFloat(sumArray.reduce((a, b) => a + b, 0))
+    return (sumArray.reduce((a, b) => a + b, 0)).toFixed(2)
   };
 
   productSum = (product_id) => {
     const product = this.state.barcodes[product_id];
-    return this.floorFloat(parseFloat(product.sell_price) * parseFloat(product.quantity_sell))
+    return (parseFloat(product.sell_price) * parseFloat(product.quantity_sell)).toFixed(2)
   };
 
   handleProductSearch = (field, v) => {
@@ -175,7 +167,7 @@ export default class SellPage extends React.Component {
             ...this.state,
             showSuccess: true,
             barcodes: {},
-            transactionAmount: resp.amount
+            action: resp.action
           });
           NotificationManager.success('Транзакція успішна');
         } else {
@@ -197,14 +189,15 @@ export default class SellPage extends React.Component {
         { this.state.showSuccess ?
           <div className='container text-center' style={{marginTop: 6+'rem'}}>
             <h1>Транзакція успішна</h1>
-            <h2>Сума продажу: {this.state.transactionAmount} грн</h2>
+            <h2>Сума продажу: {this.state.action.amount} грн</h2>
             <ButtonToggle style={{marginBottom: 6+'rem'}} size='lg' color="primary" onClick={() => location.reload()}>Зробити нову продажу</ButtonToggle>
+            <ButtonToggle style={{marginBottom: 6+'rem'}} size='lg' color="warning" onClick={() => location.href = `/actions/${this.state.action.id}/edit`}>Редагувати продаж</ButtonToggle>
           </div>
           :
           <div className='container' style={{marginTop: 100+'px', color: 'black'}}>
-            <h1>Відскановані баркоди</h1>
+            <h1>Продаж товарів</h1>
             <br/>
-            <ButtonToggle color="primary" onClick={() => this.handleModal('productSearchModal')}>Шукати продукт</ButtonToggle>
+            <ButtonToggle color="primary" onClick={() => this.handleModal('productSearchModal')}>Шукати товар</ButtonToggle>
             <table className='dark' style={{marginTop: 20 + 'px'}}>
               <thead>
               <tr>
@@ -254,8 +247,8 @@ export default class SellPage extends React.Component {
                   <Input type='number' id='income_amount' value={this.state.income_amount}
                          onChange={(e) => this.handleFieldChange('income_amount', e.target.value)}/>
                 </FormGroup>
-                { this.state.income_amount > this.summary() &&
-                  <h1>Решта: {this.ceilFloat((this.state.income_amount - this.summary()).toPrecision(4))} грн</h1>}
+                { parseFloat(this.state.income_amount) > this.summary() &&
+                  <h1>Решта: {(parseFloat(this.state.income_amount) - this.summary()).toFixed(2)} грн</h1>}
               </Fragment>}
             <hr/>
             <ButtonToggle size='lg' color="success" disabled={Object.keys(this.state.barcodes).length < 1} onClick={() => this.submitSell()}>Продати</ButtonToggle>
@@ -263,7 +256,7 @@ export default class SellPage extends React.Component {
             { (this.state.openedModal === 'productSearchModal') &&
               <Modal isOpen={this.state.openedModal === 'productSearchModal'} toggle={() => this.handleModal('')} size="lg">
                 <div className='container'>
-                  <ModalHeader>Пошук продукту</ModalHeader>
+                  <ModalHeader>Пошук товару</ModalHeader>
                   <div className='row'>
                     <div className='col-6'>
                       <FormGroup>
@@ -278,7 +271,7 @@ export default class SellPage extends React.Component {
                     </div>
                     <div className='col-6'>
                       <FormGroup>
-                        <Label for='name'>Назва продукту</Label>
+                        <Label for='name'>Назва товару</Label>
                         <Input type='search' id='name' value={this.state[this.state.openedModal].name}
                                onChange={(e) => this.handleProductSearch('name', e.target.value)}/>
                       </FormGroup>

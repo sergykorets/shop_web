@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   end
   resources :product_actions, only: [:update, :create, :destroy]
   resources :categories, only: :create
-  resources :actions, only: :create
+  resources :actions, only: [:index, :create, :edit, :update]
   get '/sell', to: 'pages#sell'
   get '/copy_db', to: 'application#copy_db'
   get '/update_db', to: 'application#update_db'

@@ -15,17 +15,18 @@
           <li class="nav-item">
             <a class="nav-link" href="/sell">Продаж</a>
           </li>
-          <% if current_user.admin? %>
-            <li class="nav-item">
-              <a class="nav-link" href="/products/new">Приход</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/products/expense">Списання</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/products">Продукти</a>
-            </li>
-          <% end %>
+          <li class="nav-item">
+            <a class="nav-link" href="/products/new">Приход</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/products/expense">Списання</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/products">Товари</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/actions">Транзакції</a>
+          </li>
           <li class="nav-item">
             <%= link_to "Профіль", edit_user_registration_path, class: 'nav-link' %>
           </li>

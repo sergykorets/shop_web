@@ -17,7 +17,8 @@ class ProductAction < ApplicationRecord
   validates :sell_price, numericality: { greater_than_or_equal_to: :buy_price }, if: :incoming?
   validates :quantity, numericality: { greater_than: 0 }
 
-  validate :check_quantity, if: -> { sell? || expense? }
+  validate :check_quantity, on: :create, if: -> { sell? || expense? }
+  validate :check_product_quantity_on_transaction_update, on: :update, if: -> { action }
 
   private
 
@@ -30,6 +31,13 @@ class ProductAction < ApplicationRecord
 
   def check_quantity
     if product.get_quantity < quantity
+      self.errors.add(:base, "Залишок продукту не може бути від'ємним")
+      throw :abort
+    end
+  end
+
+  def check_product_quantity_on_transaction_update
+    if product.get_quantity < quantity - quantity_was
       self.errors.add(:base, "Залишок продукту не може бути від'ємним")
       throw :abort
     end

@@ -26,7 +26,7 @@ export default class Expense extends React.Component {
 
   handleReceivedBarcode = (response) => {
     if (Object.values(this.state.products).some(item => response.message === item.barcode)) {
-      NotificationManager.error('Списаний продукт знаходить у верхній таблиці', 'Баркод вже відскановано');
+      NotificationManager.error('Списаний товар знаходить у верхній таблиці', 'Баркод вже відскановано');
     } else {
       if (response.product) {
         this.setState({
@@ -37,7 +37,7 @@ export default class Expense extends React.Component {
           }
         });
       } else {
-        NotificationManager.error('Продукт не знайдено');
+        NotificationManager.error('товар не знайдено');
       }
     }
   };
@@ -181,7 +181,7 @@ export default class Expense extends React.Component {
           ...this.state,
           products: products
         });
-        NotificationManager.success('Списання продукту скасовано');
+        NotificationManager.success('Списання товару скасовано');
       } else {
         NotificationManager.error(resp.error, 'Неможливо зробити дію');
       }
@@ -228,7 +228,7 @@ export default class Expense extends React.Component {
               [resp.product.product_action_id]: resp.product
             }
           });
-          NotificationManager.success('Продукт списано');
+          NotificationManager.success('товар списано');
         }
       } else {
         NotificationManager.error(resp.error, 'Неможливо зробити дію');
@@ -246,9 +246,9 @@ export default class Expense extends React.Component {
           onReceived={(data) => this.handleReceivedBarcode(data)}
         />
         <div className='container' style={{marginTop: 100+'px', color: 'black'}}>
-          <h1>Продукти на списанні</h1>
+          <h1>Списані товари</h1>
           <br/>
-          <ButtonToggle color="primary" onClick={() => this.handleModal('productSearchModal')}>Шукати продукт</ButtonToggle>
+          <ButtonToggle color="primary" onClick={() => this.handleModal('productSearchModal')}>Шукати товар</ButtonToggle>
           <table className='dark' style={{marginTop: 20 + 'px'}}>
             <thead>
             <tr>
@@ -328,7 +328,7 @@ export default class Expense extends React.Component {
           { (this.state.openedModal.length > 0 && this.state.openedModal !== 'productSearchModal') &&
             <Modal isOpen={this.state.openedModal.length > 0} toggle={() => this.handleModal('')} size="sm">
               <div className='container'>
-                <ModalHeader>Редагувати кількість списання продукту</ModalHeader>
+                <ModalHeader>Редагувати кількість списання товару</ModalHeader>
                 <div className='row'>
                   <div className='col-12'>
                     <FormGroup>
@@ -350,7 +350,7 @@ export default class Expense extends React.Component {
           { (this.state.openedModal === 'productSearchModal') &&
             <Modal isOpen={this.state.openedModal === 'productSearchModal'} toggle={() => this.handleModal('')} size="lg">
               <div className='container'>
-                <ModalHeader>Пошук продукту</ModalHeader>
+                <ModalHeader>Пошук товару</ModalHeader>
                 <div className='row'>
                   <div className='col-6'>
                     <FormGroup>
@@ -365,7 +365,7 @@ export default class Expense extends React.Component {
                   </div>
                   <div className='col-6'>
                     <FormGroup>
-                      <Label for='name'>Назва продукту</Label>
+                      <Label for='name'>Назва товару</Label>
                       <Input type='search' id='name' value={this.state[this.state.openedModal].name}
                              onChange={(e) => this.handleProductSearch('name', e.target.value)}/>
                     </FormGroup>

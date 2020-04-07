@@ -3,10 +3,19 @@ class Action < ApplicationRecord
   has_many :products, through: :product_actions
   belongs_to :user, optional: true
 
-  #before_save :set_product_actions
+  accepts_nested_attributes_for :product_actions, allow_destroy: true
 
-  def set_product_actions
-    binding.pry
-    product_actions.where(action_type: nil).destroy_all
+  before_update :set_transaction
+
+  def set_transaction
+    amount = 0
+    product_actions.each do |product_action|
+      sell_price = product_action.product.sell_price
+      amount += sell_price * product_action.quantity
+      product_action.action_type = :sell
+      product_action.buy_price = product_action.product.buy_price
+      product_action.sell_price = sell_price
+    end
+    self.amount = amount
   end
 end
