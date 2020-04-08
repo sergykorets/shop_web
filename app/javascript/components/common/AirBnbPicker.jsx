@@ -40,6 +40,7 @@ export default class AirBnbPicker extends React.Component {
             onDateChange={date => this.onDateChange({ date })}
             onFocusChange={({ focused }) => this.setState({ focused })}
             id="your_unique_id"
+            isOutsideRange={(day) => { return this.props.pastDates ? day.isAfter() : day.isSameOrBefore(); }}
           />
           :
           <DateRangePicker

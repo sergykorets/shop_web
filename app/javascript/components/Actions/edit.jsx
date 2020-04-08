@@ -10,6 +10,7 @@ export default class EditAction extends React.Component {
     this.state = {
       action: this.props.action,
       products: {},
+      showSuccess: false,
       categories: this.props.categories,
       productSearchModal: {
         barcode: '',
@@ -95,14 +96,14 @@ export default class EditAction extends React.Component {
 
   summary = () => {
     let sumArray = [];
-    Object.values(this.state.action.products).filter(item => !item.destroy).map((product, index) => {
+    Object.values(this.state.action.products).filter(item => !item.destroy).map(product => {
       return sumArray.push(parseFloat(product.sell_price) * parseFloat(product.quantity_sell))
     });
     return sumArray.reduce((a, b) => a + b, 0).toFixed(2)
   };
 
   editSummary = () => {
-    return Math.abs(this.summary() - parseFloat(this.state.action.previous_amount).toFixed(2)).toFixed(2)
+    return Math.abs(this.summary() - parseFloat(this.state.action.amount)).toFixed(2)
   };
 
   productSum = (product_id) => {
@@ -165,14 +166,14 @@ export default class EditAction extends React.Component {
         ...this.state.action,
         products: {
           ...this.state.action.products,
-          [id]: Object.assign(this.state.products[id], {quantity_sell: 1, category: this.state.products[id].category.name})
+          [id]: Object.assign(this.state.products[id], {quantity_sell: 1})
         }
       }
     })
   };
 
   restrictAdding = (id) => {
-    return Object.keys(this.state.action.products).some(item => id.toString() === item.toString())
+    return Object.values(this.state.action.products).some(item => ((id.toString() === item.id.toString()) && !item.destroy))
   };
 
   submitSell = () => {
@@ -198,6 +199,7 @@ export default class EditAction extends React.Component {
           this.setState({
             ...this.state,
             action: resp.action,
+            showSuccess: true,
             income_amount: '',
             change: '',
           });
@@ -211,6 +213,7 @@ export default class EditAction extends React.Component {
 
   render() {
     console.log(this.state)
+    console.log(this.summary())
     return (
       <ActionCableProvider url={`ws://${location.host}/cable`}>
         <NotificationContainer/>
@@ -218,118 +221,126 @@ export default class EditAction extends React.Component {
           channel='BarcodesChannel'
           onReceived={(data) => this.handleReceivedBarcode(data)}
         />
-        <div className='container' style={{marginTop: 100+'px', color: 'black'}}>
-          <h1>Редагувати продаж</h1>
-          <br/>
-          <ButtonToggle color="primary" onClick={() => this.handleModal('productSearchModal')}>Шукати товар</ButtonToggle>
-          <table className='dark' style={{marginTop: 20 + 'px'}}>
-            <thead>
-            <tr>
-              <th><h1>Баркод</h1></th>
-              <th><h1>Назва</h1></th>
-              <th><h1>Група</h1></th>
-              <th><h1>Залишок</h1></th>
-              <th><h1>Ціна</h1></th>
-              <th><h1>Кількість</h1></th>
-              <th><h1>Сума</h1></th>
-              <th><h1>Дії</h1></th>
-            </tr>
-            </thead>
-            <tbody>
-            { Object.values(this.state.action.products).filter(item => !item.destroy).map((product, i) => {
-              return (
-                <tr key={i}>
-                  <td>{product.barcode}</td>
-                  <td>{product.name}</td>
-                  <td>{product.category.name}</td>
-                  <td>{product.quantity}</td>
-                  <td>{product.sell_price} грн</td>
-                  <td>
-                    <Input type='number' id={`quantity_${i}`}
-                           value={this.state.action.products[product.id].quantity_sell}
-                           onChange={(e) => this.handleInputChange('quantity_sell', product.id, e.target.value)}
-                           className='quantity-sell'
-                           min={0}
-                           max={product.product_action_id ? parseFloat(this.state.action.products[product.id].quantity_previous || this.props.action.products[product.id].quantity_sell) + parseFloat(product.quantity) : product.quantity}
-                    />
-                  </td>
-                  <td>{this.productSum(product.id)} грн</td>
-                  <td>
-                    <ButtonToggle color="danger" size="sm" onClick={() => this.cancelProduct(product.id)}>Видалити</ButtonToggle>
-                  </td>
-                </tr>
-              )
-            })}
-            </tbody>
-          </table>
-          <hr/>
-          { Object.keys(this.state.action.products).length > 0 &&
-            <Fragment>
-              <h1>Сума до сплати: {this.summary()} грн</h1>
-              { parseFloat(this.state.action.previous_amount).toFixed(2) !== this.summary() &&
-                <Fragment>
-                  <h1>{this.summary() > parseFloat(this.state.action.previous_amount).toFixed(2) ? 'Доплата:' : 'Повернення:'} {this.editSummary()} грн</h1>
-                  { this.summary() > parseFloat(this.state.action.previous_amount).toFixed(2) &&
-                    <Fragment>
+        { this.state.showSuccess ?
+          <div className='container text-center' style={{marginTop: 6+'rem'}}>
+            <h1>Транзакцію змінено</h1>
+            <h2>Сума продажу: {this.state.action.amount} грн</h2>
+            <ButtonToggle style={{marginBottom: 6+'rem'}} size='lg' color="primary" onClick={() => location.href = '/sell'}>Зробити нову продажу</ButtonToggle>
+            <ButtonToggle style={{marginBottom: 6+'rem'}} size='lg' color="warning" onClick={() => location.reload()}>Редагувати продаж</ButtonToggle>
+          </div>
+          :
+          <div className='container' style={{marginTop: 100+'px', color: 'black'}}>
+            <h1>Редагувати продаж</h1>
+            <br/>
+            <ButtonToggle color="primary" onClick={() => this.handleModal('productSearchModal')}>Шукати товар</ButtonToggle>
+            <table className='dark' style={{marginTop: 20 + 'px'}}>
+              <thead>
+              <tr>
+                <th><h1>Баркод</h1></th>
+                <th><h1>Назва</h1></th>
+                <th><h1>Група</h1></th>
+                <th><h1>Залишок</h1></th>
+                <th><h1>Ціна</h1></th>
+                <th><h1>Кількість</h1></th>
+                <th><h1>Сума</h1></th>
+                <th><h1>Дії</h1></th>
+              </tr>
+              </thead>
+              <tbody>
+              { Object.values(this.state.action.products).filter(item => !item.destroy).map((product, i) => {
+                return (
+                  <tr key={i}>
+                    <td>{product.barcode}</td>
+                    <td>{product.name}</td>
+                    <td>{product.category.name}</td>
+                    <td>{product.quantity}</td>
+                    <td>{product.sell_price} грн</td>
+                    <td>
+                      <Input type='number' id={`quantity_${i}`}
+                             value={this.state.action.products[product.id].quantity_sell}
+                             onChange={(e) => this.handleInputChange('quantity_sell', product.id, e.target.value)}
+                             className='quantity-sell'
+                             min={0}
+                             max={product.product_action_id ? parseFloat(this.state.action.products[product.id].quantity_previous || this.props.action.products[product.id].quantity_sell) + parseFloat(product.quantity) : product.quantity}
+                      />
+                    </td>
+                    <td>{this.productSum(product.id)} грн</td>
+                    <td>
+                      <ButtonToggle color="danger" size="sm" onClick={() => this.cancelProduct(product.id)}>Видалити</ButtonToggle>
+                    </td>
+                  </tr>
+                )
+              })}
+              </tbody>
+            </table>
+            <hr/>
+            { Object.keys(this.state.action.products).length > 0 &&
+              <Fragment>
+                <h1>Сума до сплати: {this.summary()} грн</h1>
+                { parseFloat(this.state.action.amount).toFixed(2) !== this.summary() &&
+                  <Fragment>
+                    <h1>{this.summary() > parseFloat(this.state.action.amount) ? 'Доплата:' : 'Повернення:'} {this.editSummary()} грн</h1>
+                    { this.summary() > parseFloat(this.state.action.amount) &&
+                      <Fragment>
+                        <FormGroup>
+                          <Label for='income_amount'>Готівка</Label>
+                          <Input type='number' id='income_amount' value={this.state.income_amount}
+                                 onChange={(e) => this.handleFieldChange('income_amount', e.target.value)}/>
+                        </FormGroup>
+                        { parseFloat(this.state.income_amount) > this.editSummary() &&
+                          <h1>Решта: {(parseFloat(this.state.income_amount) - this.editSummary()).toFixed(2)} грн</h1>}
+                      </Fragment>}
+                  </Fragment>}
+              </Fragment>}
+            <hr/>
+            <ButtonToggle size='lg' color="warning" disabled={Object.keys(this.state.action.products).length < 1} onClick={() => this.submitSell()}>Змінити продаж</ButtonToggle>
+            <hr/>
+            { (this.state.openedModal === 'productSearchModal') &&
+              <Modal isOpen={this.state.openedModal === 'productSearchModal'} toggle={() => this.handleModal('')} size="lg">
+                <div className='container'>
+                  <ModalHeader>Пошук товару</ModalHeader>
+                  <div className='row'>
+                    <div className='col-6'>
                       <FormGroup>
-                        <Label for='income_amount'>Готівка</Label>
-                        <Input type='number' id='income_amount' value={this.state.income_amount}
-                               onChange={(e) => this.handleFieldChange('income_amount', e.target.value)}/>
+                        <Label for='barcode'>Баркод</Label>
+                        <Input type='search' id='barcode' value={this.state[this.state.openedModal].barcode}
+                               onChange={(e) => this.handleProductSearch('barcode', e.target.value)}/>
+                        <ButtonToggle size='sm' color="primary" style={{marginTop: 20+'px'}}
+                                      onClick={() => this.handleProductSearch('barcode', '482')}>
+                          Україна
+                        </ButtonToggle>
                       </FormGroup>
-                      { parseFloat(this.state.income_amount) > this.editSummary() &&
-                        <h1>Решта: {(parseFloat(this.state.income_amount) - this.editSummary()).toFixed(2)} грн</h1>}
-                    </Fragment>}
-                </Fragment>}
-            </Fragment>}
-          <hr/>
-          <ButtonToggle size='lg' color="warning" disabled={Object.keys(this.state.action.products).length < 1} onClick={() => this.submitSell()}>Змінити продаж</ButtonToggle>
-          <hr/>
-          { (this.state.openedModal === 'productSearchModal') &&
-            <Modal isOpen={this.state.openedModal === 'productSearchModal'} toggle={() => this.handleModal('')} size="lg">
-              <div className='container'>
-                <ModalHeader>Пошук товару</ModalHeader>
-                <div className='row'>
-                  <div className='col-6'>
-                    <FormGroup>
-                      <Label for='barcode'>Баркод</Label>
-                      <Input type='search' id='barcode' value={this.state[this.state.openedModal].barcode}
-                             onChange={(e) => this.handleProductSearch('barcode', e.target.value)}/>
-                      <ButtonToggle size='sm' color="primary" style={{marginTop: 20+'px'}}
-                                    onClick={() => this.handleProductSearch('barcode', '482')}>
-                        Україна
-                      </ButtonToggle>
-                    </FormGroup>
-                  </div>
-                  <div className='col-6'>
-                    <FormGroup>
-                      <Label for='name'>Назва товару</Label>
-                      <Input type='search' id='name' value={this.state[this.state.openedModal].name}
-                             onChange={(e) => this.handleProductSearch('name', e.target.value)}/>
-                    </FormGroup>
-                  </div>
-                  <div className='col-12'>
-                    <div className='found-products'>
-                      {Object.values(this.state.products).map((product, index) => {
-                        return (
-                          <div className='found-product' key={index}>
-                            <div className='found-product-info'>
-                              <span>{product.barcode}</span>
-                              <span>{product.category.name}</span>
-                              <span>{product.name}</span>
+                    </div>
+                    <div className='col-6'>
+                      <FormGroup>
+                        <Label for='name'>Назва товару</Label>
+                        <Input type='search' id='name' value={this.state[this.state.openedModal].name}
+                               onChange={(e) => this.handleProductSearch('name', e.target.value)}/>
+                      </FormGroup>
+                    </div>
+                    <div className='col-12'>
+                      <div className='found-products'>
+                        {Object.values(this.state.products).map((product, index) => {
+                          return (
+                            <div className='found-product' key={index}>
+                              <div className='found-product-info'>
+                                <span>{product.barcode}</span>
+                                <span>{product.category.name}</span>
+                                <span>{product.name}</span>
+                              </div>
+                              <ButtonToggle size='sm' color="success" disabled={this.restrictAdding(product.id)} onClick={() => this.addProduct(product.id)}>Додати</ButtonToggle>
                             </div>
-                            <ButtonToggle size='sm' color="success" disabled={this.restrictAdding(product.id)} onClick={() => this.addProduct(product.id)}>Додати</ButtonToggle>
-                          </div>
-                        )
-                      })}
+                          )
+                        })}
+                      </div>
                     </div>
                   </div>
+                  <FormGroup>
+                    <ButtonToggle color="secondary" onClick={() => this.handleModal('')}>Закрити</ButtonToggle>
+                  </FormGroup>
                 </div>
-                <FormGroup>
-                  <ButtonToggle color="secondary" onClick={() => this.handleModal('')}>Закрити</ButtonToggle>
-                </FormGroup>
-              </div>
-            </Modal>}
-        </div>
+              </Modal>}
+          </div>}
       </ActionCableProvider>
     );
   }

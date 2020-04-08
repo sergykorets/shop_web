@@ -1,6 +1,41 @@
 class ProductActionsController < ApplicationController
   before_action :set_paper_trail_whodunnit, only: [:update, :create]
 
+  def index
+    @products = Product.joins(:product_actions).where(product_actions: {action_type: params[:action_type]}).where("product_actions.created_at >= ? AND product_actions.created_at <= ?", params[:date].to_datetime.beginning_of_day, params[:date].to_datetime.end_of_day).each_with_object({}) { |product, hash|
+      if params[:action_type] == 'incoming'
+        hash[product.id] = {
+            id: product.id,
+            product_action_id: product.product_actions.incoming.last.id,
+            name: product.name,
+            product_quantity: product.get_quantity,
+            quantity: product.product_actions.incoming.last.quantity,
+            barcode: product.barcode,
+            buy_price: product.buy_price,
+            sell_price: product.sell_price,
+            due_date: product.due_date&.strftime("%d.%m.%Y"),
+            category: {
+                id: product.category.id,
+                name: product.category.name,
+                multiplier: product.category.multiplier
+            }
+        }
+      else
+        hash[product.product_actions.expense.last.id] = {
+            id: product.id,
+            product_action_id: product.product_actions.expense.last.id,
+            name: product.name,
+            quantity: product.get_quantity,
+            quantity_expense: product.product_actions.expense.last.quantity,
+            barcode: product.barcode,
+            sell_price: product.sell_price,
+            category: product.category.name
+        }
+      end
+    }
+    render json: {success: true, products: @products}
+  end
+
   def create
     if product_action_params[:quantity].to_d <= 0
       render json: {success: false, error: 'Кількість списання має бути більшою за 0'}

@@ -2,7 +2,6 @@ class ProductsController < ApplicationController
   before_action :set_paper_trail_whodunnit, only: [:create, :update]
 
   def index
-    redirect_to root_path unless current_user&.admin?
     products = Product.all
     @count = products.count
     @per = 10
@@ -29,7 +28,6 @@ class ProductsController < ApplicationController
   end
 
   def new
-    redirect_to root_path unless current_user&.admin?
     @products = Product.joins(:product_actions).where(product_actions: {action_type: :incoming}).where("product_actions.created_at >= ?", Date.today.beginning_of_day).each_with_object({}) { |product, hash|
       hash[product.id] = {
         id: product.id,
@@ -132,7 +130,6 @@ class ProductsController < ApplicationController
   end
 
   def expense
-    redirect_to root_path unless current_user&.admin?
     @products = Product.joins(:product_actions).where(product_actions: {action_type: :expense}).where("product_actions.created_at >= ?", Date.today.beginning_of_day).each_with_object({}) { |product, hash|
       hash[product.product_actions.expense.last.id] = {
           id: product.id,
@@ -165,7 +162,7 @@ class ProductsController < ApplicationController
           buy_price: product.buy_price,
           sell_price: product.sell_price,
           due_date: product.due_date&.strftime("%d.%m.%Y"),
-          category: product.category && {
+          category: {
             id: product.category.id,
             name: product.category.name,
             multiplier: product.category.multiplier
@@ -182,7 +179,7 @@ class ProductsController < ApplicationController
             buy_price: product.buy_price,
             sell_price: product.sell_price,
             due_date: product.due_date&.strftime("%d.%m.%Y"),
-            category: product.category && {
+            category: {
               id: product.category.id,
               name: product.category.name,
               multiplier: product.category.multiplier

@@ -2,13 +2,11 @@ class ActionsController < ApplicationController
   before_action :set_action, only: [:edit, :update]
 
   def index
-    actions = Action.all
-    @count = actions.count
-    @per = 10
-    @actions = actions.page(params[:page] || 1).each_with_object({}) { |action, hash|
-      hash[action.id] = {
-        id: action.id,
+    date = params[:date].try(:to_datetime) || DateTime.now
+    @actions = Action.all.where("created_at >= ? AND created_at <= ?", date.beginning_of_day, date.end_of_day).order('created_at DESC').map do |action|
+      { id: action.id,
         amount: action.amount,
+        created_at: action.created_at.strftime("%d.%m.%Y %H:%M"),
         products: action.product_actions.map do |action_product|
           { name: action_product.product.name,
             barcode: action_product.product.barcode,
@@ -18,7 +16,11 @@ class ActionsController < ApplicationController
           }
         end
       }
-    }
+    end
+    respond_to do |format|
+      format.html { render :index }
+      format.json {{success: true, actions: @actions}}
+    end
   end
 
   def create
@@ -61,7 +63,6 @@ class ActionsController < ApplicationController
     @transaction = {
       id: @action.id,
       amount: @action.amount,
-      previous_amount: @action.amount,
       products: @action.product_actions.each_with_object({}) { |action_product, hash|
         hash[action_product.product_id] = {
             product_action_id: action_product.id,
@@ -82,7 +83,6 @@ class ActionsController < ApplicationController
       render json: {success: true, action: {
         id: @action.id,
         amount: @action.amount,
-        previous_amount: @action.amount,
         products: @action.product_actions.each_with_object({}) { |action_product, hash|
           hash[action_product.product_id] = {
               product_action_id: action_product.id,
@@ -99,6 +99,28 @@ class ActionsController < ApplicationController
       }}
     else
       render json: {success: false, error: @action.errors.full_messages.to_sentence}
+    end
+  end
+
+  def destroy
+    action = Action.find_by_id(params[:id])
+    if action.destroy
+      render json: {success: true, actions: Action.all.order('created_at DESC').page(params[:page] || 1).map do |action|
+        { id: action.id,
+          amount: action.amount,
+          created_at: action.created_at.strftime("%d.%m.%Y %H:%M"),
+          products: action.product_actions.map do |action_product|
+            { name: action_product.product.name,
+              barcode: action_product.product.barcode,
+              category: action_product.product.category.name,
+              quantity: action_product.quantity,
+              sell_price: action_product.sell_price
+            }
+          end
+        }
+      end}
+    else
+      render json: {success: false, error: action.errors.full_messages.to_sentence}
     end
   end
 

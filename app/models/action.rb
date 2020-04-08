@@ -1,5 +1,5 @@
 class Action < ApplicationRecord
-  has_many :product_actions
+  has_many :product_actions, dependent: :destroy
   has_many :products, through: :product_actions
   belongs_to :user, optional: true
 

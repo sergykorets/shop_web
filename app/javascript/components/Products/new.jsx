@@ -1,4 +1,5 @@
 import React, {Fragment} from 'react';
+import moment from 'moment'
 import {ActionCable, ActionCableProvider} from 'react-actioncable-provider';
 import { Modal, ModalHeader, FormGroup, Label, Input, ButtonToggle } from 'reactstrap';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
@@ -13,6 +14,7 @@ export default class newProduct extends React.Component {
       products: this.props.products,
       foundProducts: {},
       categories: this.props.categories,
+      date: moment().format('DD.MM.YYYY'),
       barcodeModal: {
         barcode: '',
         name: '',
@@ -93,7 +95,7 @@ export default class newProduct extends React.Component {
     })
   };
 
-  handleDateChange = ({date}) => {
+  handleDueDateChange = ({date}) => {
     this.setState({
       ...this.state,
       [this.state.openedModal]: {
@@ -103,8 +105,30 @@ export default class newProduct extends React.Component {
     })
   };
 
-  floorFloat = (value) => {
-    return (Math.floor(value * 100) / 100);
+  isToday = () => {
+    return moment().isSame(moment(this.state.date, 'DD.MM.YYYY'), 'day')
+  };
+
+  handleDateChange = ({date}) => {
+    $.ajax({
+      url: '/product_actions.json',
+      type: 'GET',
+      data: {
+        action_type: 'incoming',
+        date: date.format('DD.MM.YYYY')
+      },
+      success: (resp) => {
+        if (resp.success) {
+          this.setState({
+            ...this.state,
+            products: resp.products,
+            date: date ? date.format('DD.MM.YYYY') : null
+          });
+        } else {
+          NotificationManager.error(resp.error, "Неможливо зробити дію");
+        }
+      }
+    });
   };
 
   summary = () => {
@@ -112,12 +136,12 @@ export default class newProduct extends React.Component {
     Object.values(this.state.products).map((product, index) => {
       return sumArray.push(parseFloat(product.sell_price) * parseFloat(product.quantity))
     });
-    return this.floorFloat(sumArray.reduce((a, b) => a + b, 0))
+    return (sumArray.reduce((a, b) => a + b, 0)).toFixed(2)
   };
 
   productSum = (products, product_id) => {
     const product = this.state[products][product_id];
-    return this.floorFloat(parseFloat(product.sell_price) * parseFloat(product.quantity))
+    return (parseFloat(product.sell_price) * parseFloat(product.quantity)).toFixed(2)
   };
 
   editBarcode = (barcode) => {
@@ -320,17 +344,22 @@ export default class newProduct extends React.Component {
   render() {
     console.log(this.state)
     return (
-      <ActionCableProvider url={`ws://${location.host}/cable`}>
-        <NotificationContainer/>
-        <ActionCable
-          channel='BarcodesChannel'
-          onReceived={(data) => this.handleReceivedBarcode(data)}
-        />
         <div className='container' style={{marginTop: 100+'px', color: 'black'}}>
-          <h1>Прийняті товари</h1>
+          <div className='date-header'>
+            <h1>Прийняті товари</h1>
+            <AirBnbPicker
+              single={true}
+              pastDates={true}
+              onPickerApply={this.handleDateChange}
+              date={this.state.date}
+            />
+          </div>
           <br/>
-          <ButtonToggle color="primary" onClick={() => this.handleModal('manualModal')}>Додати товар</ButtonToggle>
-          <ButtonToggle color="success" onClick={() => this.handleModal('productSearchModal')}>Шукати товар</ButtonToggle>
+          { this.isToday() &&
+            <Fragment>
+              <ButtonToggle color="primary" onClick={() => this.handleModal('manualModal')}>Додати товар</ButtonToggle>
+              <ButtonToggle color="success" onClick={() => this.handleModal('productSearchModal')}>Шукати товар</ButtonToggle>
+            </Fragment>}
           <table className='dark' style={{marginTop: 20 + 'px'}}>
             <thead>
             <tr>
@@ -341,8 +370,11 @@ export default class newProduct extends React.Component {
               <th><h1>Ціна</h1></th>
               <th><h1>Приход</h1></th>
               <th><h1>Сума</h1></th>
-              <th><h1>Залишок</h1></th>
-              <th><h1>Дії</h1></th>
+              { this.isToday() &&
+                <Fragment>
+                  <th><h1>Залишок</h1></th>
+                  <th><h1>Дії</h1></th>
+                </Fragment>}
             </tr>
             </thead>
             <tbody>
@@ -356,54 +388,69 @@ export default class newProduct extends React.Component {
                   <td>{product.sell_price} грн</td>
                   <td>{product.quantity}</td>
                   <td>{this.productSum('products' ,product.id)} грн</td>
-                  <td>{product.product_quantity}</td>
-                  <td>
-                    <ButtonToggle color="warning" size="sm" onClick={() => this.editProduct(product.id)}>Редагувати</ButtonToggle>
-                    <ButtonToggle color="danger" size="sm" onClick={() => this.cancelIncoming(product)}>Скасувати</ButtonToggle>
-                  </td>
+                  { this.isToday() &&
+                    <Fragment>
+                      <td>{product.product_quantity}</td>
+                      <td>
+                        <ButtonToggle color="warning" size="sm" onClick={() => this.editProduct(product.id)}>Редагувати</ButtonToggle>
+                        <ButtonToggle color="danger" size="sm" onClick={() => this.cancelIncoming(product)}>Скасувати</ButtonToggle>
+                      </td>
+                    </Fragment>}
                 </tr>
               )
             })}
             </tbody>
           </table>
           { Object.keys(this.state.products).length > 0 &&
-            <h1>Всього: {this.summary()} грн</h1>}
-
-          <hr/>
-          <h1>Відскановані баркоди</h1>
-          <table className='dark' style={{marginTop: 20 + 'px'}}>
-            <thead>
-            <tr>
-              <th><h1>Баркод</h1></th>
-              <th><h1>Назва</h1></th>
-              <th><h1>Група</h1></th>
-              <th><h1>Закупівля</h1></th>
-              <th><h1>Ціна</h1></th>
-              <th><h1>Залишок</h1></th>
-              <th><h1>Сума</h1></th>
-              <th><h1>Дії</h1></th>
-            </tr>
-            </thead>
-            <tbody>
-              { Object.keys(this.state.barcodes).map((barcode, i) => {
-                return (
-                  <tr key={i}>
-                    <td>{this.state.barcodes[barcode].barcode}</td>
-                    <td>{this.state.barcodes[barcode].name}</td>
-                    <td>{this.state.barcodes[barcode].category && this.state.barcodes[barcode].category.name}</td>
-                    <td>{this.state.barcodes[barcode].buy_price}</td>
-                    <td>{this.state.barcodes[barcode].sell_price}</td>
-                    <td>{this.state.barcodes[barcode].quantity}</td>
-                    <td>{this.productSum('barcodes', barcode)} грн</td>
-                    <td>
-                      <ButtonToggle color="success" size="sm" onClick={() => this.editBarcode(barcode)}>Додати</ButtonToggle>
-                      <ButtonToggle color="danger" size="sm" onClick={() => this.cancelBarcode(barcode)}>Скасувати</ButtonToggle>
-                    </td>
+            <Fragment>
+              <hr/>
+              <h1>Всього: {this.summary()} грн</h1>
+            </Fragment>}
+          { this.isToday() &&
+            <ActionCableProvider url={`ws://${location.host}/cable`}>
+              <NotificationContainer/>
+              <ActionCable
+                channel='BarcodesChannel'
+                onReceived={(data) => this.handleReceivedBarcode(data)}
+              />
+              <Fragment>
+                <hr/>
+                <h1>Відскановані баркоди</h1>
+                <table className='dark' style={{marginTop: 20 + 'px'}}>
+                  <thead>
+                  <tr>
+                    <th><h1>Баркод</h1></th>
+                    <th><h1>Назва</h1></th>
+                    <th><h1>Група</h1></th>
+                    <th><h1>Закупівля</h1></th>
+                    <th><h1>Ціна</h1></th>
+                    <th><h1>Залишок</h1></th>
+                    <th><h1>Сума</h1></th>
+                    <th><h1>Дії</h1></th>
                   </tr>
-                )
-              })}
-            </tbody>
-          </table>
+                  </thead>
+                  <tbody>
+                    { Object.keys(this.state.barcodes).map((barcode, i) => {
+                      return (
+                        <tr key={i}>
+                          <td>{this.state.barcodes[barcode].barcode}</td>
+                          <td>{this.state.barcodes[barcode].name}</td>
+                          <td>{this.state.barcodes[barcode].category && this.state.barcodes[barcode].category.name}</td>
+                          <td>{this.state.barcodes[barcode].buy_price}</td>
+                          <td>{this.state.barcodes[barcode].sell_price}</td>
+                          <td>{this.state.barcodes[barcode].quantity}</td>
+                          <td>{this.productSum('barcodes', barcode)} грн</td>
+                          <td>
+                            <ButtonToggle color="success" size="sm" onClick={() => this.editBarcode(barcode)}>Додати</ButtonToggle>
+                            <ButtonToggle color="danger" size="sm" onClick={() => this.cancelBarcode(barcode)}>Скасувати</ButtonToggle>
+                          </td>
+                        </tr>
+                      )
+                    })}
+                  </tbody>
+                </table>
+              </Fragment>
+            </ActionCableProvider>}
 
           { (this.state.openedModal.length > 0 && this.state.openedModal != 'productSearchModal') &&
             <Modal isOpen={this.state.openedModal.length > 0} toggle={() => this.handleModal('')} size="lg">
@@ -467,7 +514,7 @@ export default class newProduct extends React.Component {
                       <Label for={`due_date_${this.state.openedModal}`}>Дата придатності</Label>
                       <AirBnbPicker
                         single={true}
-                        onPickerApply={this.handleDateChange}
+                        onPickerApply={this.handleDueDateChange}
                         date={this.state[this.state.openedModal].due_date}
                       />
                     </FormGroup>
@@ -551,7 +598,6 @@ export default class newProduct extends React.Component {
               </div>
             </Modal>}
         </div>
-      </ActionCableProvider>
     );
   }
 }
