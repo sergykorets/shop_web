@@ -6,6 +6,11 @@ class Action < ApplicationRecord
   accepts_nested_attributes_for :product_actions, allow_destroy: true
 
   before_update :set_transaction
+  before_destroy :check_today
+
+  validate :check_today
+
+  private
 
   def set_transaction
     amount = 0
@@ -17,5 +22,12 @@ class Action < ApplicationRecord
       product_action.sell_price = sell_price
     end
     self.amount = amount
+  end
+
+  def check_today
+    if created_at.to_date != Date.today
+      self.errors.add(:base, "Неможливо змінити не сьогоднішні транзакції")
+      throw :abort
+    end
   end
 end

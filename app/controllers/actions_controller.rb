@@ -105,7 +105,7 @@ class ActionsController < ApplicationController
   def destroy
     action = Action.find_by_id(params[:id])
     if action.destroy
-      render json: {success: true, actions: Action.all.order('created_at DESC').page(params[:page] || 1).map do |action|
+      render json: {success: true, actions: Action.all.where("created_at >= ? AND created_at <= ?", DateTime.now.beginning_of_day, DateTime.now.end_of_day).order('created_at DESC').map do |action|
         { id: action.id,
           amount: action.amount,
           created_at: action.created_at.strftime("%d.%m.%Y %H:%M"),
