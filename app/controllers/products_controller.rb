@@ -4,8 +4,7 @@ class ProductsController < ApplicationController
   def index
     products = Product.all
     @count = products.count
-    @per = 10
-    @products = products.order('created_at DESC').page(params[:page] || 1).per(@per).map do |product|
+    @products = products.order('created_at DESC').page(params[:page] || 1).per(PER).map do |product|
       { id: product.id,
         name: product.name,
         quantity: product.get_quantity,
@@ -151,10 +150,14 @@ class ProductsController < ApplicationController
 
   def search
     products = Product.by_barcode(params[:barcode]).by_name(params[:name]).by_category(params[:category_id])
+                 .order(params[:sort].present? && params[:sort] != 'quantity' ? "#{params[:sort]} #{ActiveModel::Type::Boolean.new.cast(params[:descending]) ? 'DESC' : 'ASC'}" : 'created_at DESC')
+    count = products.count
+    if params[:sort] == 'quantity'
+      products = products.sort { |a,b|
+        ActiveModel::Type::Boolean.new.cast(params[:descending]) ? a.get_quantity <=> b.get_quantity : b.get_quantity <=> a.get_quantity}
+    end
     products = if params[:index].present?
-      count = products.count
-      per = 10
-      products.page(params[:page] || 1).per(per).order(params[:sort].present? ? "#{params[:sort]} #{ActiveModel::Type::Boolean.new.cast(params[:descending]) ? 'DESC' : 'ASC'}" : 'created_at DESC').map do |product|
+      Kaminari.paginate_array(products.to_a).page(params[:page] || 1).per(PER).map do |product|
         { id: product.id,
           name: product.name,
           quantity: product.get_quantity,
@@ -188,7 +191,7 @@ class ProductsController < ApplicationController
       }
     end
     if products.size > 0
-      render json: {success: true, products: products, count: count, per: per}
+      render json: {success: true, products: products, count: count, per: PER}
     else
       render json: {success: false, error: 'Продукти не знайдено'}
     end

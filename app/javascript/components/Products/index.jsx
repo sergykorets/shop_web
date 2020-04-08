@@ -84,6 +84,7 @@ export default class Products extends React.Component {
   };
 
   onSort = (field) => {
+    const descending = this.state.sort.field === field ? !this.state.sort.descending : this.state.sort.descending
     $.ajax({
       url: '/products/search.json',
       type: 'POST',
@@ -93,7 +94,7 @@ export default class Products extends React.Component {
         category_id: this.state.productSearch.category_id,
         index: true,
         sort: field,
-        descending: this.state.sort.descending,
+        descending: descending,
         page: this.state.activePage
       },
       success: (resp) => {
@@ -103,7 +104,7 @@ export default class Products extends React.Component {
             products: resp.products,
             sort: {
               field: field,
-              descending: !this.state.sort.descending
+              descending: descending
             }
           });
         } else {
