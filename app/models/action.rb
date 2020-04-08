@@ -8,7 +8,7 @@ class Action < ApplicationRecord
   before_update :set_transaction
   before_destroy :check_today
 
-  validate :check_today
+  validate :check_today, on: :update
 
   private
 
