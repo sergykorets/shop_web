@@ -59,7 +59,7 @@ export default class Products extends React.Component {
         productModal: Object.assign(response.product, {category_id: response.product.category.id})
       });
     } else {
-      NotificationManager.error('товар не знайдено');
+      NotificationManager.error('Товар не знайдено');
     }
   };
 
@@ -266,7 +266,7 @@ export default class Products extends React.Component {
             due_date: null
           }
         });
-        NotificationManager.success('товар змінено');
+        NotificationManager.success('Товар змінено');
       } else {
         NotificationManager.error(resp.error, 'Неможливо зробити дію');
       }

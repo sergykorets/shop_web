@@ -35,7 +35,7 @@ export default class EditAction extends React.Component {
         }
       });
     } else {
-      NotificationManager.error('товар не знайдено', 'Баркод невідомий');
+      NotificationManager.error('Товар не знайдено', 'Баркод невідомий');
     }
   };
 

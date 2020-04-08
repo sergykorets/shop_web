@@ -39,7 +39,7 @@ export default class Expense extends React.Component {
           }
         });
       } else {
-        NotificationManager.error('товар не знайдено');
+        NotificationManager.error('Товар не знайдено');
       }
     }
   };
@@ -194,22 +194,24 @@ export default class Expense extends React.Component {
   };
 
   cancelExpense = (id) => {
-    $.ajax({
-      url: `/product_actions/${id}.json`,
-      type: 'DELETE'
-    }).then((resp) => {
-      if (resp.success) {
-        let products = this.state.products;
-        delete products[id];
-        this.setState({
-          ...this.state,
-          products: products
-        });
-        NotificationManager.success('Списання товару скасовано');
-      } else {
-        NotificationManager.error(resp.error, 'Неможливо зробити дію');
-      }
-    });
+    if (window.confirm("Відмінити списання товару?")) {
+      $.ajax({
+        url: `/product_actions/${id}.json`,
+        type: 'DELETE'
+      }).then((resp) => {
+        if (resp.success) {
+          let products = this.state.products;
+          delete products[id];
+          this.setState({
+            ...this.state,
+            products: products
+          });
+          NotificationManager.success('Списання товару скасовано');
+        } else {
+          NotificationManager.error(resp.error, 'Неможливо зробити дію');
+        }
+      });
+    }
   };
 
   submitExpense = (product_id) => {
@@ -252,7 +254,7 @@ export default class Expense extends React.Component {
               [resp.product.product_action_id]: resp.product
             }
           });
-          NotificationManager.success('товар списано');
+          NotificationManager.success('Товар списано');
         }
       } else {
         NotificationManager.error(resp.error, 'Неможливо зробити дію');

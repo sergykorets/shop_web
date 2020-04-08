@@ -39,20 +39,22 @@ export default class Products extends React.Component {
   };
 
   cancelAction = (id) => {
-    $.ajax({
-      url: `/actions/${id}.json`,
-      type: 'DELETE'
-    }).then((resp) => {
-      if (resp.success) {
-        this.setState({
-          ...this.state,
-          actions: resp.actions
-        });
-        NotificationManager.success('Транзакцію скасовано');
-      } else {
-        NotificationManager.error(resp.error, 'Неможливо зробити дію');
-      }
-    });
+    if (window.confirm("Відмінити транзацію?")) {
+      $.ajax({
+        url: `/actions/${id}.json`,
+        type: 'DELETE'
+      }).then((resp) => {
+        if (resp.success) {
+          this.setState({
+            ...this.state,
+            actions: resp.actions
+          });
+          NotificationManager.success('Транзакцію скасовано');
+        } else {
+          NotificationManager.error(resp.error, 'Неможливо зробити дію');
+        }
+      });
+    }
   };
 
   isToday = () => {

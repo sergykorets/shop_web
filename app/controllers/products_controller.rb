@@ -57,10 +57,6 @@ class ProductsController < ApplicationController
       render json: {success: false, error: 'Кількість має бути більшою за 0'}
     else
       p = Product.find_by_barcode(params[:product][:barcode])
-      if p && p.product_actions.where(product_actions: {action_type: :incoming}).where("product_actions.created_at >= ?", Date.today.beginning_of_day).any?
-        render json: {success: false, error: 'Редагування приходу продукту доступне у верхній таблиці'}
-        return
-      end
       buy_price = product_params[:buy_price].to_d
       product = if p
         p.buy_price = buy_price
@@ -78,24 +74,28 @@ class ProductsController < ApplicationController
         product.sell_price = sell_price
       end
       if product.save
-        product_action = ProductAction.create(product_id: product.id, action_type: :incoming, quantity: product_params[:quantity],
+        product_action = ProductAction.new(product_id: product.id, action_type: :incoming, quantity: product_params[:quantity],
                              buy_price: product.buy_price, sell_price: product.sell_price)
-        render json: {success: true, product: {
-          id: product.id,
-          product_action_id: product_action.id,
-          name: product.name,
-          barcode: product.barcode,
-          buy_price: product.buy_price,
-          sell_price: product.sell_price,
-          due_date: product.due_date&.strftime("%d.%m.%Y"),
-          product_quantity: product.get_quantity,
-          quantity: product_action.quantity,
-          category: {
-              id: product.category.id,
-              name: product.category.name,
-              multiplier: product.category.multiplier}
+        if product_action.save
+          render json: {success: true, product: {
+            id: product.id,
+            product_action_id: product_action.id,
+            name: product.name,
+            barcode: product.barcode,
+            buy_price: product.buy_price,
+            sell_price: product.sell_price,
+            due_date: product.due_date&.strftime("%d.%m.%Y"),
+            product_quantity: product.get_quantity,
+            quantity: product_action.quantity,
+            category: {
+                id: product.category.id,
+                name: product.category.name,
+                multiplier: product.category.multiplier}
+            }
           }
-        }
+        else
+          render json: {success: false, error: product_action.errors.full_messages.to_sentence}
+        end
       else
         render json: {success: false, error: product.errors.full_messages.to_sentence}
       end
@@ -193,7 +193,7 @@ class ProductsController < ApplicationController
     if products.size > 0
       render json: {success: true, products: products, count: count, per: PER}
     else
-      render json: {success: false, error: 'Продукти не знайдено'}
+      render json: {success: false, error: 'Товари не знайдено'}
     end
   end
 

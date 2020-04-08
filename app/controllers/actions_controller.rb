@@ -31,7 +31,7 @@ class ActionsController < ApplicationController
       action_params[:products].values.each do |p|
         product = Product.find_by_id(p[:id])
         if p[:quantity].to_d <= 0
-          render json: {success: false, error: "Кількість продажі продукту '#{product.name}' має бути більшою за 0"}
+          render json: {success: false, error: "Кількість продажі товару '#{product.name}' має бути більшою за 0"}
           return
         end
         product_actions << ProductAction.new({

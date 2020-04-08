@@ -272,22 +272,24 @@ export default class newProduct extends React.Component {
   };
 
   cancelIncoming = (product) => {
-    $.ajax({
-      url: `/product_actions/${product.product_action_id}.json`,
-      type: 'DELETE'
-    }).then((resp) => {
-      if (resp.success) {
-        let products = this.state.products;
-        delete products[product.id];
-        this.setState({
-          ...this.state,
-          products: products
-        });
-        NotificationManager.success('Приход товару скасовано');
-      } else {
-        NotificationManager.error(resp.error, 'Неможливо зробити дію');
-      }
-    });
+    if (window.confirm("Відмінити приход товару?")) {
+      $.ajax({
+        url: `/product_actions/${product.product_action_id}.json`,
+        type: 'DELETE'
+      }).then((resp) => {
+        if (resp.success) {
+          let products = this.state.products;
+          delete products[product.id];
+          this.setState({
+            ...this.state,
+            products: products
+          });
+          NotificationManager.success('Приход товару скасовано');
+        } else {
+          NotificationManager.error(resp.error, 'Неможливо зробити дію');
+        }
+      });
+    }
   };
 
   submitProduct = (modal) => {
@@ -439,7 +441,7 @@ export default class newProduct extends React.Component {
                           <td>{this.state.barcodes[barcode].buy_price}</td>
                           <td>{this.state.barcodes[barcode].sell_price}</td>
                           <td>{this.state.barcodes[barcode].quantity}</td>
-                          <td>{this.productSum('barcodes', barcode)} грн</td>
+                          <td>{ this.state.barcodes[barcode].name && `${this.productSum('barcodes', barcode)} грн`}</td>
                           <td>
                             <ButtonToggle color="success" size="sm" onClick={() => this.editBarcode(barcode)}>Додати</ButtonToggle>
                             <ButtonToggle color="danger" size="sm" onClick={() => this.cancelBarcode(barcode)}>Скасувати</ButtonToggle>
