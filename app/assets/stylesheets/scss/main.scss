@@ -59,6 +59,7 @@
 }
 .SingleDatePicker {
   width: 100%;
+  font-size: large !important;
   .SingleDatePickerInput {
     width: 100%;
     .DateInput {
@@ -98,5 +99,44 @@
 .card-img {
   img {
     width: 100%;
+  }
+}
+@media (min-width: 576px) {
+  .container {
+    max-width: 99%;
+  }
+}
+body {
+  font-size: x-large !important;
+  .page-content {
+    margin-top: 8rem;
+  }
+  .container {
+    width: 99%;
+    .dark {
+      font-size: x-large !important;
+    }
+    .btn {
+      font-size: large !important;
+      margin-bottom: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .uah {
+      margin-left: 5px;
+      font-size: smaller;
+    }
+    input {
+      font-size: large !important;
+    }
+    .cash {
+      margin-top: 1rem;
+    }
+  }
+  div > .fade > .tooltip {
+    width: 320px;
+    .tooltip-inner {
+      max-width: none;
+      width: 100%;
+    }
   }
 }

@@ -10,6 +10,7 @@ class ApiController < ActionController::Base
         buy_price: product.buy_price,
         sell_price: product.sell_price,
         due_date: product.due_date&.strftime("%d.%m.%Y"),
+        picture: product.picture.present? ? product.picture : '',
         category: product.category && {
           id: product.category.id,
           name: product.category.name,

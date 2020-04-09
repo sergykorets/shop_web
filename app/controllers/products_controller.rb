@@ -39,12 +39,13 @@ class ProductsController < ApplicationController
         buy_price: product.buy_price,
         sell_price: product.sell_price,
         due_date: product.due_date&.strftime("%d.%m.%Y"),
+        picture: product.picture.present? ? product.picture : '',
         category: {
-          id: product.category.id,
-          name: product.category.name,
-          multiplier: product.category.multiplier
+            id: product.category.id,
+            name: product.category.name,
+            multiplier: product.category.multiplier
+          }
         }
-      }
     }
     @categories = Category.all.map do |category|
       {  id: category.id,
@@ -150,7 +151,8 @@ class ProductsController < ApplicationController
           quantity_expense: product.product_actions.expense.last.quantity,
           barcode: product.barcode,
           sell_price: product.sell_price,
-          category: product.category.name
+          category: product.category.name,
+          picture: product.picture.present? ? product.picture : ''
       }
     }
     @categories = Category.all.map do |category|
@@ -195,6 +197,7 @@ class ProductsController < ApplicationController
             buy_price: product.buy_price,
             sell_price: product.sell_price,
             due_date: product.due_date&.strftime("%d.%m.%Y"),
+            picture: product.picture.present? ? product.picture : '',
             category: {
               id: product.category.id,
               name: product.category.name,

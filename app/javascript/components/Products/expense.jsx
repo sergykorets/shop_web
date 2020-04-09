@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 import moment from 'moment'
 import {ActionCable, ActionCableProvider} from 'react-actioncable-provider';
-import { Modal, ModalHeader, FormGroup, Label, Input, ButtonToggle } from 'reactstrap';
+import {Modal, ModalHeader, FormGroup, Label, Input, ButtonToggle, Tooltip} from 'reactstrap';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import AirBnbPicker from '../common/AirBnbPicker';
 
@@ -14,6 +14,7 @@ export default class Expense extends React.Component {
       products: this.props.products,
       foundProducts: {},
       openedModal: '',
+      tooltips: {},
       date: moment().format('DD.MM.YYYY'),
       productSearchModal: {
         barcode: '',
@@ -49,6 +50,16 @@ export default class Expense extends React.Component {
       ...this.state,
       openedModal: modal
     })
+  };
+
+  toggleToolptip = (index) => {
+    this.setState({
+      ...this.state,
+      tooltips: {
+        ...this.state.tooltips,
+        [index]: !this.state.tooltips[index]
+      }
+    });
   };
 
   isToday = () => {
@@ -265,7 +276,7 @@ export default class Expense extends React.Component {
   render() {
     console.log(this.state)
     return (
-      <div className='container' style={{marginTop: 100+'px', color: 'black'}}>
+      <div className='container page-content' style={{color: 'black'}}>
         <div className='date-header'>
           <h1>Списані товари</h1>
           <AirBnbPicker
@@ -297,22 +308,27 @@ export default class Expense extends React.Component {
           <tbody>
           { Object.values(this.state.products).map((product, i) => {
             return (
-              <tr key={i}>
-                <td>{product.barcode}</td>
-                <td>{product.name}</td>
-                <td>{product.category}</td>
-                <td>{product.sell_price} грн</td>
-                <td>{product.quantity_expense}</td>
-                <td>{this.productSum(product.product_action_id)} грн</td>
-                { this.isToday() &&
-                  <Fragment>
-                    <td>{product.quantity}</td>
-                    <td>
-                      {/*<ButtonToggle color="warning" size="sm" onClick={() => this.editExpense(product.product_action_id)}>Редагувати</ButtonToggle>*/}
-                      <ButtonToggle color="danger" size="sm" onClick={() => this.cancelExpense(product.product_action_id)}>Скасувати</ButtonToggle>
-                    </td>
-                  </Fragment>}
-              </tr>
+              <Fragment key={i}>
+                <tr>
+                  <td id={`TooltipExample${i}`}>{product.barcode}</td>
+                  <td>{product.name}</td>
+                  <td>{product.category}</td>
+                  <td>{product.sell_price}<span className='uah'>₴</span></td>
+                  <td>{product.quantity_expense}</td>
+                  <td>{this.productSum(product.product_action_id)}<span className='uah'>₴</span></td>
+                  { this.isToday() &&
+                    <Fragment>
+                      <td>{product.quantity}</td>
+                      <td>
+                        {/*<ButtonToggle color="warning" size="sm" onClick={() => this.editExpense(product.product_action_id)}>Редагувати</ButtonToggle>*/}
+                        <ButtonToggle color="danger" size="sm" onClick={() => this.cancelExpense(product.product_action_id)}>Скасувати</ButtonToggle>
+                      </td>
+                    </Fragment>}
+                </tr>
+                <Tooltip placement="bottom" isOpen={this.state.tooltips[i]} target={`TooltipExample${i}`} toggle={() => this.toggleToolptip(i)}>
+                  <img style={{width: 300+'px'}} src={product.picture}/>
+                </Tooltip>
+              </Fragment>
             )
           })}
           </tbody>
@@ -320,7 +336,7 @@ export default class Expense extends React.Component {
         { Object.keys(this.state.products).length > 0 &&
           <Fragment>
             <hr/>
-            <h1>Всього: {this.summary()} грн</h1>
+            <h1>Всього: {this.summary()}<span className='uah'>₴</span></h1>
           </Fragment>}
         { this.isToday() &&
           <ActionCableProvider url={`ws://${location.host}/cable`}>
@@ -350,7 +366,7 @@ export default class Expense extends React.Component {
                     <td>{this.state.barcodes[barcode].barcode}</td>
                     <td>{this.state.barcodes[barcode].name}</td>
                     <td>{this.state.barcodes[barcode].category && this.state.barcodes[barcode].category.name}</td>
-                    <td>{this.state.barcodes[barcode].sell_price} грн</td>
+                    <td>{this.state.barcodes[barcode].sell_price}<span className='uah'>₴</span></td>
                     <td>{this.state.barcodes[barcode].quantity}</td>
                     <td>
                       <Input type='number' id={`quantity_${i}`}

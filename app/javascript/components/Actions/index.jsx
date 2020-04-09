@@ -94,7 +94,7 @@ export default class Products extends React.Component {
   render() {
     console.log(this.state)
     return (
-      <div className='container' style={{marginTop: 100+'px', color: 'black'}}>
+      <div className='container page-content' style={{color: 'black'}}>
         <NotificationContainer/>
         <div className='date-header'>
           <h1>Транзакції</h1>
@@ -110,7 +110,6 @@ export default class Products extends React.Component {
           <tr>
             <th><h1>Номер</h1></th>
             <th style={{cursor: 'pointer'}} onClick={() => this.onSort('buy_price')}><h1>Сума</h1></th>
-            <th><h1>Товари</h1></th>
             <th><h1>Дата</h1></th>
             <th><h1>Дії</h1></th>
           </tr>
@@ -120,8 +119,7 @@ export default class Products extends React.Component {
             return (
               <tr key={i}>
                 <td>{this.state.actions.length - i}</td>
-                <td>{action.amount} грн</td>
-                <td>{action.products.length}</td>
+                <td>{action.amount}<span className='uah'>₴</span></td>
                 <td>{action.created_at}</td>
                 <td>
                   <ButtonToggle color="primary" size="sm" onClick={() => this.handleModal('actionModal', i)}>Деталі</ButtonToggle>
@@ -137,7 +135,7 @@ export default class Products extends React.Component {
           })}
           </tbody>
         </table>
-        <h1>Всього: {this.summary()} грн</h1>
+        <h1>Всього: {this.summary()}<span className='uah'>₴</span></h1>
         <br/>
 
         { (this.state.openedModal === 'actionModal') &&
@@ -162,15 +160,15 @@ export default class Products extends React.Component {
                       <td>{product.barcode}</td>
                       <td>{product.name}</td>
                       <td>{product.category}</td>
-                      <td>{product.sell_price} грн</td>
+                      <td>{product.sell_price}<span className='uah'>₴</span></td>
                       <td>{product.quantity}</td>
-                      <td>{this.productSum(i)} грн</td>
+                      <td>{this.productSum(i)}<span className='uah'>₴</span></td>
                     </tr>
                   )
                 })}
                 </tbody>
               </table>
-              <h1>Всього: {this.state.actions[this.state.selectedAction].amount} грн</h1>
+              <h1>Всього: {this.state.actions[this.state.selectedAction].amount}<span className='uah'>₴</span></h1>
               <FormGroup>
                 <ButtonToggle color="secondary" onClick={() => this.handleModal('')}>Закрити</ButtonToggle>
               </FormGroup>

@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react';
 import {ActionCable, ActionCableProvider} from 'react-actioncable-provider';
-import { Modal, ModalHeader, FormGroup, Label, Input, ButtonToggle } from 'reactstrap';
+import { Modal, ModalHeader, FormGroup, Label, Input, ButtonToggle, Tooltip } from 'reactstrap';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 export default class SellPage extends React.Component {
@@ -22,7 +22,8 @@ export default class SellPage extends React.Component {
       openedModal: '',
       income_amount: '',
       change: '',
-      action: {}
+      action: {},
+      tooltips: {}
     };
   }
 
@@ -58,6 +59,16 @@ export default class SellPage extends React.Component {
         }
       }
     })
+  };
+
+  toggleToolptip = (index) => {
+    this.setState({
+      ...this.state,
+      tooltips: {
+        ...this.state.tooltips,
+        [index]: !this.state.tooltips[index]
+      }
+    });
   };
 
   handleFieldChange = (field, value) => {
@@ -187,14 +198,14 @@ export default class SellPage extends React.Component {
           onReceived={(data) => this.handleReceivedBarcode(data)}
         />
         { this.state.showSuccess ?
-          <div className='container text-center' style={{marginTop: 6+'rem'}}>
+          <div className='container text-center page-content'>
             <h1>Транзакція успішна</h1>
-            <h2>Сума продажу: {this.state.action.amount} грн</h2>
+            <h2>Сума продажу: {this.state.action.amount}<span className='uah'>₴</span></h2>
             <ButtonToggle style={{marginBottom: 6+'rem'}} size='lg' color="primary" onClick={() => location.reload()}>Зробити нову продажу</ButtonToggle>
             <ButtonToggle style={{marginBottom: 6+'rem'}} size='lg' color="warning" onClick={() => location.href = `/actions/${this.state.action.id}/edit`}>Редагувати продаж</ButtonToggle>
           </div>
           :
-          <div className='container' style={{marginTop: 100+'px', color: 'black'}}>
+          <div className='container page-content' style={{color: 'black'}}>
             <h1>Продаж товарів</h1>
             <br/>
             <ButtonToggle color="primary" onClick={() => this.handleModal('productSearchModal')}>Шукати товар</ButtonToggle>
@@ -214,26 +225,31 @@ export default class SellPage extends React.Component {
               <tbody>
               { Object.keys(this.state.barcodes).map((barcode, i) => {
                 return (
-                  <tr key={i}>
-                    <td>{this.state.barcodes[barcode].barcode}</td>
-                    <td>{this.state.barcodes[barcode].name}</td>
-                    <td>{this.state.barcodes[barcode].category && this.state.barcodes[barcode].category.name}</td>
-                    <td>{this.state.barcodes[barcode].quantity}</td>
-                    <td>{this.state.barcodes[barcode].sell_price} грн</td>
-                    <td>
-                      <Input type='number' id={`quantity_${i}`}
-                             value={this.state.barcodes[barcode].quantity_sell}
-                             onChange={(e) => this.handleInputChange('quantity_sell', barcode, e.target.value)}
-                             className='quantity-sell'
-                             min={0}
-                             max={this.state.barcodes[barcode].quantity}
-                      />
-                    </td>
-                    <td>{this.productSum(barcode)} грн</td>
-                    <td>
-                      <ButtonToggle color="danger" size="sm" onClick={() => this.cancelBarcode(barcode)}>Видалити</ButtonToggle>
-                    </td>
-                  </tr>
+                  <Fragment key={i}>
+                    <tr>
+                      <td id={`TooltipExample${i}`}>{this.state.barcodes[barcode].barcode}</td>
+                      <td>{this.state.barcodes[barcode].name}</td>
+                      <td>{this.state.barcodes[barcode].category && this.state.barcodes[barcode].category.name}</td>
+                      <td>{this.state.barcodes[barcode].quantity}</td>
+                      <td>{this.state.barcodes[barcode].sell_price}<span className='uah'>₴</span></td>
+                      <td>
+                        <Input type='number' id={`quantity_${i}`}
+                               value={this.state.barcodes[barcode].quantity_sell}
+                               onChange={(e) => this.handleInputChange('quantity_sell', barcode, e.target.value)}
+                               className='quantity-sell'
+                               min={0}
+                               max={this.state.barcodes[barcode].quantity}
+                        />
+                      </td>
+                      <td>{this.productSum(barcode)}<span className='uah'>₴</span></td>
+                      <td>
+                        <ButtonToggle color="danger" size="sm" onClick={() => this.cancelBarcode(barcode)}>Видалити</ButtonToggle>
+                      </td>
+                    </tr>
+                    <Tooltip placement="bottom" isOpen={this.state.tooltips[i]} target={`TooltipExample${i}`} toggle={() => this.toggleToolptip(i)}>
+                      <img style={{width: 300+'px'}} src={this.state.barcodes[barcode].picture}/>
+                    </Tooltip>
+                  </Fragment>
                 )
               })}
               </tbody>
@@ -241,14 +257,14 @@ export default class SellPage extends React.Component {
             <hr/>
             { Object.keys(this.state.barcodes).length > 0 &&
               <Fragment>
-                <h1>Сума до сплати: {this.summary()} грн</h1>
-                <FormGroup>
+                <h1>Сума до сплати: {this.summary()}<span className='uah'>₴</span></h1>
+                <FormGroup className='cash'>
                   <Label for='income_amount'>Готівка</Label>
                   <Input type='number' id='income_amount' value={this.state.income_amount}
                          onChange={(e) => this.handleFieldChange('income_amount', e.target.value)}/>
                 </FormGroup>
                 { parseFloat(this.state.income_amount) > this.summary() &&
-                  <h1>Решта: {(parseFloat(this.state.income_amount) - this.summary()).toFixed(2)} грн</h1>}
+                  <h1>Решта: {(parseFloat(this.state.income_amount) - this.summary()).toFixed(2)}<span className='uah'>₴</span></h1>}
               </Fragment>}
             <hr/>
             <ButtonToggle size='lg' color="success" disabled={Object.keys(this.state.barcodes).length < 1} onClick={() => this.submitSell()}>Продати</ButtonToggle>

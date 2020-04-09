@@ -72,7 +72,8 @@ class ActionsController < ApplicationController
             category: { name: action_product.product.category.name },
             quantity: action_product.product.get_quantity,
             quantity_sell: action_product.quantity,
-            sell_price: action_product.sell_price
+            sell_price: action_product.sell_price,
+            picture: action_product.product.picture.present? ? action_product.product.picture : ''
         }
       }
     }

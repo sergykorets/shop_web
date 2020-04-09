@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react';
 import {ActionCable, ActionCableProvider} from 'react-actioncable-provider';
-import { Modal, ModalHeader, FormGroup, Label, Input, ButtonToggle } from 'reactstrap';
+import { Modal, ModalHeader, FormGroup, Label, Input, ButtonToggle, Tooltip } from 'reactstrap';
 import Pagination from "react-js-pagination";
 import ReactLoading from 'react-loading';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
@@ -19,6 +19,7 @@ export default class Products extends React.Component {
       count: this.props.count,
       per: this.props.per,
       createCategory: false,
+      tooltips: {},
       category: {
         name: '',
         multiplier: 1
@@ -75,6 +76,16 @@ export default class Products extends React.Component {
         [field]: value
       }
     })
+  };
+
+  toggleToolptip = (index) => {
+    this.setState({
+      ...this.state,
+      tooltips: {
+        ...this.state.tooltips,
+        [index]: !this.state.tooltips[index]
+      }
+    });
   };
 
   handleDateChange = ({date}) => {
@@ -342,7 +353,7 @@ export default class Products extends React.Component {
           onReceived={(data) => this.handleReceivedConversation(data)}
         />
         <NotificationContainer/>
-        <div className='container' style={{marginTop: 100+'px', color: 'black'}}>
+        <div className='container page-content' style={{color: 'black'}}>
           <div className='row'>
             <div className='col-4'>
               <FormGroup>
@@ -388,18 +399,23 @@ export default class Products extends React.Component {
             <tbody>
             { this.state.products.map((product, i) => {
               return (
-                <tr key={i}>
-                  <td>{product.barcode}</td>
-                  <td>{product.name}</td>
-                  <td>{product.category && product.category.name}</td>
-                  <td>{product.buy_price} грн</td>
-                  <td>{product.sell_price} грн</td>
-                  <td>{product.quantity}</td>
-                  <td>{product.due_date}</td>
-                  <td>
-                    <ButtonToggle color="warning" size="sm" onClick={() => this.editProduct(product, i)}>Редагувати</ButtonToggle>
-                  </td>
-                </tr>
+                <Fragment key={i}>
+                  <tr>
+                    <td id={`TooltipExample${i}`}>{product.barcode}</td>
+                    <td>{product.name}</td>
+                    <td>{product.category && product.category.name}</td>
+                    <td>{product.buy_price}<span className='uah'>₴</span></td>
+                    <td>{product.sell_price}<span className='uah'>₴</span></td>
+                    <td>{product.quantity}</td>
+                    <td>{product.due_date}</td>
+                    <td>
+                      <ButtonToggle color="warning" size="sm" onClick={() => this.editProduct(product, i)}>Редагувати</ButtonToggle>
+                    </td>
+                  </tr>
+                  <Tooltip placement="bottom" isOpen={this.state.tooltips[i]} target={`TooltipExample${i}`} toggle={() => this.toggleToolptip(i)}>
+                    <img style={{width: 300+'px'}} src={product.picture}/>
+                  </Tooltip>
+                </Fragment>
               )
             })}
             </tbody>
