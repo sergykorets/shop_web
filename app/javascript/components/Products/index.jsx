@@ -2,8 +2,10 @@ import React, {Fragment} from 'react';
 import {ActionCable, ActionCableProvider} from 'react-actioncable-provider';
 import { Modal, ModalHeader, FormGroup, Label, Input, ButtonToggle } from 'reactstrap';
 import Pagination from "react-js-pagination";
+import ReactLoading from 'react-loading';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import AirBnbPicker from '../common/AirBnbPicker';
+import FileDrop from '../common/FileDrop';
 
 export default class Products extends React.Component {
   constructor(props) {
@@ -34,13 +36,15 @@ export default class Products extends React.Component {
         category_id: '',
         buy_price: '',
         sell_price: '',
-        due_date: null
+        due_date: null,
+        picture: '',
       },
       productSearch: {
         barcode: '',
         name: '',
         category_id: ''
-      }
+      },
+      photoLoading: false
     };
   }
 
@@ -143,6 +147,62 @@ export default class Products extends React.Component {
       ...this.state,
       openedModal: 'productModal',
       productModal: Object.assign(product, {index: index, category_id: product.category.id})
+    })
+  };
+
+  onDrop = (name, file) => {
+    if (file.length > 0) {
+      this.setState({photoLoading: true});
+      const formData = new FormData();
+      formData.append('product[picture]', file[0], file[0].name);
+      $.ajax({
+        url: `/products/${this.state.productModal.id}.json`,
+        type: 'PATCH',
+        data: formData,
+        dataType: 'json',
+        cache: false,
+        processData: false,
+        contentType: false,
+        success: (resp) => {
+          if (resp.success) {
+            let products = this.state.products;
+            products[this.state.productModal.index] = resp.product;
+            this.setState({
+              ...this.state,
+              photoLoading: false,
+              products: products,
+              productModal: {
+                ...this.state.productModal,
+                picture: resp.product.picture
+              }
+            });
+            NotificationManager.success('Фото збережене');
+          } else {
+            NotificationManager.error(resp.error, "Неможливо зробити дію");
+          }
+        }
+      })
+    }
+  };
+
+  deletePicture = () => {
+    $.ajax({
+      url: `/products/${this.state.productModal.id}/destroy_picture.json`,
+      type: 'DELETE',
+      success: (resp) => {
+        if (resp.success) {
+          this.setState({
+            ...this.state,
+            productModal: {
+              ...this.state.productModal,
+              picture: ''
+            }
+          });
+          NotificationManager.success('Фото видалено');
+        } else {
+          NotificationManager.error(resp.error, "Неможливо зробити дію");
+        }
+      }
     })
   };
 
@@ -438,6 +498,37 @@ export default class Products extends React.Component {
                     <Input type='number' id={`sell_price_${this.state.openedModal}`}
                            value={this.state[this.state.openedModal].sell_price}
                            onChange={(e) => this.handleInputChange(this.state.openedModal,'sell_price', e.target.value)}/>
+                  </FormGroup>
+                </div>
+                <div className='col-12'>
+                  <FormGroup>
+                    <FileDrop
+                      onDrop={this.onDrop}
+                      acceptedFiles='image/*'
+                      file={this.state.productModal.picture}
+                      name='file'
+                      placeholder={this.state.productModal.picture && 'Змінити фото'}
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    { this.state.photoLoading ?
+                      <div className='loader-wrap'>
+                        <ReactLoading type='spin' color='green' height={200} width={200} />
+                      </div>
+                      :
+                      <Fragment>
+                        { this.state.productModal.picture &&
+                          <div className="card">
+                            <div className="card-img">
+                              <img src={this.state.productModal.picture} alt={this.state.productModal.name}/>
+                            </div>
+                            <div className="card-body">
+                              <div className='custom-checkbox'>
+                              </div>
+                              <ButtonToggle color="danger" size="sm" onClick={this.deletePicture}>Видалити фото</ButtonToggle>
+                            </div>
+                          </div>}
+                      </Fragment>}
                   </FormGroup>
                 </div>
               </div>

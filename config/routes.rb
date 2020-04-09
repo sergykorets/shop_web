@@ -10,6 +10,9 @@ Rails.application.routes.draw do
       post :search
       get :expense
     end
+    member do
+      delete :destroy_picture
+    end
   end
   resources :product_actions, only: [:index, :update, :create, :destroy]
   resources :categories, only: :create

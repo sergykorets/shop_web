@@ -3,6 +3,9 @@ class Product < ApplicationRecord
   has_many :product_actions
   has_many :actions, through: :product_actions
 
+  has_attached_file :picture, styles: { medium: '300x300>', large: '600x600>' }
+  validates_attachment_content_type :picture, content_type: /\Aimage\/.*\z/
+
   validates_uniqueness_of :barcode
   validates_presence_of :name, :buy_price, :sell_price, :barcode, :category
   validates :buy_price, numericality: { greater_than_or_equal_to: 0 }

@@ -12,6 +12,7 @@ class ProductsController < ApplicationController
         buy_price: product.buy_price,
         sell_price: product.sell_price,
         due_date: product.due_date&.strftime("%d.%m.%Y"),
+        picture: product.picture.present? ? product.picture : '',
         category: product.category && {
           id: product.category.id,
           name: product.category.name,
@@ -116,6 +117,7 @@ class ProductsController < ApplicationController
           buy_price: product.buy_price,
           sell_price: product.sell_price,
           due_date: product.due_date&.strftime("%d.%m.%Y"),
+          picture: product.picture.present? ? product.picture : '',
           category: {
               id: product.category.id,
               name: product.category.name,
@@ -125,6 +127,16 @@ class ProductsController < ApplicationController
       else
         render json: {success: false, error: product.errors.full_messages.to_sentence}
       end
+    end
+  end
+
+  def destroy_picture
+    product = Product.find_by_id(params[:id])
+    product.picture.destroy
+    if product.save
+      render json: {success: true}
+    else
+      render json: {success: false, error: product.errors.full_messages.to_sentence}
     end
   end
 
@@ -165,6 +177,7 @@ class ProductsController < ApplicationController
           buy_price: product.buy_price,
           sell_price: product.sell_price,
           due_date: product.due_date&.strftime("%d.%m.%Y"),
+          picture: product.picture.present? ? product.picture : '',
           category: {
             id: product.category.id,
             name: product.category.name,
@@ -200,6 +213,6 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:barcode, :name, :quantity, :buy_price, :sell_price, :category_id, :due_date)
+    params.require(:product).permit(:barcode, :name, :quantity, :buy_price, :sell_price, :category_id, :due_date, :picture)
   end
 end

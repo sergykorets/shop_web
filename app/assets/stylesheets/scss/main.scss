@@ -79,3 +79,24 @@
     width: 20%;
   }
 }
+.dropzone {
+  cursor: pointer;
+  .file-drop {
+    border: 1px dashed lightgrey;
+    border-radius: 5px;
+    padding: 10px 0;
+    text-align: center;
+    img {
+      margin-right: 10px;
+    }
+  }
+}
+.loader-wrap > div {
+  margin-left: auto;
+  margin-right: auto;
+}
+.card-img {
+  img {
+    width: 100%;
+  }
+}
