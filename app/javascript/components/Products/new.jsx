@@ -457,7 +457,7 @@ export default class newProduct extends React.Component {
                           <td>{this.state.barcodes[barcode].buy_price}{this.state.barcodes[barcode].buy_price && <span className='uah'>₴</span>}</td>
                           <td>{this.state.barcodes[barcode].sell_price}{this.state.barcodes[barcode].buy_price && <span className='uah'>₴</span>}</td>
                           <td>{this.state.barcodes[barcode].quantity}</td>
-                          <td>{ this.state.barcodes[barcode].name && `${this.productSum('barcodes', barcode)}<span className='uah'>₴</span>`}</td>
+                          <td>{this.state.barcodes[barcode].name && this.productSum('barcodes', barcode)}{this.state.barcodes[barcode].name && <span className='uah'>₴</span>}</td>
                           <td>
                             <ButtonToggle color="success" size="sm" onClick={() => this.editBarcode(barcode)}>Додати</ButtonToggle>
                             <ButtonToggle color="danger" size="sm" onClick={() => this.cancelBarcode(barcode)}>Скасувати</ButtonToggle>

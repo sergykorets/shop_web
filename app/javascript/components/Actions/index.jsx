@@ -139,7 +139,7 @@ export default class Products extends React.Component {
         <br/>
 
         { (this.state.openedModal === 'actionModal') &&
-          <Modal isOpen={this.state.openedModal === 'actionModal'} toggle={() => this.handleModal('')} size="lg">
+          <Modal isOpen={this.state.openedModal === 'actionModal'} toggle={() => this.handleModal('')} size="lg" className='show-action-details'>
             <div className='container'>
               <ModalHeader>Деталі продажу</ModalHeader>
               <table className='dark' style={{marginTop: 20 + 'px'}}>
