@@ -3,14 +3,15 @@
     <% if current_user.admin? %>
       <%= react_component("SystemButtons", props: {admin: @admin}) %>
     <% end %>
+    <% if current_user.admin? %>
+      <%= link_to 'Панель адміністратора', rails_admin_path, class: 'btn btn-primary' %>
+    <% end %>
+    <%= link_to "Вийти з профілю #{current_user.name}", destroy_user_session_path, class: 'btn btn-danger' %>
   </div>
   <div class="wrapper wrapper--w780">
     <div class="card card-3">
       <div class="card-body">
         <h2 class="title text-center">Редагувати профіль</h2>
-        <% if current_user.admin? %>
-          <%= link_to 'Admin', rails_admin_path %>
-        <% end %>
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
           <%= devise_error_messages! %>
           <div class="input-group">

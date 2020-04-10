@@ -28,8 +28,6 @@ export default class SystemButtons extends React.Component {
         <NotificationContainer/>
         <FormGroup>
           <ButtonToggle color="warning" onClick={() => this.sendRequest('copy_db')}>Записати дані на флешку</ButtonToggle>
-        </FormGroup>
-        <FormGroup>
           <ButtonToggle color="success" onClick={() => this.sendRequest('update_db')}>
             Скопіювати дані з флешки
           </ButtonToggle>

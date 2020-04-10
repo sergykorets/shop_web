@@ -45,9 +45,39 @@ export default class Products extends React.Component {
         name: '',
         category_id: ''
       },
-      photoLoading: false
+      photoLoading: false,
+      style: { transform: 'translateY(0px)' }
     };
   }
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.handleScroll);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+  }
+
+  handleScroll = () => {
+    const $navbar = $('.navbar');
+    let navOffset    = $navbar.offset().top,
+        tableOffset  = $('.dark').offset().top,
+        distance     = (tableOffset - navOffset);
+    console.log('navOffset: ' + navOffset)
+    console.log('tableOffset: ' + tableOffset)
+    console.log('distance: ' + distance)
+    console.log('navbarHeight: ' + $navbar.height())
+    let itemTranslate = navOffset - tableOffset + $navbar.height();
+    if (distance < $navbar.height()) {
+      this.setState({...this.state,
+        style: { transform: `translateY(${itemTranslate}px)` }
+      });
+    } else {
+      this.setState({...this.state,
+        style: { transform: `translateY(0px)` }
+      });
+    }
+  };
 
   handleModal = (modal) => {
     this.setState({
@@ -384,7 +414,7 @@ export default class Products extends React.Component {
             </div>
           </div>
           <table className='dark' style={{marginTop: 20 + 'px'}}>
-            <thead>
+            <thead style={this.state.style}>
             <tr>
               <th><h1>Баркод</h1></th>
               <th><h1>Назва</h1></th>
