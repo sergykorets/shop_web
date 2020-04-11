@@ -6,6 +6,7 @@ import ReactLoading from 'react-loading';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import AirBnbPicker from '../common/AirBnbPicker';
 import FileDrop from '../common/FileDrop';
+import Table from '../common/table';
 
 export default class Products extends React.Component {
   constructor(props) {
@@ -46,38 +47,8 @@ export default class Products extends React.Component {
         category_id: ''
       },
       photoLoading: false,
-      style: { transform: 'translateY(0px)' }
     };
   }
-
-  componentDidMount() {
-    window.addEventListener('scroll', this.handleScroll);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleScroll);
-  }
-
-  handleScroll = () => {
-    const $navbar = $('.navbar');
-    let navOffset    = $navbar.offset().top,
-        tableOffset  = $('.dark').offset().top,
-        distance     = (tableOffset - navOffset);
-    console.log('navOffset: ' + navOffset)
-    console.log('tableOffset: ' + tableOffset)
-    console.log('distance: ' + distance)
-    console.log('navbarHeight: ' + $navbar.height())
-    let itemTranslate = navOffset - tableOffset + $navbar.height();
-    if (distance < $navbar.height()) {
-      this.setState({...this.state,
-        style: { transform: `translateY(${itemTranslate}px)` }
-      });
-    } else {
-      this.setState({...this.state,
-        style: { transform: `translateY(0px)` }
-      });
-    }
-  };
 
   handleModal = (modal) => {
     this.setState({
@@ -375,7 +346,7 @@ export default class Products extends React.Component {
   };
 
   render() {
-    console.log(this.state)
+    console.log('index', this.state);
     return (
       <ActionCableProvider url={`ws://${location.host}/cable`}>
         <ActionCable
@@ -413,43 +384,20 @@ export default class Products extends React.Component {
               </FormGroup>
             </div>
           </div>
-          <table className='dark' style={{marginTop: 20 + 'px'}}>
-            <thead style={this.state.style}>
-            <tr>
-              <th><h1>Баркод</h1></th>
-              <th><h1>Назва</h1></th>
-              <th><h1>Група</h1></th>
-              <th style={{cursor: 'pointer'}} onClick={() => this.onSort('buy_price')}><h1>Закупівля</h1></th>
-              <th style={{cursor: 'pointer'}} onClick={() => this.onSort('sell_price')}><h1>Ціна</h1></th>
-              <th style={{cursor: 'pointer'}} onClick={() => this.onSort('quantity')}><h1>Залишок</h1></th>
-              <th style={{cursor: 'pointer'}} onClick={() => this.onSort('due_date')}><h1>Придатність</h1></th>
-              <th><h1>Дії</h1></th>
-            </tr>
-            </thead>
-            <tbody>
-            { this.state.products.map((product, i) => {
-              return (
-                <Fragment key={i}>
-                  <tr>
-                    <td id={`TooltipExample${i}`}>{product.barcode}</td>
-                    <td>{product.name}</td>
-                    <td>{product.category && product.category.name}</td>
-                    <td>{product.buy_price}<span className='uah'>₴</span></td>
-                    <td>{product.sell_price}<span className='uah'>₴</span></td>
-                    <td>{product.quantity}</td>
-                    <td>{product.due_date}</td>
-                    <td>
-                      <ButtonToggle color="warning" size="sm" onClick={() => this.editProduct(product, i)}>Редагувати</ButtonToggle>
-                    </td>
-                  </tr>
-                  <Tooltip placement="bottom" isOpen={this.state.tooltips[i]} target={`TooltipExample${i}`} toggle={() => this.toggleToolptip(i)}>
-                    <img style={{width: 300+'px'}} src={product.picture}/>
-                  </Tooltip>
-                </Fragment>
-              )
-            })}
-            </tbody>
-          </table>
+          <Table properties={
+            [ {barcode: 'Баркод', sort: false},
+              {name: 'Назва', sort: false},
+              {category: 'Група', sort: false},
+              {buy_price: 'Закупівля', sort: true},
+              {sell_price: 'Ціна', sort: true},
+              {quantity: 'Залишок', sort: true},
+              {due_date: 'Придатність', sort: true}]}
+            items={this.state.products}
+            onSort={this.onSort}
+            toggleToolptip={this.toggleToolptip}
+            tooltips={this.state.tooltips}
+            actions={[{action: this.editProduct, name: 'Редагувати', color: 'warning'}]}
+          />
           { this.state.count > this.state.per ?
             <Fragment>
               <br/>
