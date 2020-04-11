@@ -385,9 +385,9 @@ export default class Products extends React.Component {
             </div>
           </div>
           <Table properties={
-            [ {barcode: 'Баркод', sort: false},
-              {name: 'Назва', sort: false},
-              {category: 'Група', sort: false},
+            [ {barcode: 'Баркод'},
+              {name: 'Назва'},
+              {category: 'Група'},
               {buy_price: 'Закупівля', sort: true},
               {sell_price: 'Ціна', sort: true},
               {quantity: 'Залишок', sort: true},

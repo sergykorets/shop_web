@@ -2,6 +2,7 @@ import React, {Fragment} from 'react';
 import {ActionCable, ActionCableProvider} from 'react-actioncable-provider';
 import { Modal, ModalHeader, FormGroup, Label, Input, ButtonToggle, Tooltip } from 'reactstrap';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
+import Table from '../common/table';
 
 export default class SellPage extends React.Component {
   constructor(props) {
@@ -75,9 +76,9 @@ export default class SellPage extends React.Component {
     this.setState({ ...this.state, [field]: value })
   };
 
-  cancelBarcode = (barcode) => {
+  cancelBarcode = (barcode, i) => {
     let barcodes = this.state.barcodes;
-    delete barcodes[barcode];
+    delete barcodes[barcode.id];
     this.setState({
       ...this.state,
       barcodes: barcodes
@@ -209,51 +210,22 @@ export default class SellPage extends React.Component {
             <h1>Продаж товарів</h1>
             <br/>
             <ButtonToggle color="primary" onClick={() => this.handleModal('productSearchModal')}>Шукати товар</ButtonToggle>
-            <table className='dark' style={{marginTop: 20 + 'px'}}>
-              <thead>
-              <tr>
-                <th><h1>Баркод</h1></th>
-                <th><h1>Назва</h1></th>
-                <th><h1>Група</h1></th>
-                <th><h1>Залишок</h1></th>
-                <th><h1>Ціна</h1></th>
-                <th><h1>Кількість</h1></th>
-                <th><h1>Сума</h1></th>
-                <th><h1>Дії</h1></th>
-              </tr>
-              </thead>
-              <tbody>
-              { Object.keys(this.state.barcodes).map((barcode, i) => {
-                return (
-                  <Fragment key={i}>
-                    <tr>
-                      <td id={`TooltipExample${i}`}>{this.state.barcodes[barcode].barcode}</td>
-                      <td>{this.state.barcodes[barcode].name}</td>
-                      <td>{this.state.barcodes[barcode].category && this.state.barcodes[barcode].category.name}</td>
-                      <td>{this.state.barcodes[barcode].quantity}</td>
-                      <td>{this.state.barcodes[barcode].sell_price}<span className='uah'>₴</span></td>
-                      <td>
-                        <Input type='number' id={`quantity_${i}`}
-                               value={this.state.barcodes[barcode].quantity_sell}
-                               onChange={(e) => this.handleInputChange('quantity_sell', barcode, e.target.value)}
-                               className='quantity-sell'
-                               min={0}
-                               max={this.state.barcodes[barcode].quantity}
-                        />
-                      </td>
-                      <td>{this.productSum(barcode)}<span className='uah'>₴</span></td>
-                      <td>
-                        <ButtonToggle color="danger" size="sm" onClick={() => this.cancelBarcode(barcode)}>Видалити</ButtonToggle>
-                      </td>
-                    </tr>
-                    <Tooltip placement="bottom" isOpen={this.state.tooltips[i]} target={`TooltipExample${i}`} toggle={() => this.toggleToolptip(i)}>
-                      <img style={{width: 300+'px'}} src={this.state.barcodes[barcode].picture}/>
-                    </Tooltip>
-                  </Fragment>
-                )
-              })}
-              </tbody>
-            </table>
+            <Table properties={
+              [ {barcode: 'Баркод'},
+                {name: 'Назва'},
+                {category: 'Група'},
+                {quantity: 'Залишок'},
+                {sell_price: 'Ціна'},
+                {quantity_sell: 'Кількість', input: true},
+                {product_sum: 'Сума', action: 'productSum'}
+              ]}
+              items={Object.values(this.state.barcodes)}
+              toggleToolptip={this.toggleToolptip}
+              tooltips={this.state.tooltips}
+              handleInputChange={this.handleInputChange}
+              productSum={this.productSum}
+              actions={[{action: this.cancelBarcode, name: 'Скасувати', color: 'danger'}]}
+            />
             <hr/>
             { Object.keys(this.state.barcodes).length > 0 &&
               <Fragment>

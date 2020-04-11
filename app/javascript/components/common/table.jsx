@@ -39,18 +39,24 @@ export default class Table extends React.Component {
     return (!!a) && (a.constructor === Object);
   };
 
-  handleInputChange = (type, field, value) => {
-    this.setState({
-      ...this.state,
-      [type]: {
-        ...this.state[type],
-        [field]: value
-      }
-    })
+  tableCell = (property, itemIndex) => {
+    if (property['input']) {
+      return <Input type='number' id={`quantity_${itemIndex}`}
+        value={this.props.items[itemIndex].quantity_sell}
+        onChange={(e) => this.props.handleInputChange('quantity_sell', this.props.items[itemIndex].id, e.target.value)}
+        className='quantity-sell'
+        min={0}
+        max={this.props.items[itemIndex].quantity}
+      />
+    } else if (property['action']) {
+      return this.props[property['action']](this.props.items[itemIndex].id);
+    } else {
+      return this.isObject(this.props.items[itemIndex][Object.keys(property)[0]]) ? this.props.items[itemIndex][Object.keys(property)[0]].name : this.props.items[itemIndex][Object.keys(property)[0]];
+    }
   };
 
   render() {
-    console.log('table', this.state)
+    console.log('table', this.props)
     return (
       <table className='dark' style={{marginTop: 20 + 'px'}}>
         <thead style={this.state.style}>
@@ -58,11 +64,10 @@ export default class Table extends React.Component {
           { this.props.properties.map((property, i) => {
             return (
               <Fragment key={i}>
-                { Object.values(property)[1] ?
+                { property['sort'] ?
                   <th style={{cursor: 'pointer'}} onClick={() => this.props.onSort(Object.keys(property)[0])}><h1>{Object.values(property)[0]}</h1></th>
                   :
-                  <th><h1>{Object.values(property)[0]}</h1></th>
-                }
+                  <th><h1>{Object.values(property)[0]}</h1></th>}
               </Fragment>
             )
           })}
@@ -76,14 +81,16 @@ export default class Table extends React.Component {
               <tr>
                 {this.props.properties.map((property, index) => {
                   return (
-                    <td key={index} id={this.props.tooltips && Object.keys(property)[0] === 'barcode' ? `TooltipExample${i}` : i}>{this.isObject(item[Object.keys(property)[0]]) ? item[Object.keys(property)[0]].name : item[Object.keys(property)[0]]}</td>
+                    <td key={index} id={this.props.tooltips && Object.keys(property)[0] === 'barcode' ? `TooltipExample${i}` : i}>
+                      {this.tableCell(property, i)}
+                    </td>
                   )
                 })}
                 { this.props.actions &&
                   <td>
-                    {this.props.actions.map((action, i) => {
+                    {this.props.actions.map((action, iterator) => {
                       return (
-                        <ButtonToggle key={i} color={action.color} size="sm" onClick={() => this.props[action.action(item, i)]}>{action.name}</ButtonToggle>
+                        <ButtonToggle key={iterator} color={action.color} size="sm" onClick={() => this.props[action.action(item, i)]}>{action.name}</ButtonToggle>
                       )
                     })}
                   </td>}
