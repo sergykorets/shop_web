@@ -15,6 +15,7 @@ class ProductAction < ApplicationRecord
   validates :sell_price, numericality: { greater_than_or_equal_to: :buy_price }, if: :incoming?
   validates :quantity, numericality: { greater_than: 0 }
   validates_uniqueness_of :product_id, scope: :action_type, conditions: -> { where("DATE(created_at) = ?", Date.today) }, if: -> { incoming? || expense? }
+  validates_uniqueness_of :product_id, scope: :action_id, if: :sell?
 
   validate :check_quantity, on: :create, if: -> { sell? || expense? }
   validate :check_product_quantity_on_transaction_update, on: :update, if: -> { action }

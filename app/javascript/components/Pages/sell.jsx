@@ -30,13 +30,17 @@ export default class SellPage extends React.Component {
 
   handleReceivedBarcode = (response) => {
     if (response.product) {
-      this.setState({
-        ...this.state,
-        barcodes: {
-          ...this.state.barcodes,
-          [response.product.id]: Object.assign(response.product, {quantity_sell: 1})
-        }
-      });
+      if (Object.values(this.state.barcodes).some(item => response.product.id.toString() === item.id.toString())) {
+        NotificationManager.error('Редагуйте кількість даного товару в таблиці', 'Товар є в чеку');
+      } else {
+        this.setState({
+          ...this.state,
+          barcodes: {
+            ...this.state.barcodes,
+            [response.product.id]: Object.assign(response.product, {quantity_sell: 1})
+          }
+        });
+      }
     } else {
       NotificationManager.error('Товар не знайдено', 'Баркод невідомий');
     }

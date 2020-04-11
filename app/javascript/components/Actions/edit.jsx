@@ -2,6 +2,7 @@ import React, {Fragment} from 'react';
 import {ActionCable, ActionCableProvider} from 'react-actioncable-provider';
 import { Modal, ModalHeader, FormGroup, Label, Input, ButtonToggle, Tooltip } from 'reactstrap';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
+import Table from "../common/table";
 
 export default class EditAction extends React.Component {
   constructor(props) {
@@ -28,13 +29,37 @@ export default class EditAction extends React.Component {
 
   handleReceivedBarcode = (response) => {
     if (response.product) {
-      this.setState({
-        ...this.state,
-        barcodes: {
-          ...this.state.action.products,
-          [response.product.id]: Object.assign(response.product, {quantity_sell: 1, category: this.state.products[id].category.name})
-        }
-      });
+      if (Object.values(this.state.action.products).some(item => ((response.product.id.toString() === item.id.toString()) && item.destroy))) {
+        this.setState({
+          ...this.state,
+          action: {
+            ...this.state.action,
+            products: {
+              ...this.state.action.products,
+              [response.product.id]: {
+                ...this.state.action.products[response.product.id],
+                destroy: false
+              }
+            }
+          }
+        })
+      } else if (Object.values(this.state.action.products).some(item => response.product.id.toString() === item.id.toString())) {
+        NotificationManager.error('Редагуйте кількість даного товару в таблиці', 'Товар є в чеку');
+      } else {
+        this.setState({
+          ...this.state,
+          action: {
+            ...this.state.action,
+            products: {
+              ...this.state.action.products,
+              [response.product.id]: Object.assign(response.product, {
+                quantity_sell: 1,
+                category: response.product.category.name
+              })
+            }
+          }
+        });
+      }
     } else {
       NotificationManager.error('Товар не знайдено', 'Баркод невідомий');
     }
@@ -77,16 +102,16 @@ export default class EditAction extends React.Component {
     this.setState({ ...this.state, [field]: value })
   };
 
-  cancelProduct = (product) => {
-    if (this.state.action.products[product].product_action_id) {
+  cancelProduct = (product, i) => {
+    if (product.product_action_id) {
       this.setState({
         ...this.state,
         action: {
           ...this.state.action,
           products: {
             ...this.state.action.products,
-            [product]: {
-              ...this.state.action.products[product],
+            [product.id]: {
+              ...this.state.action.products[product.id],
               destroy: true
             }
           }
@@ -94,7 +119,7 @@ export default class EditAction extends React.Component {
       })
     } else {
       let products = this.state.action.products;
-      delete products[product];
+      delete products[product.id];
       this.setState({
         ...this.state,
         action: {
@@ -171,16 +196,32 @@ export default class EditAction extends React.Component {
   };
 
   addProduct = (id) => {
-    this.setState({
-      ...this.state,
-      action: {
-        ...this.state.action,
-        products: {
-          ...this.state.action.products,
-          [id]: Object.assign(this.state.products[id], {quantity_sell: 1})
+    if (Object.values(this.state.action.products).some(item => id.toString() === item.id.toString())) {
+      this.setState({
+        ...this.state,
+        action: {
+          ...this.state.action,
+          products: {
+            ...this.state.action.products,
+            [id]: {
+              ...this.state.action.products[id],
+              destroy: false
+            }
+          }
         }
-      }
-    })
+      })
+    } else {
+      this.setState({
+        ...this.state,
+        action: {
+          ...this.state.action,
+          products: {
+            ...this.state.action.products,
+            [id]: Object.assign(this.state.products[id], {quantity_sell: 1})
+          }
+        }
+      })
+    }
   };
 
   restrictAdding = (id) => {
@@ -224,7 +265,6 @@ export default class EditAction extends React.Component {
 
   render() {
     console.log(this.state)
-    console.log(this.summary())
     return (
       <ActionCableProvider url={`ws://${location.host}/cable`}>
         <NotificationContainer/>
@@ -244,51 +284,22 @@ export default class EditAction extends React.Component {
             <h1>Редагувати продаж</h1>
             <br/>
             <ButtonToggle color="primary" onClick={() => this.handleModal('productSearchModal')}>Шукати товар</ButtonToggle>
-            <table className='dark' style={{marginTop: 20 + 'px'}}>
-              <thead>
-              <tr>
-                <th><h1>Баркод</h1></th>
-                <th><h1>Назва</h1></th>
-                <th><h1>Група</h1></th>
-                <th><h1>Залишок</h1></th>
-                <th><h1>Ціна</h1></th>
-                <th><h1>Кількість</h1></th>
-                <th><h1>Сума</h1></th>
-                <th><h1>Дії</h1></th>
-              </tr>
-              </thead>
-              <tbody>
-              { Object.values(this.state.action.products).filter(item => !item.destroy).map((product, i) => {
-                return (
-                  <Fragment key={i}>
-                    <tr>
-                      <td id={`TooltipExample${i}`}>{product.barcode}</td>
-                      <td>{product.name}</td>
-                      <td>{product.category.name}</td>
-                      <td>{product.quantity}</td>
-                      <td>{product.sell_price}<span className='uah'>₴</span></td>
-                      <td>
-                        <Input type='number' id={`quantity_${i}`}
-                               value={this.state.action.products[product.id].quantity_sell}
-                               onChange={(e) => this.handleInputChange('quantity_sell', product.id, e.target.value)}
-                               className='quantity-sell'
-                               min={0}
-                               max={product.product_action_id ? parseFloat(this.state.action.products[product.id].quantity_previous || this.props.action.products[product.id].quantity_sell) + parseFloat(product.quantity) : product.quantity}
-                        />
-                      </td>
-                      <td>{this.productSum(product.id)}<span className='uah'>₴</span></td>
-                      <td>
-                        <ButtonToggle color="danger" size="sm" onClick={() => this.cancelProduct(product.id)}>Видалити</ButtonToggle>
-                      </td>
-                    </tr>
-                    <Tooltip placement="bottom" isOpen={this.state.tooltips[i]} target={`TooltipExample${i}`} toggle={() => this.toggleToolptip(i)}>
-                      <img style={{width: 300+'px'}} src={product.picture}/>
-                    </Tooltip>
-                  </Fragment>
-                )
-              })}
-              </tbody>
-            </table>
+            <Table properties={
+              [ {barcode: 'Баркод'},
+                {name: 'Назва'},
+                {category: 'Група'},
+                {quantity: 'Залишок'},
+                {sell_price: 'Ціна'},
+                {quantity_sell: 'Кількість', input: true},
+                {product_sum: 'Сума', action: 'productSum'}
+              ]}
+               items={Object.values(this.state.action.products).filter(item => !item.destroy)}
+               toggleToolptip={this.toggleToolptip}
+               tooltips={this.state.tooltips}
+               handleInputChange={this.handleInputChange}
+               productSum={this.productSum}
+               actions={[{action: this.cancelProduct, name: 'Скасувати', color: 'danger'}]}
+            />
             <hr/>
             { Object.keys(this.state.action.products).length > 0 &&
               <Fragment>

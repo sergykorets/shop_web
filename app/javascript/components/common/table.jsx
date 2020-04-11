@@ -46,13 +46,17 @@ export default class Table extends React.Component {
         onChange={(e) => this.props.handleInputChange('quantity_sell', this.props.items[itemIndex].id, e.target.value)}
         className='quantity-sell'
         min={0}
-        max={this.props.items[itemIndex].quantity}
+        max={this.maxInput(itemIndex)}
       />
     } else if (property['action']) {
       return this.props[property['action']](this.props.items[itemIndex].id);
     } else {
       return this.isObject(this.props.items[itemIndex][Object.keys(property)[0]]) ? this.props.items[itemIndex][Object.keys(property)[0]].name : this.props.items[itemIndex][Object.keys(property)[0]];
     }
+  };
+
+  maxInput = (itemIndex) => {
+    return this.props.items[itemIndex].product_action_id ? parseFloat(this.props.items[itemIndex].quantity_previous) + parseFloat(this.props.items[itemIndex].quantity) : this.props.items[itemIndex].quantity
   };
 
   render() {
