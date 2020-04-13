@@ -2,34 +2,34 @@ class ProductActionsController < ApplicationController
   before_action :set_paper_trail_whodunnit, only: [:update, :create]
 
   def index
-    @products = Product.joins(:product_actions).where(product_actions: {action_type: params[:action_type]}).where("product_actions.created_at >= ? AND product_actions.created_at <= ?", params[:date].to_datetime.beginning_of_day, params[:date].to_datetime.end_of_day).each_with_object({}) { |product, hash|
+    @products = ProductAction.joins(:product).where(product_actions: {action_type: params[:action_type]}).where("product_actions.created_at >= ? AND product_actions.created_at <= ?", params[:date].to_datetime.beginning_of_day, params[:date].to_datetime.end_of_day).each_with_object({}) { |product_action, hash|
       if params[:action_type] == 'incoming'
-        hash[product.id] = {
-            id: product.id,
-            product_action_id: product.product_actions.incoming.last.id,
-            name: product.name,
-            product_quantity: product.get_quantity,
-            quantity: product.product_actions.incoming.last.quantity,
-            barcode: product.barcode,
-            buy_price: product.buy_price,
-            sell_price: product.sell_price,
-            due_date: product.due_date&.strftime("%d.%m.%Y"),
+        hash[product_action.product.id] = {
+            id: product_action.product.id,
+            product_action_id: product_action.id,
+            name: product_action.product.name,
+            product_quantity: product_action.product.get_quantity,
+            quantity: product_action.quantity,
+            barcode: product_action.product.barcode,
+            buy_price: product_action.buy_price,
+            sell_price: product_action.sell_price,
+            due_date: product_action.product.due_date&.strftime("%d.%m.%Y"),
             category: {
-                id: product.category.id,
-                name: product.category.name,
-                multiplier: product.category.multiplier
+                id: product_action.product.category.id,
+                name: product_action.product.category.name,
+                multiplier: product_action.product.category.multiplier
             }
         }
       else
-        hash[product.product_actions.expense.last.id] = {
-            id: product.id,
-            product_action_id: product.product_actions.expense.last.id,
-            name: product.name,
-            quantity: product.get_quantity,
-            quantity_expense: product.product_actions.expense.last.quantity,
-            barcode: product.barcode,
-            sell_price: product.sell_price,
-            category: product.category.name
+        hash[product_action.product.id] = {
+            id: product_action.product.id,
+            product_action_id: product_action.id,
+            name: product_action.product.name,
+            quantity: product_action.product.get_quantity,
+            quantity_expense: product_action.quantity,
+            barcode: product_action.product.barcode,
+            sell_price: product_action.sell_price,
+            category: product_action.product.category.name
         }
       end
     }

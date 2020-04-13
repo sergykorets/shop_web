@@ -28,22 +28,22 @@ class ProductsController < ApplicationController
   end
 
   def new
-    @products = Product.joins(:product_actions).where(product_actions: {action_type: :incoming}).where("product_actions.created_at >= ?", Date.today.beginning_of_day).each_with_object({}) { |product, hash|
-      hash[product.id] = {
-        id: product.id,
-        product_action_id: product.product_actions.incoming.last.id,
-        name: product.name,
-        product_quantity: product.get_quantity,
-        quantity: product.product_actions.incoming.last.quantity,
-        barcode: product.barcode,
-        buy_price: product.buy_price,
-        sell_price: product.sell_price,
-        due_date: product.due_date&.strftime("%d.%m.%Y"),
-        picture: product.picture.present? ? product.picture : '',
+    @products = ProductAction.joins(:product).where(product_actions: {action_type: :incoming}).where("product_actions.created_at >= ?", Date.today.beginning_of_day).each_with_object({}) { |product_action, hash|
+      hash[product_action.product.id] = {
+        id: product_action.product.id,
+        product_action_id: product_action.id,
+        name: product_action.product.name,
+        product_quantity: product_action.product.get_quantity,
+        quantity: product_action.quantity,
+        barcode: product_action.product.barcode,
+        buy_price: product_action.buy_price,
+        sell_price: product_action.sell_price,
+        due_date: product_action.product.due_date&.strftime("%d.%m.%Y"),
+        picture: product_action.product.picture.present? ? product_action.product.picture : '',
         category: {
-            id: product.category.id,
-            name: product.category.name,
-            multiplier: product.category.multiplier
+            id: product_action.product.category.id,
+            name: product_action.product.category.name,
+            multiplier: product_action.product.category.multiplier
           }
         }
     }
@@ -142,17 +142,17 @@ class ProductsController < ApplicationController
   end
 
   def expense
-    @products = Product.joins(:product_actions).where(product_actions: {action_type: :expense}).where("product_actions.created_at >= ?", Date.today.beginning_of_day).each_with_object({}) { |product, hash|
-      hash[product.product_actions.expense.last.id] = {
-          id: product.id,
-          product_action_id: product.product_actions.expense.last.id,
-          name: product.name,
-          quantity: product.get_quantity,
-          quantity_expense: product.product_actions.expense.last.quantity,
-          barcode: product.barcode,
-          sell_price: product.sell_price,
-          category: product.category.name,
-          picture: product.picture.present? ? product.picture : ''
+    @products = ProductAction.joins(:product).where(product_actions: {action_type: :expense}).where("product_actions.created_at >= ?", Date.today.beginning_of_day).each_with_object({}) { |product_action, hash|
+      hash[product_action.product.id] = {
+          id: product_action.product.id,
+          product_action_id: product_action.id,
+          name: product_action.product.name,
+          quantity: product_action.product.get_quantity,
+          quantity_expense: product_action.quantity,
+          barcode: product_action.product.barcode,
+          sell_price: product_action.sell_price,
+          category: product_action.product.category.name,
+          picture: product_action.product.picture.present? ? product_action.product.picture : ''
       }
     }
     @categories = Category.all.map do |category|

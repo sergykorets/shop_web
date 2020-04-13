@@ -4,6 +4,7 @@ import {ActionCable, ActionCableProvider} from 'react-actioncable-provider';
 import {Modal, ModalHeader, FormGroup, Label, Input, ButtonToggle, Tooltip} from 'reactstrap';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import AirBnbPicker from '../common/AirBnbPicker';
+import Table from "../common/table";
 
 export default class Expense extends React.Component {
   constructor(props) {
@@ -118,9 +119,11 @@ export default class Expense extends React.Component {
     return (sumArray.reduce((a, b) => a + b, 0)).toFixed(2)
   };
 
-  productSum = (product_id) => {
-    const product = this.state.products[product_id];
-    return (parseFloat(product.sell_price) * parseFloat(product.quantity_expense)).toFixed(2)
+  productSum = (products, product_id) => {
+    const product = this.state[products][product_id];
+    if (product.sell_price && product.quantity) {
+      return (parseFloat(product.sell_price) * parseFloat(product.quantity_expense)).toFixed(2)
+    }
   };
 
   handleProductSearch = (field, v) => {
@@ -204,15 +207,15 @@ export default class Expense extends React.Component {
     })
   };
 
-  cancelExpense = (id) => {
+  cancelExpense = (product) => {
     if (window.confirm("Відмінити списання товару?")) {
       $.ajax({
-        url: `/product_actions/${id}.json`,
+        url: `/product_actions/${product.product_action_id}.json`,
         type: 'DELETE'
       }).then((resp) => {
         if (resp.success) {
           let products = this.state.products;
-          delete products[id];
+          delete products[product.id];
           this.setState({
             ...this.state,
             products: products
@@ -249,10 +252,10 @@ export default class Expense extends React.Component {
             openedModal: '',
             products: {
               ...this.state.products,
-              [resp.product.product_action_id]: resp.product
+              [resp.product.id]: resp.product
             }
           });
-          NotificationManager.success('Клькість списання змінено');
+          NotificationManager.success('Кількість списання змінено');
         } else {
           let barcodes = this.state.barcodes;
           delete barcodes[product_id];
@@ -262,7 +265,7 @@ export default class Expense extends React.Component {
             barcodes: barcodes,
             products: {
               ...this.state.products,
-              [resp.product.product_action_id]: resp.product
+              [resp.product.id]: resp.product
             }
           });
           NotificationManager.success('Товар списано');
@@ -289,50 +292,32 @@ export default class Expense extends React.Component {
         <br/>
         { this.isToday() &&
           <ButtonToggle color="primary" onClick={() => this.handleModal('productSearchModal')}>Шукати товар</ButtonToggle>}
-        <table className='dark' style={{marginTop: 20 + 'px'}}>
-          <thead>
-          <tr>
-            <th><h1>Баркод</h1></th>
-            <th><h1>Назва</h1></th>
-            <th><h1>Група</h1></th>
-            <th><h1>Ціна</h1></th>
-            <th><h1>Списання</h1></th>
-            <th><h1>Сума</h1></th>
-            { this.isToday() &&
-              <Fragment>
-                <th><h1>Залишок</h1></th>
-                <th><h1>Дії</h1></th>
-              </Fragment>}
-          </tr>
-          </thead>
-          <tbody>
-          { Object.values(this.state.products).map((product, i) => {
-            return (
-              <Fragment key={i}>
-                <tr>
-                  <td id={`TooltipExample${i}`}>{product.barcode}</td>
-                  <td>{product.name}</td>
-                  <td>{product.category}</td>
-                  <td>{product.sell_price}<span className='uah'>₴</span></td>
-                  <td>{product.quantity_expense}</td>
-                  <td>{this.productSum(product.product_action_id)}<span className='uah'>₴</span></td>
-                  { this.isToday() &&
-                    <Fragment>
-                      <td>{product.quantity}</td>
-                      <td>
-                        {/*<ButtonToggle color="warning" size="sm" onClick={() => this.editExpense(product.product_action_id)}>Редагувати</ButtonToggle>*/}
-                        <ButtonToggle color="danger" size="sm" onClick={() => this.cancelExpense(product.product_action_id)}>Скасувати</ButtonToggle>
-                      </td>
-                    </Fragment>}
-                </tr>
-                <Tooltip placement="bottom" isOpen={this.state.tooltips[i]} target={`TooltipExample${i}`} toggle={() => this.toggleToolptip(i)}>
-                  <img style={{width: 300+'px'}} src={product.picture}/>
-                </Tooltip>
-              </Fragment>
-            )
-          })}
-          </tbody>
-        </table>
+        <Table properties={
+          this.isToday() ?
+            [ {barcode: 'Баркод'},
+              {name: 'Назва'},
+              {category: 'Група'},
+              {sell_price: 'Ціна', icon: '₴'},
+              {quantity_expense: 'Списання'},
+              {product_sum: 'Сума', action: 'productSum', icon: '₴'},
+              {quantity: 'Залишок'}
+            ]
+            :
+            [ {barcode: 'Баркод'},
+              {name: 'Назва'},
+              {category: 'Група'},
+              {sell_price: 'Ціна', icon: '₴'},
+              {quantity_expense: 'Списання'},
+              {product_sum: 'Сума', action: 'productSum', icon: '₴'}
+            ]
+        }
+         items={Object.values(this.state.products)}
+         toggleToolptip={this.toggleToolptip}
+         tooltips={this.state.tooltips}
+         productSum={this.productSum}
+         itemType={'products'}
+         actions={this.isToday() && [{action: this.cancelExpense, name: 'Скасувати', color: 'danger'}]}
+        />
         { Object.keys(this.state.products).length > 0 &&
           <Fragment>
             <hr/>

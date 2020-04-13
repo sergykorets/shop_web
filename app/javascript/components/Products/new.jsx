@@ -4,6 +4,7 @@ import {ActionCable, ActionCableProvider} from 'react-actioncable-provider';
 import { Modal, ModalHeader, FormGroup, Label, Input, ButtonToggle, Tooltip } from 'reactstrap';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import AirBnbPicker from '../common/AirBnbPicker';
+import Table from "../common/table";
 
 export default class newProduct extends React.Component {
   constructor(props) {
@@ -70,9 +71,9 @@ export default class newProduct extends React.Component {
     }
   };
 
-  cancelBarcode = (barcode) => {
+  cancelBarcode = (item) => {
     let barcodes = this.state.barcodes;
-    delete barcodes[barcode]
+    delete barcodes[item.barcode]
     this.setState({
       ...this.state,
       barcodes: barcodes
@@ -152,40 +153,42 @@ export default class newProduct extends React.Component {
 
   productSum = (products, product_id) => {
     const product = this.state[products][product_id];
-    return (parseFloat(product.sell_price) * parseFloat(product.quantity)).toFixed(2)
+    if (product.sell_price && product.quantity) {
+      return (parseFloat(product.sell_price) * parseFloat(product.quantity)).toFixed(2)
+    }
   };
 
-  editBarcode = (barcode) => {
+  editBarcode = (item, index) => {
     this.setState({
       ...this.state,
       openedModal: 'barcodeModal',
       barcodeModal: {
         ...this.state.barcodeModal,
-        barcode: barcode,
-        name: this.state.barcodes[barcode].name,
+        barcode: item.barcode,
+        name: this.state.barcodes[item.barcode].name,
         quantity: 1,
-        category_id: this.state.barcodes[barcode].category ? this.state.barcodes[barcode].category.id : this.state.categories[0].id,
-        buy_price: this.state.barcodes[barcode].buy_price,
-        sell_price: this.state.barcodes[barcode].sell_price
+        category_id: this.state.barcodes[item.barcode].category ? this.state.barcodes[item.barcode].category.id : this.state.categories[0].id,
+        buy_price: this.state.barcodes[item.barcode].buy_price,
+        sell_price: this.state.barcodes[item.barcode].sell_price
       }
     })
   };
 
-  editProduct = (id) => {
+  editProduct = (product) => {
     this.setState({
       ...this.state,
       openedModal: 'productModal',
       productModal: {
         ...this.state.productModal,
-        id: this.state.products[id].id,
-        product_action_id: this.state.products[id].product_action_id,
-        barcode: this.state.products[id].barcode,
-        name: this.state.products[id].name,
-        quantity: this.state.products[id].quantity,
-        category_id: this.state.products[id].category.id,
-        buy_price: this.state.products[id].buy_price,
-        sell_price: this.state.products[id].sell_price,
-        due_date: this.state.products[id].due_date
+        id: product.id,
+        product_action_id: product.product_action_id,
+        barcode: product.barcode,
+        name: product.name,
+        quantity: product.quantity,
+        category_id: product.category.id,
+        buy_price: product.buy_price,
+        sell_price: product.sell_price,
+        due_date: product.due_date
       }
     })
   };
@@ -373,52 +376,34 @@ export default class newProduct extends React.Component {
               <ButtonToggle color="primary" onClick={() => this.handleModal('manualModal')}>Додати товар</ButtonToggle>
               <ButtonToggle color="success" onClick={() => this.handleModal('productSearchModal')}>Шукати товар</ButtonToggle>
             </Fragment>}
-          <table className='dark' style={{marginTop: 20 + 'px'}}>
-            <thead>
-            <tr>
-              <th><h1>Баркод</h1></th>
-              <th><h1>Назва</h1></th>
-              <th><h1>Група</h1></th>
-              <th><h1>Закупівля</h1></th>
-              <th><h1>Ціна</h1></th>
-              <th><h1>Приход</h1></th>
-              <th><h1>Сума</h1></th>
-              { this.isToday() &&
-                <Fragment>
-                  <th><h1>Залишок</h1></th>
-                  <th><h1>Дії</h1></th>
-                </Fragment>}
-            </tr>
-            </thead>
-            <tbody>
-            { Object.values(this.state.products).map((product, i) => {
-              return (
-                <Fragment key={i}>
-                  <tr>
-                    <td id={`TooltipExample${i}`}>{product.barcode}</td>
-                    <td>{product.name}</td>
-                    <td>{product.category && product.category.name}</td>
-                    <td>{product.buy_price}<span className='uah'>₴</span></td>
-                    <td>{product.sell_price}<span className='uah'>₴</span></td>
-                    <td>{product.quantity}</td>
-                    <td>{this.productSum('products' ,product.id)}<span className='uah'>₴</span></td>
-                    { this.isToday() &&
-                      <Fragment>
-                        <td>{product.product_quantity}</td>
-                        <td>
-                          <ButtonToggle color="warning" size="sm" onClick={() => this.editProduct(product.id)}>Редагувати</ButtonToggle>
-                          <ButtonToggle color="danger" size="sm" onClick={() => this.cancelIncoming(product)}>Скасувати</ButtonToggle>
-                        </td>
-                      </Fragment>}
-                  </tr>
-                  <Tooltip placement="bottom" isOpen={this.state.tooltips[i]} target={`TooltipExample${i}`} toggle={() => this.toggleToolptip(i)}>
-                    <img style={{width: 300+'px'}} src={product.picture}/>
-                  </Tooltip>
-                </Fragment>
-              )
-            })}
-            </tbody>
-          </table>
+          <Table properties={
+            this.isToday() ?
+            [ {barcode: 'Баркод'},
+              {name: 'Назва'},
+              {category: 'Група'},
+              {buy_price: 'Закупівля', icon: '₴'},
+              {sell_price: 'Ціна', icon: '₴'},
+              {quantity: 'Приход'},
+              {product_sum: 'Сума', action: 'productSum', icon: '₴'},
+              {product_quantity: 'Залишок'}
+            ]
+              :
+            [ {barcode: 'Баркод'},
+              {name: 'Назва'},
+              {category: 'Група'},
+              {buy_price: 'Закупівля', icon: '₴'},
+              {sell_price: 'Ціна', icon: '₴'},
+              {quantity: 'Приход'},
+              {product_sum: 'Сума', action: 'productSum', icon: '₴'}
+            ]
+          }
+                 items={Object.values(this.state.products)}
+                 toggleToolptip={this.toggleToolptip}
+                 tooltips={this.state.tooltips}
+                 productSum={this.productSum}
+                 itemType={'products'}
+                 actions={this.isToday() && [{action: this.editProduct, name: 'Змінити', color: 'warning'}, {action: this.cancelIncoming, name: 'Скасувати', color: 'danger'}]}
+          />
           { Object.keys(this.state.products).length > 0 &&
             <Fragment>
               <hr/>
@@ -434,39 +419,22 @@ export default class newProduct extends React.Component {
               <Fragment>
                 <hr/>
                 <h1>Відскановані баркоди</h1>
-                <table className='dark' style={{marginTop: 20 + 'px'}}>
-                  <thead>
-                  <tr>
-                    <th><h1>Баркод</h1></th>
-                    <th><h1>Назва</h1></th>
-                    <th><h1>Група</h1></th>
-                    <th><h1>Закупівля</h1></th>
-                    <th><h1>Ціна</h1></th>
-                    <th><h1>Залишок</h1></th>
-                    <th><h1>Сума</h1></th>
-                    <th><h1>Дії</h1></th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                    { Object.keys(this.state.barcodes).map((barcode, i) => {
-                      return (
-                        <tr key={i}>
-                          <td>{this.state.barcodes[barcode].barcode}</td>
-                          <td>{this.state.barcodes[barcode].name}</td>
-                          <td>{this.state.barcodes[barcode].category && this.state.barcodes[barcode].category.name}</td>
-                          <td>{this.state.barcodes[barcode].buy_price}{this.state.barcodes[barcode].buy_price && <span className='uah'>₴</span>}</td>
-                          <td>{this.state.barcodes[barcode].sell_price}{this.state.barcodes[barcode].buy_price && <span className='uah'>₴</span>}</td>
-                          <td>{this.state.barcodes[barcode].quantity}</td>
-                          <td>{this.state.barcodes[barcode].name && this.productSum('barcodes', barcode)}{this.state.barcodes[barcode].name && <span className='uah'>₴</span>}</td>
-                          <td>
-                            <ButtonToggle color="success" size="sm" onClick={() => this.editBarcode(barcode)}>Додати</ButtonToggle>
-                            <ButtonToggle color="danger" size="sm" onClick={() => this.cancelBarcode(barcode)}>Скасувати</ButtonToggle>
-                          </td>
-                        </tr>
-                      )
-                    })}
-                  </tbody>
-                </table>
+                <Table properties={
+                  [ {barcode: 'Баркод'},
+                    {name: 'Назва'},
+                    {category: 'Група'},
+                    {buy_price: 'Закупівля', icon: '₴'},
+                    {sell_price: 'Ціна', icon: '₴'},
+                    {quantity: 'Залишок'},
+                    {product_sum: 'Сума', action: 'productSum', icon: '₴'},
+                  ]}
+                       items={Object.values(this.state.barcodes)}
+                       toggleToolptip={this.toggleToolptip}
+                       tooltips={this.state.tooltips}
+                       productSum={this.productSum}
+                       itemType={'barcodes'}
+                       actions={[{action: this.editBarcode, name: 'Додати', color: 'success'}, {action: this.cancelBarcode, name: 'Скасувати', color: 'danger'}]}
+                />
               </Fragment>
             </ActionCableProvider>}
 

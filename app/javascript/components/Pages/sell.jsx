@@ -219,9 +219,9 @@ export default class SellPage extends React.Component {
                 {name: 'Назва'},
                 {category: 'Група'},
                 {quantity: 'Залишок'},
-                {sell_price: 'Ціна'},
+                {sell_price: 'Ціна', icon: '₴'},
                 {quantity_sell: 'Кількість', input: true},
-                {product_sum: 'Сума', action: 'productSum'}
+                {product_sum: 'Сума', action: 'productSum', icon: '₴'}
               ]}
               items={Object.values(this.state.barcodes)}
               toggleToolptip={this.toggleToolptip}

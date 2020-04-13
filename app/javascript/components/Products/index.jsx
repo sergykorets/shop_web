@@ -388,8 +388,8 @@ export default class Products extends React.Component {
             [ {barcode: 'Баркод'},
               {name: 'Назва'},
               {category: 'Група'},
-              {buy_price: 'Закупівля', sort: true},
-              {sell_price: 'Ціна', sort: true},
+              {buy_price: 'Закупівля', sort: true, icon: '₴'},
+              {sell_price: 'Ціна', sort: true, icon: '₴'},
               {quantity: 'Залишок', sort: true},
               {due_date: 'Придатність', sort: true}]}
             items={this.state.products}

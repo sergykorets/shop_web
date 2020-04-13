@@ -20,9 +20,13 @@ export default class Table extends React.Component {
 
   handleScroll = () => {
     const $navbar = $('.navbar');
-    let navOffset    = $navbar.offset().top,
-      tableOffset  = $('.dark').offset().top,
-      distance     = (tableOffset - navOffset);
+    let tableOffset = '';
+    if (this.props.itemType) {
+      tableOffset = $(`#${this.props.itemType}`).offset().top
+    } else {
+      tableOffset = $('.dark').offset().top;
+    }
+    let navOffset = $navbar.offset().top, distance = (tableOffset - navOffset);
     let itemTranslate = navOffset - tableOffset + $navbar.height();
     if (distance < $navbar.height()) {
       this.setState({...this.state,
@@ -49,20 +53,34 @@ export default class Table extends React.Component {
         max={this.maxInput(itemIndex)}
       />
     } else if (property['action']) {
-      return this.props[property['action']](this.props.items[itemIndex].id);
+      if (this.props.itemType) {
+        if (this.props.itemType == 'barcodes') {
+          return this.props[property['action']](this.props.itemType, this.props.items[itemIndex].barcode);
+        } else {
+          return this.props[property['action']](this.props.itemType, this.props.items[itemIndex].id);
+        }
+      } else {
+        return this.props[property['action']](this.props.items[itemIndex].id);
+      }
+    } else if (this.isObject(this.props.items[itemIndex][Object.keys(property)[0]])) {
+      return this.props.items[itemIndex][Object.keys(property)[0]].name;
     } else {
-      return this.isObject(this.props.items[itemIndex][Object.keys(property)[0]]) ? this.props.items[itemIndex][Object.keys(property)[0]].name : this.props.items[itemIndex][Object.keys(property)[0]];
+      return this.props.items[itemIndex][Object.keys(property)[0]];
     }
   };
 
   maxInput = (itemIndex) => {
-    return this.props.items[itemIndex].product_action_id ? parseFloat(this.props.items[itemIndex].quantity_previous) + parseFloat(this.props.items[itemIndex].quantity) : this.props.items[itemIndex].quantity
+    if (this.props.items[itemIndex].product_action_id) {
+      return parseFloat(this.props.items[itemIndex].quantity_previous) + parseFloat(this.props.items[itemIndex].quantity);
+    } else {
+      return this.props.items[itemIndex].quantity;
+    }
   };
 
   render() {
     console.log('table', this.props)
     return (
-      <table className='dark' style={{marginTop: 20 + 'px'}}>
+      <table id={this.props.itemType} className='dark' style={{marginTop: 20 + 'px'}}>
         <thead style={this.state.style}>
         <tr>
           { this.props.properties.map((property, i) => {
@@ -86,7 +104,7 @@ export default class Table extends React.Component {
                 {this.props.properties.map((property, index) => {
                   return (
                     <td key={index} id={this.props.tooltips && Object.keys(property)[0] === 'barcode' ? `TooltipExample${i}` : i}>
-                      {this.tableCell(property, i)}
+                      {this.tableCell(property, i)}{this.tableCell(property, i) && property['icon'] ? <span className='uah'>{property['icon']}</span> : ''}
                     </td>
                   )
                 })}

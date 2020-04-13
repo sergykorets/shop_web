@@ -289,9 +289,9 @@ export default class EditAction extends React.Component {
                 {name: 'Назва'},
                 {category: 'Група'},
                 {quantity: 'Залишок'},
-                {sell_price: 'Ціна'},
+                {sell_price: 'Ціна', icon: '₴'},
                 {quantity_sell: 'Кількість', input: true},
-                {product_sum: 'Сума', action: 'productSum'}
+                {product_sum: 'Сума', action: 'productSum', icon: '₴'}
               ]}
                items={Object.values(this.state.action.products).filter(item => !item.destroy)}
                toggleToolptip={this.toggleToolptip}
