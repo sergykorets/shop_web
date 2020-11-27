@@ -357,8 +357,11 @@ export default class newProduct extends React.Component {
     });
   };
 
+  shouldScanResponse = (data) => {
+    return (data.device === this.props.workingPhone && this.props.user.role === 'cashier') || (data.device !== this.props.workingPhone && this.props.user.role === 'admin')
+  };
+
   render() {
-    console.log(this.state)
     return (
         <div className='container page-content' style={{color: 'black'}}>
           <div className='date-header'>
@@ -414,7 +417,7 @@ export default class newProduct extends React.Component {
               <NotificationContainer/>
               <ActionCable
                 channel='BarcodesChannel'
-                onReceived={(data) => this.handleReceivedBarcode(data)}
+                onReceived={(data) => this.shouldScanResponse(data) ? this.handleReceivedBarcode(data) : ''}
               />
               <Fragment>
                 <hr/>

@@ -1,1 +1,1 @@
-<%= react_component("SellPage", props: {categories: @categories}) %>
+<%= react_component("SellPage", props: {categories: @categories, user: current_user.attributes, workingPhone: Setting.first.working_phone}) %>

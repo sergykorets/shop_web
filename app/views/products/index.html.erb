@@ -1,1 +1,1 @@
-<%= react_component("Products", props: {products: @products, admin: @admin, categories: @categories, count: @count, per: ApplicationController::PER}) %>
+<%= react_component("Products", props: {products: @products, admin: @admin, categories: @categories, count: @count, per: ApplicationController::PER, user: current_user.attributes, workingPhone: Setting.first.working_phone}) %>

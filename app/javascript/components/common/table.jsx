@@ -78,7 +78,6 @@ export default class Table extends React.Component {
   };
 
   render() {
-    console.log('table', this.props)
     return (
       <table id={this.props.itemType} className='dark' style={{marginTop: 20 + 'px'}}>
         <thead style={this.state.style}>

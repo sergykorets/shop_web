@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
-import {  FormGroup, ButtonToggle } from 'reactstrap';
+import { FormGroup, ButtonToggle } from 'reactstrap';
 
 export default class SystemButtons extends React.Component {
   constructor(props) {

@@ -57,7 +57,7 @@ export default class Products extends React.Component {
     })
   };
 
-  handleReceivedConversation = (response) => {
+  handleReceivedBarcode = (response) => {
     if (response.product) {
       this.setState({
         ...this.state,
@@ -345,13 +345,16 @@ export default class Products extends React.Component {
     });
   };
 
+  shouldScanResponse = (data) => {
+    return (data.device === this.props.workingPhone && this.props.user.role === 'cashier') || (data.device !== this.props.workingPhone && this.props.user.role === 'admin')
+  };
+
   render() {
-    console.log('index', this.state);
     return (
       <ActionCableProvider url={`ws://${location.host}/cable`}>
         <ActionCable
           channel='BarcodesChannel'
-          onReceived={(data) => this.handleReceivedConversation(data)}
+          onReceived={(data) => this.shouldScanResponse(data) ? this.handleReceivedBarcode(data) : ''}
         />
         <NotificationContainer/>
         <div className='container page-content' style={{color: 'black'}}>
