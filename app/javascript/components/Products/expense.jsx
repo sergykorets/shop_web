@@ -327,7 +327,7 @@ export default class Expense extends React.Component {
             <h1>Всього: {this.summary()}<span className='uah'>₴</span></h1>
           </Fragment>}
         { this.isToday() &&
-          <ActionCableProvider url={`ws://${location.host}/cable`}>
+          <ActionCableProvider url={`wss://${location.host}/cable`}>
             <NotificationContainer/>
             <ActionCable
               channel='BarcodesChannel'

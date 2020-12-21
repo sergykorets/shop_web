@@ -351,7 +351,7 @@ export default class Products extends React.Component {
 
   render() {
     return (
-      <ActionCableProvider url={`ws://${location.host}/cable`}>
+      <ActionCableProvider url={`wss://${location.host}/cable`}>
         <ActionCable
           channel='BarcodesChannel'
           onReceived={(data) => this.shouldScanResponse(data) ? this.handleReceivedBarcode(data) : ''}

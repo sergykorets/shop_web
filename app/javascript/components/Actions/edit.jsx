@@ -269,7 +269,7 @@ export default class EditAction extends React.Component {
 
   render() {
     return (
-      <ActionCableProvider url={`ws://${location.host}/cable`}>
+      <ActionCableProvider url={`wss://${location.host}/cable`}>
         <NotificationContainer/>
         <ActionCable
           channel='BarcodesChannel'

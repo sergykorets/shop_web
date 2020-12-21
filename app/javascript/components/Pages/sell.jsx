@@ -200,7 +200,7 @@ export default class SellPage extends React.Component {
   render() {
     console.log(this.state, this.props)
     return (
-      <ActionCableProvider url={`ws://${location.host}/cable`}>
+      <ActionCableProvider url={`wss://${location.host}/cable`}>
         <NotificationContainer/>
         <ActionCable
           channel='BarcodesChannel'
